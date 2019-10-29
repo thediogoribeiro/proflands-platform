@@ -68,28 +68,28 @@ function mult(a,b,x,y){
 }
 
 function div(a,b,x,y){
-	var topm = a * y;
+  var topm = a * y;
   var botm = b * x;
-	var divisor = gcd(topm, botm);
-	topm = topm / divisor;
-	botm = botm / divisor;
+  var divisor = gcd(topm, botm);
+  topm = topm / divisor;
+  botm = botm / divisor;
   var res = [topm,botm];
   return res
 }
 
 function add(a,b,x,y){
-	var topm = a * y + b * x;
-	var botm = b * y;
-	var divisor = gcd(topm, botm);
-	topm = topm / divisor;
-	botm = botm / divisor;
+  var topm = a * y + b * x;
+  var botm = b * y;
+  var divisor = gcd(topm, botm);
+  topm = topm / divisor;
+  botm = botm / divisor;
   var res = [topm,botm];
   return res
 }
 
 function sub(a,b,x,y){
-	var topm = a * y - b * x;
-	var botm = b * y;
+  var topm = a * y - b * x;
+  var botm = b * y;
   var divisor = gcd(topm, botm);
   topm = topm / divisor;
   botm = botm / divisor;
@@ -105,6 +105,8 @@ function frac_aleatoria(res){
 }
 
 funcs[0][0] = function (){
+  console.log('fora');
+  console.log('dentro');
   titulo(0,0);
   pagina = 0;
   hide("materia");
@@ -115,20 +117,20 @@ funcs[0][0] = function (){
     var denum1 = Math.floor(Math.random() * intervalo_frac) + 1;
     var num2 = Math.floor(Math.random() * intervalo_frac) + 1;
     var denum2 = Math.floor(Math.random() * intervalo_frac) + 1;
-  	var op = Math.floor(Math.random() * 4) + 1;
-  	if (op == 1) {
-  		op = '&nbsp;<div id="cell2" class="divTableCell"> + </div>&nbsp;';
-  		var resok = add(num1,denum1,num2,denum2);
-  	} else if(op == 2) {
-  		op = '&nbsp;<div id="cell2" class="divTableCell"> - </div>&nbsp;';
-  		var resok = sub(num1,denum1,num2,denum2);
-  	}else if(op == 3) {
-  		op = '&nbsp;<div id="cell2" class="divTableCell"> &times; </div>&nbsp;';
-  		var resok = mult(num1,denum1,num2,denum2);
-  	}else if(op == 4) {
-  		op = '&nbsp;<div id="cell2" class="divTableCell"> / </div>&nbsp;';
-  		var resok = div(num1,denum1,num2,denum2);
-  	}
+    var op = Math.floor(Math.random() * 4) + 1;
+    if (op == 1) {
+      op = '&nbsp;<div id="cell2" class="divTableCell"> + </div>&nbsp;';
+      var resok = add(num1,denum1,num2,denum2);
+    } else if(op == 2) {
+      op = '&nbsp;<div id="cell2" class="divTableCell"> - </div>&nbsp;';
+      var resok = sub(num1,denum1,num2,denum2);
+    }else if(op == 3) {
+      op = '&nbsp;<div id="cell2" class="divTableCell"> &times; </div>&nbsp;';
+      var resok = mult(num1,denum1,num2,denum2);
+    }else if(op == 4) {
+      op = '&nbsp;<div id="cell2" class="divTableCell"> / </div>&nbsp;';
+      var resok = div(num1,denum1,num2,denum2);
+    }
     document.getElementById("enunciado"+i).innerHTML = start_frac()+create_frac(num1,denum1)+op+create_frac(num2,denum2)+end_frac();
     write_solutions(i,frac_aleatoria(resok),frac_aleatoria(resok),frac_aleatoria(resok),start_frac()+create_frac(resok[0],resok[1])+end_frac());
   }
