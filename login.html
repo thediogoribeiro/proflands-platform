@@ -16,21 +16,25 @@
 		<button onclick="getUserInput()" class="dropbtn" id="bgetUserInput">Login</button>
 	</div>
 
+	<!-- 1ª layer local ou global -->
   <div class="local_global" id="local_global">
     <button onclick="local()" class="dropbtn" id="blocal">Local</button>
     <button onclick="global()" class="dropbtn" id="bglobal">Global</button>
   </div>
 
+  <!-- 2ª layer Local : Solo ou Lobby -->
   <div class="solo_lobby" id="solo_lobby">
     <button onclick="solo()" class="dropbtn" id="bsolo">Solo</button>
     <button onclick="lobby()" class="dropbtn" id="blobby">Lobby</button>
   </div>
 
+  <!-- 2ª layer Global : casual ou rank -->
   <div class="casual_rank" id="casual_rank">
     <button onclick="casual()" class="dropbtn" id="bcasual">Casual</button>
     <button onclick="rank()" class="dropbtn" id="brank">Rank</button>
   </div>
 
+  <!-- Escolha da materia -->
 	<div class="disciplina" id="disciplina">
     <button onclick="mat()" class="dropbtn" id="bmat">Matemática</button>
     <button onclick="cien()" class="dropbtn" id="bcien">Ciências</button>
@@ -43,15 +47,16 @@
 		<button onclick="ano(7)" class="dropbtn" id="bano7">7º Ano</button>
 	</div>
 
-
+	<!-- Materia em função do ano -->
 	<div class="materia" id="materia"></div>
 
+	<!-- Quizzes - JS -->
   <div class="quizzes" id="quizzes">
 		<div>
 			<h1 id="tituloMateria"></h1>
 			<p class="cabecalho_pag" id="cabecalho_pag">Pagina: 1</p>
 		</div>
-		<div class"quizzes" id="quizzesMain"></div>
+		<div class="quizzes" id="quizzesMain"></div>
 		<div>
 			<p></p>
 			<button onclick="pag_ant()" class="dropbtn" id="banterior">Anterior</button>

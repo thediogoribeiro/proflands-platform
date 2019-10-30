@@ -9,7 +9,7 @@ var lobby=0;
 app.use('/static', express.static('public'));
 
 app.get('/', function(req, res){
-    res.sendFile(path.join(__dirname,'/Quizzes.html'));
+    res.sendFile(path.join(__dirname,'/login.html'));
 });
 
 app.post('/lobby',(req, resp) => {
