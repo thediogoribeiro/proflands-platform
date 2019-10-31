@@ -104,34 +104,48 @@ function frac_aleatoria(res){
   return start_frac()+create_frac(var1,var2)+end_frac();
 }
 
-funcs[0][0] = function (){
-  console.log('fora');
-  console.log('dentro');
+funcs[0][0] = function(data){
+  var objSol = Array(10);
+  var num1, num2, denum1, denum2, op, opStr, resok;
   titulo(0,0);
   pagina = 0;
   hide("materia");
   show("quizzes");
   for (var i = 0; i < 10; i++) {
-    cria_pag(i);
-    var num1 = Math.floor(Math.random() * intervalo_frac) + 1;
-    var denum1 = Math.floor(Math.random() * intervalo_frac) + 1;
-    var num2 = Math.floor(Math.random() * intervalo_frac) + 1;
-    var denum2 = Math.floor(Math.random() * intervalo_frac) + 1;
-    var op = Math.floor(Math.random() * 4) + 1;
-    if (op == 1) {
-      op = '&nbsp;<div id="cell2" class="divTableCell"> + </div>&nbsp;';
-      var resok = add(num1,denum1,num2,denum2);
-    } else if(op == 2) {
-      op = '&nbsp;<div id="cell2" class="divTableCell"> - </div>&nbsp;';
-      var resok = sub(num1,denum1,num2,denum2);
-    }else if(op == 3) {
-      op = '&nbsp;<div id="cell2" class="divTableCell"> &times; </div>&nbsp;';
-      var resok = mult(num1,denum1,num2,denum2);
-    }else if(op == 4) {
-      op = '&nbsp;<div id="cell2" class="divTableCell"> / </div>&nbsp;';
-      var resok = div(num1,denum1,num2,denum2);
+    if (typeof data === 'undefined' || modo == "solo"){
+      console.log("jogador 1 - random");
+      num1 = Math.floor(Math.random() * intervalo_frac) + 1;
+      denum1 = Math.floor(Math.random() * intervalo_frac) + 1;
+      num2 = Math.floor(Math.random() * intervalo_frac) + 1;
+      denum2 = Math.floor(Math.random() * intervalo_frac) + 1;
+      op = Math.floor(Math.random() * 4) + 1;
+    }else{
+      console.log("jogador 2 - ler dados");
+      num1 = data[i].n1;
+      denum1 =data[i].d1;
+      num2 = data[i].n2;
+      denum2 = data[i].d2;
+      op = data[i].op;
     }
-    document.getElementById("enunciado"+i).innerHTML = start_frac()+create_frac(num1,denum1)+op+create_frac(num2,denum2)+end_frac();
+    console.log(num1,num2,denum1,denum2,op);
+    cria_pag(i);
+    if (op == 1) {
+      opStr = '&nbsp;<div id="cell2" class="divTableCell"> + </div>&nbsp;';
+      resok = add(num1,denum1,num2,denum2);
+    } else if(op == 2) {
+      opStr = '&nbsp;<div id="cell2" class="divTableCell"> - </div>&nbsp;';
+      resok = sub(num1,denum1,num2,denum2);
+    }else if(op == 3) {
+      opStr = '&nbsp;<div id="cell2" class="divTableCell"> &times; </div>&nbsp;';
+      resok = mult(num1,denum1,num2,denum2);
+    }else if(op == 4) {
+      opStr = '&nbsp;<div id="cell2" class="divTableCell"> / </div>&nbsp;';
+      resok = div(num1,denum1,num2,denum2);
+    }
+    console.log("resok: ",resok);
+    document.getElementById("enunciado"+i).innerHTML = start_frac()+create_frac(num1,denum1)+opStr+create_frac(num2,denum2)+end_frac();
     write_solutions(i,frac_aleatoria(resok),frac_aleatoria(resok),frac_aleatoria(resok),start_frac()+create_frac(resok[0],resok[1])+end_frac());
+    objSol[i] = {n1:num1,n2:num2,d1:denum1,d2:denum2,op:op};
   }
+  return objSol;
 }
