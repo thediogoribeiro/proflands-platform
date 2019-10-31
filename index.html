@@ -2,6 +2,9 @@
 <html>
 <head>
 	<title>Profland!</title>
+	<meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" type="text/css" href="/static/stylesheets/styles.css">
 	<script type="text/javascript" src="/static/script.js"></script>
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -10,16 +13,18 @@
 	<div class="index__container">
 
 		<div class="index__logo">
-			<img src="">
+			<img src="/static/assets/logo-2D.png">
 		</div>
 
 		<div class="user__info">
 			<div class="user__img">
-				<img class="user__photo">
+				<img class="user__photo" src="https://via.placeholder.com/100">
 			</div>
 			<div class="user__input" id="user_input">
-				<input type="text" id="userName" name="userName" value=""><br>
-				<select id="userYear">
+				<input type="text" id="userName" class="user__name" name="userName" value="">
+				<input type="text" id="userPass" class="user__pass" name="userPass" value="">
+				<br>
+				<select id="userYear" class="user__year">
 						<option value="5">5</option>
 						<option value="6">6</option>
 						<option value="7">7</option>
