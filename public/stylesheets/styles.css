@@ -1,0 +1,96 @@
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+  display: block; }
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse; }
+
+td.selected {
+  background-color: red; }
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #DFDFDE;
+  color: black;
+  font-weight: bold;
+  padding: 16px 16px 16px 55px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  background-size: 50px;
+  background-repeat: no-repeat;
+  background-position: left; }
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #BDBDBD;
+  /* The container <div> - needed to position the dropdown content */ }
+
+.dropdown {
+  margin: auto;
+  display: inline-block;
+  text-align: center; }
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 8px 16px rgba(0, 0, 0, 0.2); }
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block; }
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1; }
+
+.divTable {
+  text-align: center;
+  height: 30px;
+  width: 40px;
+  display: table; }
+
+.divTableCell {
+  font-size: 13px;
+  vertical-align: middle;
+  display: table-cell; }
+
+.divTableCelle {
+  font-size: 16px;
+  vertical-align: middle;
+  display: table-cell; }
+
+.divTableCellp {
+  font-size: 23px;
+  vertical-align: middle;
+  display: table-cell; }
+
+.divTableRow {
+  display: table-row; }
+
+.divTableBody {
+  display: table-row-group; }
+
+.frac_pot {
+  display: inline-block;
+  width: 1em; }
+
+.frac {
+  display: inline-block;
+  width: 2em; }
+
+.num {
+  text-align: center;
+  border-bottom: 1px solid black; }
+
+.denum {
+  text-align: center; }
+
+/*# sourceMappingURL=styles.css.map */
