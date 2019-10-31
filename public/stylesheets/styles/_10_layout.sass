@@ -1,17 +1,35 @@
 
-table, th, td
-  border: 1px solid black
-  border-collapse: collapse
 
-td.selected 
-  background-color: red
-
-
-
+// Breakpoints
+$xl: 1280px
+$md: 640px
+$smp: 411px
+$sm: 375px
+$xs: 320px 
 
 
+.index__container
+	display: grid
+	grid-template-columns: 1fr 1fr 1fr 1fr
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr
+	height: 100%
+	@media screen and (min-width: $xs) and  (max-width: $sm - 1)
+		max-height: 640px
+	@media screen and (min-width: $sm) and  (max-width: $smp - 1)
+		max-height: 812px
+	@media screen and (min-width: $smp) and  (max-width: $md - 1)
+		max-height: 823px
+	@media screen and (min-width: $md) and  (max-width: $xl - 1)
+		max-height: 1366px
+	@media screen and (min-width: $xl)
 
 
+
+
+
+
+
+	
 
 
 
