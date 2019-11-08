@@ -8,6 +8,7 @@ for (var i = 0; i < scripts.length; i++) {
   imported.src = scripts[i];
   document.getElementsByTagName("head")[0].appendChild(imported);
 }
+
 //variaveis
 var funcs = new Array(10);
 for (var i = 0; i < funcs.length; i++) {
@@ -16,102 +17,184 @@ for (var i = 0; i < funcs.length; i++) {
     funcs[i][j] = new Array(10);
   }
 }
-var dropdwn = [
+const dropdwn = [
   ["Números Racionais","Potência de Potência","Raízes","Reta númerica","Frações com sinal","Maior ou Menor"]
 ];
-var materias = [
-	["Frações", "Areas", "Perimetros", "Divisores comuns"],
-	["Volumes","Potências","Fração VS Unidade","Área colorida(Frações)","Potências(Frações)","Arredondamentos"],
+const materias = [
+  ["Frações", "Areas", "Perimetros", "Divisores comuns"],
+  ["Volumes","Potências","Fração VS Unidade","Área colorida(Frações)","Potências(Frações)","Arredondamentos"],
   [dropdwn[0],"Grafico 1","Grafico 2"]
 ];
 var jogador = {nome : "", ano: 0, pontos: 0};
 var submete = 0;
 var pagina = 0;
+var modo = "erro";
 var cor_certo = "#88ff91";
 var cor_errado = "#ff8888";
 
 window.onload = function() {
   hide("local_global");
-	hide("solo_lobby");
-	hide("casual_rank");
-	hide("materia");
-	hide("ano");
-	hide("disciplina");
+  hide("solo_lobby");
+  hide("casual_rank");
+  hide("materia");
+  hide("ano");
+  hide("disciplina");
   hide("quizzes");
 };
 
 function pag_ant(){
-	if (pagina>0){
-		hide("pag"+pagina);
-		pagina--;
-		show("pag"+pagina);
-		document.getElementById("cabecalho_pag").innerHTML = "Pagina: " + (pagina + 1);
-	}
+  if (pagina>0){
+    hide("pag"+pagina);
+    pagina--;
+    show("pag"+pagina);
+    document.getElementById("cabecalho_pag").innerHTML = "Pagina: " + (pagina + 1);
+  }
 }
 
 function pag_seg(){
-	if (pagina<9){
-		hide("pag"+pagina);
-		pagina++;
-		show("pag"+pagina);
-		if (pagina==9) show("bverificar");
-		document.getElementById("cabecalho_pag").innerHTML = "Pagina: " + (pagina + 1);
-	}
+  if (pagina<9){
+    hide("pag"+pagina);
+    pagina++;
+    show("pag"+pagina);
+    if (pagina==9) show("bverificar");
+    document.getElementById("cabecalho_pag").innerHTML = "Pagina: " + (pagina + 1);
+  }
 }
 
 function hide(eid){
-	document.getElementById(eid).style.display = 'none';
+  document.getElementById(eid).style.display = 'none';
 }
 
 function show(eid){
-	document.getElementById(eid).style.display = 'inline-block';
+  document.getElementById(eid).style.display = 'inline-block';
 }
 
 function local() {
-	hide("local_global");
-  show("solo_lobby")
-	return false;
+  hide("local_global");
+  show("solo_lobby");
+  return false;
 }
 
 function global() {
-	hide("local_global");
-  show("casual_rank")
-	return false;
+  hide("local_global");
+  show("casual_rank");
+  return false;
 }
 
 function solo() {
-	hide("solo_lobby");
-  show("disciplina")
-	return false;
+  modo = "solo";
+  hide("solo_lobby");
+  show("disciplina");
+  return false;
+}
+
+async function enter_lobby(){
+  const options = {
+    method: 'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({})
+  };
+  const res = await fetch('/lobby', options);
+  const data = await res.json();
+  console.log(data.player);
+  //espera();
+  after_lobby(data.player);
+}
+
+async function envia_score(player, score){
+  const options = {
+    method: 'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({player:player, score:score})
+  };
+  const res = await fetch('/1v1score', options);
+  const data = await res.json();
+  console.log(data);
+}
+
+async function espera(){
+  var data = {status:"NO"};
+  const options = {
+    method: 'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({})
+  };
+  setTimeout(async function(){
+    while(data.status!="OK"){
+      var res = await fetch('/waiting', options);
+      data = await res.json();
+      console.log(data);
+    }
+  }, 1000);
+}
+
+async function check_score(){
+  const options = {
+    method: 'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({})
+  };
+  const res = await fetch('/checkScore', options);
+  const data = await res.json();
+  alert(data.status)
+}
+
+async function after_lobby(jgdr){
+  var objSol = Array(10);
+  if (jgdr==='1'){
+    jogador.nome="Jogador 1";
+    objSol = funcs[0][0]();
+    console.log(objSol);
+    const options = {
+      method: 'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(objSol)
+    };
+    const res = await fetch('/after_lobby', options);
+    const data = await res.json();
+    console.log(data);
+  }else{
+    jogador.nome="Jogador 2";
+    const options = {
+      method: 'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({text:"segundo jogador"})
+    };
+    const res = await fetch('/after_lobby', options);
+    const data = await res.json();
+    console.log(data);
+    funcs[0][0](data);
+  }
+}
+
+function mm1v1() {
+  console.log("entrou lobby");
+  modo = "1v1";
+  hide("solo_lobby");
+  titulo(0,0);
+  pagina = 0;
+  hide("materia");
+  enter_lobby();
+  show("quizzes");
+  return false;
 }
 
 function mat(){
-	hide("disciplina");
-	//show("ano");
+  hide("disciplina");
   show("materia");
-  console.log(jogador.ano);
   materia(jogador.ano-5,materias[jogador.ano-5]);
 }
 
-function ano(ano){
-	hide("ano");
-	show("materia");
-	materia(ano-5,materias[ano-5]);
-}
 
-function lobby() {
-	hide("local_global");
-	return false;
-}
 
 function casual() {
-	hide("local_global");
-	return false;
+  hide("local_global");
+  return false;
 }
 
 function rank() {
-	hide("local_global");
-	return false;
+  hide("local_global");
+  return false;
 }
 
 function getUserInput(){
@@ -143,7 +226,7 @@ function criaHTML(element,className,id,inner,click){
 
 function materia(ano,materia){
   document.getElementById("materia").innerHTML="";
-	for (var i = 0; i < materia.length; i++) {
+  for (var i = 0; i < materia.length; i++) {
     if((typeof materia[i])=="string"){
       var novo_botao = criaHTML("button","dropbtn","b"+materia[i],materia[i],funcs[ano][i]);
       document.getElementById("materia").appendChild(novo_botao);
@@ -157,7 +240,7 @@ function materia(ano,materia){
         nova_div.appendChild(novo_link);
       }
     }
-	}
+  }
 
   var nova_div = criaHTML("div",null,"div_muda_ano",null,null);
   document.getElementById("materia").appendChild(nova_div);
@@ -173,31 +256,19 @@ function clear_radio(i){
 }
 
 function cria_pag(i){
-  function junta(group, user, pass, level){
-  	var url= "/lobby";
-  	var xhr = new XMLHttpRequest();
-  	xhr.open("post", url, true);
-  	xhr.setRequestHeader("Content-type", "application/json");
-  	xhr.onreadystatechange = function(){
-  		if (xhr.readyState != 4) {return;}
-  		if (xhr.status != 200) { return;}
-  		console.log("response text " + xhr.responseText);
-  	};
-  	xhr.send(JSON.stringify({name: jogador.nome , ano: jogador.ano, pontos: jogador.pontos}));
-    if(i==0) hide("bverificar");
-    var nova_div = criaHTML("div","pag"+i,"pag"+i,null,null);
-    if(i!=0) nova_div.style.display = 'none';
-    document.getElementById("quizzesMain").appendChild(nova_div);
-    var nova_div = criaHTML("div","pag"+i,"enunciado"+i,null,null);
-    document.getElementById("pag"+i).appendChild(nova_div);
-    var nova_div = criaHTML("div","pag"+i,"respostas"+i,null,null);
-    document.getElementById("pag"+i).appendChild(nova_div);
-    var str = '<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label id="label0'+i+'"></label><br>';
-    str += '<input type="radio" id="r1'+i+'" name="solucao'+i+'" value="1"><label id="label1'+i+'"></label><br>';
-    str += '<input type="radio" id="r2'+i+'" name="solucao'+i+'" value="2"><label id="label2'+i+'"></label><br>';
-    str += '<input type="radio" id="r3'+i+'" name="solucao'+i+'" value="3"><label id="label3'+i+'"></label><br>';
-    nova_div.innerHTML = str;
-  }
+  if(i==0) hide("bverificar");
+  var nova_div = criaHTML("div","pag"+i,"pag"+i,null,null);
+  if(i!=0) nova_div.style.display = 'none';
+  document.getElementById("quizzesMain").appendChild(nova_div);
+  var nova_div = criaHTML("div","pag"+i,"enunciado"+i,null,null);
+  document.getElementById("pag"+i).appendChild(nova_div);
+  var nova_div = criaHTML("div","pag"+i,"respostas"+i,null,null);
+  document.getElementById("pag"+i).appendChild(nova_div);
+  var str = '<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label id="label0'+i+'"></label><br>';
+  str += '<input type="radio" id="r1'+i+'" name="solucao'+i+'" value="1"><label id="label1'+i+'"></label><br>';
+  str += '<input type="radio" id="r2'+i+'" name="solucao'+i+'" value="2"><label id="label2'+i+'"></label><br>';
+  str += '<input type="radio" id="r3'+i+'" name="solucao'+i+'" value="3"><label id="label3'+i+'"></label><br>';
+  nova_div.innerHTML = str;
 }
 
 function write_solutions(i,a,b,c,d){
@@ -213,6 +284,7 @@ function sairMateria(){
 }
 
 function sairQuiz(){
+  check_score();
   var str = '<div><h1 id="tituloMateria"></h1>';
   str += '<p class="cabecalho_pag" id="cabecalho_pag">Pagina: 1</p></div>';
   str += '<div class"quizzes" id="quizzesMain"></div>';
@@ -240,6 +312,7 @@ function verificar(){
     else if (submete==8 && ver_graf2(i)) {jogador.pontos++;div.style.backgroundColor = cor_certo;}
     else div.style.backgroundColor = cor_errado;
   }
+  envia_score(jogador.nome,jogador.pontos);
   if(jogador.pontos<5) alert(jogador.pontos + " pontos. Podia ser melhor");
   else if(jogador.pontos<8) alert(jogador.pontos + " pontos. Nada mau :)");
   else if(jogador.pontos<10) alert(jogador.pontos + " pontos. Muito Bom!!");
@@ -247,8 +320,8 @@ function verificar(){
 }
 
 function gcd(a,b) {
-   if (b == 0) return a;
-   else return gcd(b, a % b);
+  if (b == 0) return a;
+  else return gcd(b, a % b);
 }
 
 function entre(v, a, b) {
@@ -260,8 +333,8 @@ function entre(v, a, b) {
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function dd2click() {
-	document.getElementById("myDropdown2").classList.toggle("show");
-	return false;
+  document.getElementById("myDropdown2").classList.toggle("show");
+  return false;
 }
 
 function variacao(valor){
