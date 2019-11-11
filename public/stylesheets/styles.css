@@ -1,4 +1,7 @@
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+body {
+  background-color: #9659A9; }
+
 .show {
   display: block; }
 
@@ -11,28 +14,40 @@ td.selected {
 
 .index__container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   height: 100%; }
   @media screen and (min-width: 320px) and (max-width: 374px) {
     .index__container {
-      max-height: 640px; } }
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      max-height: 640px;
+      grid-row-gap: 16px; } }
   @media screen and (min-width: 375px) and (max-width: 410px) {
     .index__container {
-      max-height: 812px; } }
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      max-height: 812px;
+      grid-row-gap: 20px; } }
   @media screen and (min-width: 411px) and (max-width: 639px) {
     .index__container {
-      max-height: 823px; } }
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      max-height: 823px;
+      grid-row-gap: 24px; } }
   @media screen and (min-width: 640px) and (max-width: 1279px) {
     .index__container {
-      max-height: 1366px; } }
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+      max-height: 1366px;
+      grid-row-gap: 56px; } }
+  @media screen and (min-width: 1280px) {
+    .index__container {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+      min-height: 1367px;
+      grid-row-gap: 72px; } }
 
 /* Dropdown Button */
 .dropbtn {
   background-color: #DFDFDE;
   color: black;
   font-weight: bold;
-  padding: 16px 16px 16px 55px;
+  padding: 10px 20px;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -83,17 +98,18 @@ td.selected {
   grid-column-end: 4;
   grid-row-start: 2;
   grid-row-end: 6; }
-  .user__info .user__img {
-    grid-column-start: 2;
-    grid-column-end: 4;
-    grid-row: 2; }
-  .user__info .user__input {
-    grid-column-start: 2;
-    grid-column-end: 4; }
-    .user__info .user__input .user__name {
-      grid-row: 3; }
-    .user__info .user__input .user__pass {
-      grid-row: 3; }
+
+.user__img {
+  grid-row: 2;
+  text-align: center; }
+
+.user__input {
+  grid-row: 3;
+  text-align: center; }
+
+.user__options {
+  grid-row: 4;
+  text-align: center; }
 
 .divTable {
   text-align: center;
