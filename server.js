@@ -200,6 +200,10 @@ function pickFunc(i,materia){
 		const perim = require('./Mat/5/perim');
 		return perim.f(i);
 		break;
+		case 'Divisores comuns':
+		const divCom = require('./Mat/5/div-com');
+		return divCom.f(i);
+		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);
 	}
