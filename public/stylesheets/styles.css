@@ -42,6 +42,14 @@ td.selected {
       min-height: 1367px;
       grid-row-gap: 72px; } }
 
+.index__container p {
+  font-family: sans-serif;
+  color: #FFFFFF;
+  font-size: 13px;
+  line-height: 1.31;
+  letter-spacing: 1.2px;
+  text-decoration: underline; }
+
 /* Dropdown Button */
 .dropbtn {
   background-color: #DFDFDE;
@@ -110,6 +118,12 @@ td.selected {
   grid-row-start: 3;
   grid-row-end: 4;
   text-align: center; }
+
+.user__name {
+  align-self: start; }
+
+.user__pass {
+  align-self: end; }
 
 .user__dropbtn {
   grid-row-start: 4;
