@@ -3,18 +3,24 @@
 
 // Container Proflands logo
 .index__logo
-	grid-column-start: 1
-	grid-column-end: 5
-	grid-row-start: 1
-	grid-row-end: 2
 	img
 		height: auto
 		width: 100%
+	@media screen and (min-width: $xs) and  (max-width: $md - 1)
+		grid-column-start: 1
+		grid-column-end: 5
+		grid-row-start: 1
+		grid-row-end: 2
+	@media screen and (min-width: $md) and  (max-width: $xl - 1)
+		grid-column-start: 2
+		grid-column-end: 6
+		grid-row-start: 1
+		grid-row-end: 2
 
 // Container information login
 .user__info
-	grid-column-start: 2
-	grid-column-end: 4
+	grid-column-start: 3
+	grid-column-end: 5
 	grid-row-start: 2
 	grid-row-end: 6
 	display: grid
@@ -25,6 +31,14 @@
 	grid-row-start: 1
 	grid-row-end: 3
 	text-align: center
+
+.user__photo
+	@media screen and (min-width: $xs) and  (max-width: $md - 1)
+		content: url("https://via.placeholder.com/100")
+	@media screen and (min-width: $md) and  (max-width: $xl - 1)
+		content: url("https://via.placeholder.com/200")
+	@media screen and (min-width: $xl)
+		content: url("https://via.placeholder.com/300")
 
 // Container username and password
 .user__input
