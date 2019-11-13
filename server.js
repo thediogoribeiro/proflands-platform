@@ -204,6 +204,14 @@ function pickFunc(i,materia){
 		const divCom = require('./Mat/5/div-com');
 		return divCom.f(i);
 		break;
+		case 'Volumes':
+		const vol = require('./Mat/6/volume');
+		//return vol.f(i); NOT WORKING
+		break;
+		case 'Potências':
+		const pot = require('./Mat/6/pot');
+		return pot.f(i);
+		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);
 	}

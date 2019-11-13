@@ -40,7 +40,6 @@ module.exports = {
     create_3d(geometry,scene, camera, renderer, 0.5, 1,2, cor);
   },
 
-
   draw_prisma:function(scene, camera, renderer,tipo,x,z){
     if (tipo=="cilindro") var lados = 400;
     else if (tipo=="prisma") var lados = 3;
