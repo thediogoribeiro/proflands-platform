@@ -82,8 +82,9 @@ app.post('/getPage',(req, res) => {
 		if (data.image!=undefined) image[i] = data.image;
 		quizPage+=script.buildPage(i, data.q, data.s1, data.s2, data.s3, data.s4);
 	}
-	if(image === undefined || image.length == 0) res.send({quizPage:quizPage, image:image});
-	else res.send({quizPage:quizPage, image:'none'});
+	console.log(image[0] == null);
+	if(image[0] == null) res.send({quizPage:quizPage, image:'none'});
+	else res.send({quizPage:quizPage, image:image});
 });
 
 app.post('/waiting',(req, res) => {

@@ -170,12 +170,12 @@ function materia(ano,materia){
   document.getElementById("materia").appendChild(nova_div);
 }
 
-async function getPage(m1,m2){
+async function getPage(e,m){
   buildQuiz();
   const options = {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({materia:m2})
+    body: JSON.stringify({materia:m})
   };
   const res = await fetch('/getPage', options);
   const data = await res.json();
