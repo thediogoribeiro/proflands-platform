@@ -196,6 +196,10 @@ function pickFunc(i,materia){
 		const area = require('./Mat/5/area');
 		return area.f(i);
 		break;
+		case 'Perimetros':
+		const perim = require('./Mat/5/perim');
+		return perim.f(i);
+		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);
 	}

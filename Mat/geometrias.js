@@ -6,6 +6,7 @@ const des_max = 80;
 const cor = "grey";
 const larg_canvas = 400;
 const alt_canvas = 400;
+const pi = Math.PI;
 const Canvas = require('canvas');
 const Image = Canvas.Image;
 const canvas = new Canvas.Canvas(alt_canvas, larg_canvas);
