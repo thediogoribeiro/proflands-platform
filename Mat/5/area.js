@@ -31,20 +31,6 @@ function calc_area_rect(h,w){
   var sol = w*h;
   return Math.round(sol * 100) / 100;
 }
-/*
-function calc_area_hex(lado){
-var tres_raiz_3 = 3*Math.sqrt(3)
-var lado_quad = Math.pow(lado,2)
-var sol = (tres_raiz_3*lado_quad)/2;
-return Math.round(sol * 100) / 100;
-}
-
-function calc_area_pent(lado){
-var tres_raiz_3 = 3*Math.sqrt(3)
-var lado_quad = Math.pow(lado,2)
-var sol = (tres_raiz_3*lado_quad)/2;
-return Math.round(sol * 100) / 100;
-}*/
 
 function calc_area_circle(raio){
   var raio_quad = Math.pow(raio,2)
@@ -107,6 +93,6 @@ module.exports = {
     else if(rand==2){s2=s5}
     else if(rand==3){s3=s5}
     else if(rand==4){s4=s5}
-    return {q:q, s1:s1, s2:s2, s3:s3, s4:s4, solution:s5, canvas:dataURL}
+    return {q:q, s1:s1, s2:s2, s3:s3, s4:s4, solution:s5, image:dataURL}
   }
 };

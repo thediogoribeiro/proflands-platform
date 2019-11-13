@@ -159,28 +159,32 @@ function criaHTML(element,className,id,inner,click){
 function materia(ano,materia){
   document.getElementById("materia").innerHTML="";
   for (var i = 0; i < materia.length; i++) {
-    if((typeof materia[i])=="string"){
-      var novo_botao = criaHTML("button","dropbtn","b"+materia[i],materia[i],getPage);
-      document.getElementById("materia").appendChild(novo_botao);
-    }
+    var novo_botao = document.createElement('button');
+    novo_botao.className="dropbtn";
+    novo_botao.id="b"+materia[i];
+    novo_botao.innerHTML = materia[i];
+    novo_botao.addEventListener("click", getPage.bind(null, event, materia[i]));
+    document.getElementById("materia").appendChild(novo_botao);
   }
   var nova_div = criaHTML("div",null,"div_muda_ano",null,null);
   document.getElementById("materia").appendChild(nova_div);
 }
 
-async function getPage(){
+async function getPage(m1,m2){
   buildQuiz();
   const options = {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({})
+    body: JSON.stringify({materia:m2})
   };
   const res = await fetch('/getPage', options);
   const data = await res.json();
   hide("materia");
   document.getElementById("quizzesMain").innerHTML=data.quizPage;
-  for(var i = 0; i<10;i++){
-      document.getElementById('img'+i).src = data.canvas[i];
+  if(data.image!='none'){
+    for(var i = 0; i<10;i++){
+      document.getElementById('img'+i).src = data.image[i];
+    }
   }
   document.getElementById("banterior").disabled = true;
   hide("bverificar");

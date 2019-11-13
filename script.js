@@ -4,7 +4,8 @@ module.exports = {
     var str="";
     if(i>0) str = '<div class="pag'+i+'" id="pag'+i+'" style="display: none;">';
     else str = '<div class="pag'+i+'" id="pag'+i+'">';
-    str+='<div class="pag'+i+'" id="enunciado'+i+'"><img src="" id="img'+i+'" width="500" />'+q+'</div>';
+    str+='<img src="" id="img'+i+'" width="500" />';
+    str+='<div class="pag'+i+'" id="enunciado'+i+'">'+q+'</div>';
     str+='<div class="pag'+i+'" id="respostas'+i+'">';
     str+='<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label id="label0'+i+'">'+s1+'</label><br>';
     str+='<input type="radio" id="r1'+i+'" name="solucao'+i+'" value="1"><label id="label1'+i+'">'+s2+'</label><br>';

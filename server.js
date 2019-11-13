@@ -48,8 +48,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const frac = require('./Mat/5/frac');
-const area = require('./Mat/5/area');
 const script = require('./script');
 
 app.use(cors());
@@ -77,14 +75,15 @@ app.post('/verificar',(req, res) => {
 
 app.post('/getPage',(req, res) => {
 	var quizPage ="";
-	var canvas= new Array(10);;
+	var image = new Array(10);
 	for(var i = 0; i<10; i++){
-		const data = area.f(i);
+		const data = pickFunc(i,req.body.materia);
 		solutions[i] = data.solution;
-		canvas[i] = data.canvas;
+		if (data.image!=undefined) image[i] = data.image;
 		quizPage+=script.buildPage(i, data.q, data.s1, data.s2, data.s3, data.s4);
 	}
-	res.send({quizPage:quizPage, canvas:canvas});
+	if(image === undefined || image.length == 0) res.send({quizPage:quizPage, image:image});
+	else res.send({quizPage:quizPage, image:'none'});
 });
 
 app.post('/waiting',(req, res) => {
@@ -141,7 +140,7 @@ app.post('/checkScore',(req, res) => {
 	while(lobbys[cont].id!=req.body.user.lobbyID){
 		cont++;
 	}
-    res.send({ list:lobbys[cont].jogadores });
+	res.send({ list:lobbys[cont].jogadores });
 });
 
 app.post('/lobby',(req, res) => {
@@ -185,3 +184,18 @@ app.post('/after_lobby',(req, res) => {
 		res.send(lobbys[cont].data);
 	}
 });
+
+function pickFunc(i,materia){
+	switch(materia) {
+		case 'Frações':
+		const frac = require('./Mat/5/frac');
+		return frac.f(i);
+		break;
+		case 'Areas':
+		const area = require('./Mat/5/area');
+		return area.f(i);
+		break;
+		default:
+		console.log('Nenhuma funcao executada', materia, i);
+	}
+}
