@@ -1,11 +1,17 @@
 // Breakpoints
 $xl: 1280px
+$lg: 1024px
 $md: 640px
 $smp: 411px
 $sm: 375px
 $xs: 320px
 
+// responsive gaps
+$sm-gap: 20px
+$md-gap: 36px
+$lg-gap: 56px
 
+// Estrutura do 1º Container 
 .index__container
 	display: grid
 	height: 100%
@@ -14,7 +20,7 @@ $xs: 320px
 	@media screen and (min-width: $xs) and  (max-width: $md - 1)
 		grid-template-rows: 1fr 1fr 1fr 1fr 1fr
 		grid-template-columns: 1fr 1fr 1fr 1fr
-		grid-row-gap: 20px
+		grid-row-gap: $sm-gap
 	@media screen and (min-width: $xs) and  (max-width: $sm - 1)
 		max-height: 640px
 	@media screen and (min-width: $sm) and  (max-width: $smp - 1)
@@ -27,13 +33,22 @@ $xs: 320px
 		grid-template-rows: 1fr 1fr 1fr 1fr 1fr
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
 		max-height: 1366px
-		grid-row-gap: 36px
+		grid-row-gap: $md-gap
 
 	// DESKTOP
 	@media screen and (min-width: $xl)
+		grid-template-rows: 1fr 1fr 1fr 1fr 1fr
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
 		min-height: 1367px
-		grid-row-gap: 72px
+		grid-row-gap: $lg-gap
+
+
+// Estrutura do 2º Container (dentro do 1º)
+.user__info
+	display: grid
+	grid-template-rows: 1fr 1fr 1fr 1fr
+	grid-template-columns: 1fr 1fr
+	grid-row-gap: $sm-gap
 
 
 

@@ -11,7 +11,7 @@
 		grid-column-end: 5
 		grid-row-start: 1
 		grid-row-end: 2
-	@media screen and (min-width: $md) and  (max-width: $xl - 1)
+	@media screen and (min-width: $md) and  (max-width: $xl)
 		grid-column-start: 2
 		grid-column-end: 6
 		grid-row-start: 1
@@ -19,32 +19,52 @@
 
 // Container information login
 .user__info
-	grid-column-start: 3
-	grid-column-end: 5
-	grid-row-start: 2
-	grid-row-end: 6
-	display: grid
-	grid-template-columns: subgrid
+	//grid-template-columns: subgrid ---> So disponivel no Firefox - Utilizar outra solução 
+	@media screen and (min-width: $xs) and  (max-width: $md - 1)
+		grid-column-start: 2
+		grid-column-end: 4
+		grid-row-start: 2
+		grid-row-end: 6
+	@media screen and (min-width: $md) and  (max-width: $xl - 1)
+		grid-column-start: 3
+		grid-column-end: 5
+		grid-row-start: 2
+		grid-row-end: 6
+	@media screen and (min-width: $xl)
+		grid-column-start: 3
+		grid-column-end: 5
+		grid-row-start: 2
+		grid-row-end: 6
+
 
 // Container user photo
 .user__img
-	grid-row-start: 1
-	grid-row-end: 3
-	text-align: center
+	@media screen and (min-width: $xs) and  (max-width: $xl)
+		grid-column-start: 1
+		grid-column-end: 3
+		grid-row: 1
+		text-align: center
+	@media screen and (min-width: $lg) and  (max-width: $xl - 1)
+		.user__photo
+			padding-top: 40px
 
 .user__photo
 	@media screen and (min-width: $xs) and  (max-width: $md - 1)
 		content: url("https://via.placeholder.com/100")
-	@media screen and (min-width: $md) and  (max-width: $xl - 1)
+	@media screen and (min-width: $md) and  (max-width: $lg - 1)
+		content: url("https://via.placeholder.com/150")
+	@media screen and (min-width: $lg) and  (max-width: $xl - 1)
 		content: url("https://via.placeholder.com/200")
 	@media screen and (min-width: $xl)
-		content: url("https://via.placeholder.com/300")
+		content: url("https://via.placeholder.com/250")
 
 // Container username and password
 .user__input
-	grid-row-start: 3
-	grid-row-end: 4
 	text-align: center
+	@media screen and (min-width: $xs) and  (max-width: $xl)
+		grid-column-start: 1
+		grid-column-end: 3
+		grid-row: 2
 
 .user__name
 	align-self: start
@@ -54,17 +74,19 @@
 
 // Container dropdown and button
 .user__dropbtn
-	grid-row-start: 4
-	grid-row-end: 5
 	text-align: center
+	@media screen and (min-width: $xs) and  (max-width: $xl)
+		grid-column-start: 1
+		grid-column-end: 3
+		grid-row: 3
 
 // Container new-user & forgot-password
 .user__options
-	grid-row-start: 5
-	grid-row-end: 6
 	text-align: center
-
-.dropbtn
+	@media screen and (min-width: $xs) and  (max-width: $xl)
+		grid-column-start: 1
+		grid-column-end: 3
+		grid-row: 4
 	
 
 
