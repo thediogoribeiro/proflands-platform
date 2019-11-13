@@ -7,9 +7,9 @@ $sm: 375px
 $xs: 320px
 
 // responsive gaps
-$sm-gap: 20px
-$md-gap: 36px
-$lg-gap: 56px
+$sm-gap: 16px
+$md-gap: 32px
+$lg-gap: 48px
 
 // Estrutura do 1º Container 
 .index__container
@@ -40,15 +40,16 @@ $lg-gap: 56px
 		grid-template-rows: 1fr 1fr 1fr 1fr 1fr
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
 		min-height: 1367px
-		grid-row-gap: $lg-gap
+		grid-row-gap: $md-gap
 
 
 // Estrutura do 2º Container (dentro do 1º)
 .user__info
 	display: grid
-	grid-template-rows: 1fr 1fr 1fr 1fr
 	grid-template-columns: 1fr 1fr
-	grid-row-gap: $sm-gap
+	@media screen and (min-width: $md)
+		grid-template-rows: 200px 100px 100px 100px
+		grid-row-gap: $sm-gap
 
 
 

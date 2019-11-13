@@ -3,19 +3,32 @@
 
 // Container Proflands logo
 .index__logo
-	img
-		height: auto
-		width: 100%
 	@media screen and (min-width: $xs) and  (max-width: $md - 1)
 		grid-column-start: 1
 		grid-column-end: 5
 		grid-row-start: 1
 		grid-row-end: 2
-	@media screen and (min-width: $md) and  (max-width: $xl)
+		img
+			height: auto
+			width: 100%
+	@media screen and (min-width: $md) and  (max-width: $lg - 1)
 		grid-column-start: 2
 		grid-column-end: 6
 		grid-row-start: 1
 		grid-row-end: 2
+		img
+			height: auto
+			width: 100%
+	@media screen and (min-width: $lg)
+		grid-column-start: 2
+		grid-column-end: 6
+		grid-row-start: 1
+		grid-row-end: 2
+		text-align: center
+		img
+			height: auto
+			width: 100%
+			max-width: 800px
 
 // Container information login
 .user__info
@@ -25,12 +38,7 @@
 		grid-column-end: 4
 		grid-row-start: 2
 		grid-row-end: 6
-	@media screen and (min-width: $md) and  (max-width: $xl - 1)
-		grid-column-start: 3
-		grid-column-end: 5
-		grid-row-start: 2
-		grid-row-end: 6
-	@media screen and (min-width: $xl)
+	@media screen and (min-width: $md)
 		grid-column-start: 3
 		grid-column-end: 5
 		grid-row-start: 2
@@ -39,32 +47,30 @@
 
 // Container user photo
 .user__img
-	@media screen and (min-width: $xs) and  (max-width: $xl)
+	@media screen and (min-width: $xs)
 		grid-column-start: 1
 		grid-column-end: 3
 		grid-row: 1
 		text-align: center
-	@media screen and (min-width: $lg) and  (max-width: $xl - 1)
-		.user__photo
-			padding-top: 40px
 
 .user__photo
 	@media screen and (min-width: $xs) and  (max-width: $md - 1)
 		content: url("https://via.placeholder.com/100")
 	@media screen and (min-width: $md) and  (max-width: $lg - 1)
 		content: url("https://via.placeholder.com/150")
-	@media screen and (min-width: $lg) and  (max-width: $xl - 1)
+	@media screen and (min-width: $lg)
 		content: url("https://via.placeholder.com/200")
-	@media screen and (min-width: $xl)
-		content: url("https://via.placeholder.com/250")
+
 
 // Container username and password
 .user__input
 	text-align: center
-	@media screen and (min-width: $xs) and  (max-width: $xl)
+	@media screen and (min-width: $xs)
 		grid-column-start: 1
 		grid-column-end: 3
 		grid-row: 2
+	@media screen and (min-width: $lg)
+		padding-top: 30px
 
 .user__name
 	align-self: start
@@ -75,7 +81,7 @@
 // Container dropdown and button
 .user__dropbtn
 	text-align: center
-	@media screen and (min-width: $xs) and  (max-width: $xl)
+	@media screen and (min-width: $xs)
 		grid-column-start: 1
 		grid-column-end: 3
 		grid-row: 3
@@ -83,11 +89,10 @@
 // Container new-user & forgot-password
 .user__options
 	text-align: center
-	@media screen and (min-width: $xs) and  (max-width: $xl)
+	@media screen and (min-width: $xs)
 		grid-column-start: 1
 		grid-column-end: 3
 		grid-row: 4
-	
 
 
 

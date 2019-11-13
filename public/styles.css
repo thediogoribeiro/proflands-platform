@@ -19,7 +19,7 @@ td.selected {
     .index__container {
       grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr 1fr;
-      grid-row-gap: 20px; } }
+      grid-row-gap: 16px; } }
   @media screen and (min-width: 320px) and (max-width: 374px) {
     .index__container {
       max-height: 640px; } }
@@ -34,19 +34,21 @@ td.selected {
       grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
       max-height: 1366px;
-      grid-row-gap: 36px; } }
+      grid-row-gap: 32px; } }
   @media screen and (min-width: 1280px) {
     .index__container {
       grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
       min-height: 1367px;
-      grid-row-gap: 56px; } }
+      grid-row-gap: 32px; } }
 
 .user__info {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr;
-  grid-row-gap: 20px; }
+  grid-template-columns: 1fr 1fr; }
+  @media screen and (min-width: 640px) {
+    .user__info {
+      grid-template-rows: 200px 100px 100px 100px;
+      grid-row-gap: 16px; } }
 
 .index__container p {
   font-family: sans-serif;
@@ -98,21 +100,35 @@ td.selected {
 .dropdown-content a:hover {
   background-color: #f1f1f1; }
 
-.index__logo img {
-  height: auto;
-  width: 100%; }
 @media screen and (min-width: 320px) and (max-width: 639px) {
   .index__logo {
     grid-column-start: 1;
     grid-column-end: 5;
     grid-row-start: 1;
-    grid-row-end: 2; } }
-@media screen and (min-width: 640px) and (max-width: 1280px) {
+    grid-row-end: 2; }
+    .index__logo img {
+      height: auto;
+      width: 100%; } }
+@media screen and (min-width: 640px) and (max-width: 1023px) {
   .index__logo {
     grid-column-start: 2;
     grid-column-end: 6;
     grid-row-start: 1;
-    grid-row-end: 2; } }
+    grid-row-end: 2; }
+    .index__logo img {
+      height: auto;
+      width: 100%; } }
+@media screen and (min-width: 1024px) {
+  .index__logo {
+    grid-column-start: 2;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    text-align: center; }
+    .index__logo img {
+      height: auto;
+      width: 100%;
+      max-width: 800px; } }
 
 @media screen and (min-width: 320px) and (max-width: 639px) {
   .user__info {
@@ -120,28 +136,19 @@ td.selected {
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 6; } }
-@media screen and (min-width: 640px) and (max-width: 1279px) {
-  .user__info {
-    grid-column-start: 3;
-    grid-column-end: 5;
-    grid-row-start: 2;
-    grid-row-end: 6; } }
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 640px) {
   .user__info {
     grid-column-start: 3;
     grid-column-end: 5;
     grid-row-start: 2;
     grid-row-end: 6; } }
 
-@media screen and (min-width: 320px) and (max-width: 1280px) {
+@media screen and (min-width: 320px) {
   .user__img {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row: 1;
     text-align: center; } }
-@media screen and (min-width: 1024px) and (max-width: 1279px) {
-  .user__img .user__photo {
-    padding-top: 40px; } }
 
 @media screen and (min-width: 320px) and (max-width: 639px) {
   .user__photo {
@@ -149,20 +156,20 @@ td.selected {
 @media screen and (min-width: 640px) and (max-width: 1023px) {
   .user__photo {
     content: url("https://via.placeholder.com/150"); } }
-@media screen and (min-width: 1024px) and (max-width: 1279px) {
+@media screen and (min-width: 1024px) {
   .user__photo {
     content: url("https://via.placeholder.com/200"); } }
-@media screen and (min-width: 1280px) {
-  .user__photo {
-    content: url("https://via.placeholder.com/250"); } }
 
 .user__input {
   text-align: center; }
-  @media screen and (min-width: 320px) and (max-width: 1280px) {
+  @media screen and (min-width: 320px) {
     .user__input {
       grid-column-start: 1;
       grid-column-end: 3;
       grid-row: 2; } }
+  @media screen and (min-width: 1024px) {
+    .user__input {
+      padding-top: 30px; } }
 
 .user__name {
   align-self: start; }
@@ -172,7 +179,7 @@ td.selected {
 
 .user__dropbtn {
   text-align: center; }
-  @media screen and (min-width: 320px) and (max-width: 1280px) {
+  @media screen and (min-width: 320px) {
     .user__dropbtn {
       grid-column-start: 1;
       grid-column-end: 3;
@@ -180,7 +187,7 @@ td.selected {
 
 .user__options {
   text-align: center; }
-  @media screen and (min-width: 320px) and (max-width: 1280px) {
+  @media screen and (min-width: 320px) {
     .user__options {
       grid-column-start: 1;
       grid-column-end: 3;
