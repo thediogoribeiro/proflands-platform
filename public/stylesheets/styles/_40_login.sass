@@ -70,13 +70,17 @@
 		grid-column-end: 3
 		grid-row: 2
 	@media screen and (min-width: $lg)
-		padding-top: 30px
+		padding-top: 15px
 
 .user__name
 	align-self: start
 
 .user__pass
-	align-self: end
+	@media screen and (min-width: $xs) and  (max-width: $md - 1)
+		margin-top: 15px
+	@media screen and (min-width: $md)
+		margin-top: 25px
+
 
 // Container dropdown and button
 .user__dropbtn
