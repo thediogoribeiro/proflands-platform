@@ -1,22 +1,18 @@
-/* Dropdown Button */
-.dropbtn
-  background-color: #DFDFDE
-  color: black
-  font-weight: bold
-  padding: 10px 20px
-  font-size: 16px
-  border: none
-  cursor: pointer
-  background-size: 50px
-  background-repeat: no-repeat
-  background-position: left
 
+
+.dropbtn
+  @media screen and (min-width: $xs) and  (max-width: $md - 1)
+    
+  @media screen and (min-width: $md)
+    font-weight: bold
+    font-size: 100px
 
 /* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus 
-  background-color: #BDBDBD
+.dropbtn:hover, .dropbtn:focus, .is-primary:focus .is-inverted:focus .is-outlined:focus
+  background-color: $white
+  color: $light-purple
 
-  /* The container <div> - needed to position the dropdown content */
+/* The container <div> - needed to position the dropdown content */
 .dropdown 
   margin: auto
   display: inline-block
@@ -45,7 +41,18 @@
   background-color: #f1f1f1
 
 
-
+/* Dropdown Button */
+//.dropbtn
+  //background-color: $light-purple
+  //color: $light-purple
+  //font-weight: bold
+  //padding: 10px 20px
+  //font-size: 16px
+  //border: none
+  //cursor: pointer
+  //background-size: 50px
+  //background-repeat: no-repeat
+  //background-position: left  
 
 
 
