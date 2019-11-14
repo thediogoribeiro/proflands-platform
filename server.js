@@ -83,7 +83,6 @@ app.post('/getPage',(req, res) => {
 		solutions[i] = data.f.solution;
 		if (data.f.image!=undefined) image[i] = data.f.image;
 		quizPage+=script.buildPage(i, data.f.q, data.f.s1, data.f.s2, data.f.s3, data.f.s4,data.type);
-		console.log(data.type)
 	}
 	if(image[0] == null) res.send({quizPage:quizPage, image:'none', sub:submete});
 	else res.send({quizPage:quizPage, image:image, sub:submete});
@@ -229,6 +228,10 @@ function pickFunc(i,materia){
 		case 'Arredondamentos':
 		const a = require('./Mat/6/arredonda');
 		return {f:a.f(i),type:1};
+		break;
+		case 'Potência de Potência':
+		const pp = require('./Mat/7/pot-pot');
+		return {f:pp.f(i),type:1};
 		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);
