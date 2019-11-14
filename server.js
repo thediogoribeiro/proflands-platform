@@ -75,17 +75,18 @@ app.post('/verificar',(req, res) => {
 
 app.post('/getPage',(req, res) => {
 	var quizPage ="";
+	var submete = 0;
 	var image = new Array(10);
 	for(var i = 0; i<10; i++){
 		const data = pickFunc(i,req.body.materia);
+		if (data.type==3) submete = 1;
 		solutions[i] = data.f.solution;
 		if (data.f.image!=undefined) image[i] = data.f.image;
 		quizPage+=script.buildPage(i, data.f.q, data.f.s1, data.f.s2, data.f.s3, data.f.s4,data.type);
 		console.log(data.type)
 	}
-	console.log(image[0] == null);
-	if(image[0] == null) res.send({quizPage:quizPage, image:'none'});
-	else res.send({quizPage:quizPage, image:image});
+	if(image[0] == null) res.send({quizPage:quizPage, image:'none', sub:submete});
+	else res.send({quizPage:quizPage, image:image, sub:submete});
 });
 
 app.post('/waiting',(req, res) => {
@@ -216,6 +217,10 @@ function pickFunc(i,materia){
 		case 'Fração VS Unidade':
 		const fVSu = require('./Mat/6/fracVSunidade');
 		return {f:fVSu.f(i),type:2};
+		break;
+		case 'Área colorida(Frações)':
+		const ac = require('./Mat/6/area-colorida');
+		return {f:ac.f(i),type:3};
 		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);

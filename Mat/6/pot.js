@@ -1,5 +1,3 @@
-
-
 const f = require('./../fracoes');
 var q ="";
 

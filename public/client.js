@@ -179,6 +179,7 @@ async function getPage(e,m){
   };
   const res = await fetch('/getPage', options);
   const data = await res.json();
+  submete = data.sub;
   hide("materia");
   document.getElementById("quizzesMain").innerHTML=data.quizPage;
   if(data.image!='none'){
@@ -219,13 +220,19 @@ function pag_seg(){
 
 async function verificar(){
   var sol = new Array(10);
-  for (var i = 0; i < 10; i++){
-    var radios = document.getElementsByName('solucao'+i);
-    for (var j = 0; j < radios.length; j++){
-      if (radios[j].checked) {
-        sol[i] = document.getElementById("label"+radios[j].value+i).innerHTML;
-        break;
+  if (submete==0){
+    for (var i = 0; i < 10; i++){
+      var radios = document.getElementsByName('solucao'+i);
+      for (var j = 0; j < radios.length; j++){
+        if (radios[j].checked) {
+          sol[i] = document.getElementById("label"+radios[j].value+i).innerHTML;
+          break;
+        }
       }
+    }
+  }else if (submete==1){
+    for (var i = 0; i < 10; i++){
+      sol[i] = conta_tabela(i);
     }
   }
   const options = {
@@ -240,6 +247,22 @@ async function verificar(){
 
 function change_radio(item,i){
   document.getElementById("cell2"+i).innerHTML=item.value;
+}
+
+function changeColor(td){
+  td.style.backgroundColor=(td.style.backgroundColor=='blue')?('transparent'):('blue');
+}
+
+function conta_tabela(i){
+  var table = document.getElementById("tabela_cores" + i);
+  var n_cells = table.rows[0].cells;
+  var selct_cells = 0;
+  for (j = 0; j< table.rows.length; j++){
+    for (var i = 0; i < table.rows[j].cells.length; i++){
+     if(table.rows[j].cells[i].style.backgroundColor=='blue')selct_cells++;
+    }
+  }
+  return selct_cells;
 }
 
 function sairQuiz(){
