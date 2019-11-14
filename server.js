@@ -82,7 +82,7 @@ app.post('/getPage',(req, res) => {
 		if (data.type==3) submete = 1;
 		solutions[i] = data.f.solution;
 		if (data.f.image!=undefined) image[i] = data.f.image;
-		quizPage+=script.buildPage(i, data.f.q, data.f.s1, data.f.s2, data.f.s3, data.f.s4,data.type);
+		quizPage+=script.buildPage(i, data.f.q, data.f.s1, data.f.s2, data.f.s3, data.f.s4, data.type, data.f.cs );
 	}
 	if(image[0] == null) res.send({quizPage:quizPage, image:'none', sub:submete});
 	else res.send({quizPage:quizPage, image:image, sub:submete});
@@ -236,6 +236,10 @@ function pickFunc(i,materia){
 		case 'Raízes':
 		const r = require('./Mat/7/raizes');
 		return {f:r.f(i),type:1};
+		break;
+		case 'Reta númerica':
+		const rn = require('./Mat/7/reta-num');
+		return {f:rn.f(i),type:1};
 		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);
