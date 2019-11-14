@@ -78,9 +78,10 @@ app.post('/getPage',(req, res) => {
 	var image = new Array(10);
 	for(var i = 0; i<10; i++){
 		const data = pickFunc(i,req.body.materia);
-		solutions[i] = data.solution;
-		if (data.image!=undefined) image[i] = data.image;
-		quizPage+=script.buildPage(i, data.q, data.s1, data.s2, data.s3, data.s4);
+		solutions[i] = data.f.solution;
+		if (data.f.image!=undefined) image[i] = data.f.image;
+		quizPage+=script.buildPage(i, data.f.q, data.f.s1, data.f.s2, data.f.s3, data.f.s4,data.type);
+		console.log(data.type)
 	}
 	console.log(image[0] == null);
 	if(image[0] == null) res.send({quizPage:quizPage, image:'none'});
@@ -190,19 +191,19 @@ function pickFunc(i,materia){
 	switch(materia) {
 		case 'Frações':
 		const frac = require('./Mat/5/frac');
-		return frac.f(i);
+		return {f:frac.f(i),type:1};
 		break;
 		case 'Areas':
 		const area = require('./Mat/5/area');
-		return area.f(i);
+		return {f:area.f(i),type:1};
 		break;
 		case 'Perimetros':
 		const perim = require('./Mat/5/perim');
-		return perim.f(i);
+		return {f:perim.f(i),type:1};
 		break;
 		case 'Divisores comuns':
 		const divCom = require('./Mat/5/div-com');
-		return divCom.f(i);
+		return {f:divCom.f(i),type:1};
 		break;
 		case 'Volumes':
 		const vol = require('./Mat/6/volume');
@@ -210,7 +211,11 @@ function pickFunc(i,materia){
 		break;
 		case 'Potências':
 		const pot = require('./Mat/6/pot');
-		return pot.f(i);
+		return {f:pot.f(i),type:1};
+		break;
+		case 'Fração VS Unidade':
+		const fVSu = require('./Mat/6/fracVSunidade');
+		return {f:fVSu.f(i),type:2};
 		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);

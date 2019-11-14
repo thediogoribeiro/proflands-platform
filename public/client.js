@@ -238,6 +238,10 @@ async function verificar(){
   alert(data.score);
 }
 
+function change_radio(item,i){
+  document.getElementById("cell2"+i).innerHTML=item.value;
+}
+
 function sairQuiz(){
   buildQuiz();
   hide("quizzes");

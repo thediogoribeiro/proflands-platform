@@ -1,16 +1,29 @@
-module.exports = {
 
-  buildPage : function(i,q,s1,s2,s3,s4){
+const f = require('./Mat/fracoes');
+module.exports = {
+  buildPage : function(i,q,s1,s2,s3,s4,type){
     var str="";
     if(i>0) str = '<div class="pag'+i+'" id="pag'+i+'" style="display: none;">';
     else str = '<div class="pag'+i+'" id="pag'+i+'">';
     str+='<img src="" id="img'+i+'" width="500" />';
-    str+='<div class="pag'+i+'" id="enunciado'+i+'">'+q+'</div>';
-    str+='<div class="pag'+i+'" id="respostas'+i+'">';
-    str+='<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label id="label0'+i+'">'+s1+'</label><br>';
-    str+='<input type="radio" id="r1'+i+'" name="solucao'+i+'" value="1"><label id="label1'+i+'">'+s2+'</label><br>';
-    str+='<input type="radio" id="r2'+i+'" name="solucao'+i+'" value="2"><label id="label2'+i+'">'+s3+'</label><br>';
-    str+='<input type="radio" id="r3'+i+'" name="solucao'+i+'" value="3"><label id="label3'+i+'">'+s4+'</label><br>';
+    if(type!=2){
+      str+='<div class="pag'+i+'" id="enunciado'+i+'">'+q+'</div>';
+      str+='<div class="pag'+i+'" id="respostas'+i+'">';
+      str+='<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label id="label0'+i+'">'+s1+'</label><br>';
+      str+='<input type="radio" id="r1'+i+'" name="solucao'+i+'" value="1"><label id="label1'+i+'">'+s2+'</label><br>';
+      str+='<input type="radio" id="r2'+i+'" name="solucao'+i+'" value="2"><label id="label2'+i+'">'+s3+'</label><br>';
+      str+='<input type="radio" id="r3'+i+'" name="solucao'+i+'" value="3"><label id="label3'+i+'">'+s4+'</label><br>';
+    }else{
+      str+='<div class="pag'+i+'" id="enunciado'+i+'">';
+      str+=f.start_frac() + f.create_frac(q.a,q.b);
+      str+='<div id="cell2'+i+'" class="divTableCell">&nbsp;?&nbsp;</div>';
+      str+='<div class="divTableCell">' + (Math.round(q.a/q.b))+ '</div>';
+      str+=f.end_frac()+'</div>';
+      str+='<div class="pag'+i+'" id="respostas'+i+'">';
+      str+='<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0" onclick="change_radio(this,'+i+')"><label id="label0'+i+'"><</label><br>';
+      str+='<input type="radio" id="r1'+i+'" name="solucao'+i+'" value="1" onclick="change_radio(this,'+i+')"><label id="label1'+i+'">></label><br>';
+      str+='<input type="radio" id="r2'+i+'" name="solucao'+i+'" value="2" onclick="change_radio(this,'+i+')"><label id="label2'+i+'">=</label><br>';
+    }
     str+='</div></div>';
     return str;
   },
