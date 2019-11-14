@@ -222,6 +222,10 @@ function pickFunc(i,materia){
 		const ac = require('./Mat/6/area-colorida');
 		return {f:ac.f(i),type:3};
 		break;
+		case 'Potências(Frações)':
+		const pf = require('./Mat/6/pot-frac');
+		return {f:pf.f(i),type:1};
+		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);
 	}
