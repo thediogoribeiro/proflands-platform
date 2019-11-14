@@ -233,6 +233,10 @@ function pickFunc(i,materia){
 		const pp = require('./Mat/7/pot-pot');
 		return {f:pp.f(i),type:1};
 		break;
+		case 'Raízes':
+		const r = require('./Mat/7/raizes');
+		return {f:r.f(i),type:1};
+		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);
 	}
