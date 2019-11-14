@@ -226,6 +226,10 @@ function pickFunc(i,materia){
 		const pf = require('./Mat/6/pot-frac');
 		return {f:pf.f(i),type:1};
 		break;
+		case 'Arredondamentos':
+		const a = require('./Mat/6/arredonda');
+		return {f:a.f(i),type:1};
+		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);
 	}
