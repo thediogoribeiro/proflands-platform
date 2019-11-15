@@ -29,10 +29,31 @@
 			<div class="user__img">
 				<img class="user__photo">
 			</div>
-			<div class="user__input control" id="user_input">
-				<input type="text" id="userName" class="user__name input is-small" name="userName" value="" placeholder="Username">
+			<div class="user__input" id="user_input">
+				<div class="field">
+				  <p class="control has-icons-left has-icons-right">
+				    <input id="userName" class="user__name input is-small" type="email" placeholder="Email">
+				    <span class="icon is-small is-left">
+				      <i class="fas fa-envelope"></i>
+				    </span>
+				    <span class="icon is-small is-right">
+				      <i class="fas fa-check"></i>
+				    </span>
+				  </p>
+				</div>
+				<div class="field">
+				  <p class="control has-icons-left">
+				    <input id="userPass" class="user__pass input is-small" type="password" placeholder="Password">
+				    <span class="icon is-small is-left">
+				      <i class="fas fa-lock"></i>
+				    </span>
+				  </p>
+				</div>
+				<!-- 
+				<input type="text" id="userName" class=" input " name="userName" value="" placeholder="Username">
 				<br>
 				<input type="password" id="userPass" class="user__pass input is-small" name="userPass" value="" placeholder="Password">
+				-->
 			</div>
 			<div class="user__dropbtn">
 				<br>
