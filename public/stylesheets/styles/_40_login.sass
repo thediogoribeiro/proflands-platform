@@ -71,6 +71,11 @@
 		grid-row: 2
 	@media screen and (min-width: $lg)
 		padding-top: 15px
+	.user__input-1, .user__input-2
+		@media screen and (min-width: $xs) and (max-width: $md - 1)
+			width: 200px
+		@media screen and (min-width: $md)
+			width: 250px
 
 .user__name
 	align-self: start
@@ -82,13 +87,20 @@
 		//margin-top: 25px
 
 
-// Container dropdown and button
+// Container dropdown & Button
 .user__dropbtn
 	text-align: center
 	@media screen and (min-width: $xs)
 		grid-column-start: 1
 		grid-column-end: 3
 		grid-row: 3
+
+// Container login button
+.user__btn
+	@media screen and (min-width: $xs) and (max-width: $md - 1)
+		margin-top: 20px
+	@media screen and (min-width: $md)
+		margin-top: 40px
 
 // Container new-user & forgot-password
 .user__options
