@@ -97,10 +97,15 @@
 
 // Container login button
 .user__btn
+	text-align: center
 	@media screen and (min-width: $xs) and (max-width: $md - 1)
 		margin-top: 20px
+		button
+			width: 200px
 	@media screen and (min-width: $md)
 		margin-top: 40px
+		button
+			width: 250px
 
 // Container new-user & forgot-password
 .user__options
@@ -109,7 +114,11 @@
 		grid-column-start: 1
 		grid-column-end: 3
 		grid-row: 4
-
+	.user__options-1, .user__options-2
+		@media screen and (min-width: $xs) and  (max-width: $md - 1)
+			margin-bottom: 15px
+		@media screen and (min-width: $md)
+			margin-bottom: 20px
 
 
 

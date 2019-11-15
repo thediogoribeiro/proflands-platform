@@ -50,12 +50,24 @@ td.selected {
   flex-wrap: wrap;
   align-content: center; }
 
+.user__btn {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center; }
+
+.user__options {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center; }
+
 .index__container p {
   font-family: sans-serif;
   color: #FFFFFF;
   font-size: 13px;
   line-height: 1.31;
-  letter-spacing: 1.2px;
+  letter-spacing: 1px;
   text-decoration: underline; }
 
 @media screen and (min-width: 640px) {
@@ -182,12 +194,18 @@ td.selected {
       grid-column-end: 3;
       grid-row: 3; } }
 
-@media screen and (min-width: 320px) and (max-width: 639px) {
-  .user__btn {
-    margin-top: 20px; } }
-@media screen and (min-width: 640px) {
-  .user__btn {
-    margin-top: 40px; } }
+.user__btn {
+  text-align: center; }
+  @media screen and (min-width: 320px) and (max-width: 639px) {
+    .user__btn {
+      margin-top: 20px; }
+      .user__btn button {
+        width: 200px; } }
+  @media screen and (min-width: 640px) {
+    .user__btn {
+      margin-top: 40px; }
+      .user__btn button {
+        width: 250px; } }
 
 .user__options {
   text-align: center; }
@@ -196,6 +214,12 @@ td.selected {
       grid-column-start: 1;
       grid-column-end: 3;
       grid-row: 4; } }
+  @media screen and (min-width: 320px) and (max-width: 639px) {
+    .user__options .user__options-1, .user__options .user__options-2 {
+      margin-bottom: 15px; } }
+  @media screen and (min-width: 640px) {
+    .user__options .user__options-1, .user__options .user__options-2 {
+      margin-bottom: 20px; } }
 
 .divTable {
   text-align: center;
