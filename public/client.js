@@ -187,6 +187,10 @@ async function getPage(e,m){
       document.getElementById('img'+i).src = data.image[i];
     }
   }
+  for(var i = 0;i<10;i++){
+    eval(data.exec[i]);
+    console.log(data.exec[i]);
+  }
   document.getElementById("banterior").disabled = true;
   hide("bverificar");
 }

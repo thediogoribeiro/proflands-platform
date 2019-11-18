@@ -1,41 +1,40 @@
-funcs[2][2] = function (i,data){
-  var num, des, denum, neg, dif, sinal, res, n, forMax;
+const f = require('./../fracoes');
 
-    var canvas = '<canvas id="canvas' + i + '"  width="' + larg_canvas + '" height="'+ alt_canvas + '"></canvas>';
-    var enunciado = document.getElementById("enunciado"+i);
+module.exports = {
+  f : function(i){
+    var num, des, denum, neg, dif, sinal, res, n;
     var flag=1;
     while(flag==1){
-      var final = start_frac();
+      var final = f.start_frac();
       res = 0;
-        dif = Math.floor(Math.random() * 2) + 1;
-        des = Math.floor(Math.random() * 11) + 3;
-        denum = Math.floor(Math.random() * 3) + 1;
-        neg = Math.floor(Math.random() * 2) + 1;
-        num = Math.floor(Math.random() * 20) + 3;
-        sinal = Math.floor(Math.random() * 2) + 1;
-        n = Math.floor(Math.random() * 3) + 2;
-
+      dif = Math.floor(Math.random() * 2) + 1;
+      des = Math.floor(Math.random() * 11) + 3;
+      denum = Math.floor(Math.random() * 3) + 1;
+      neg = Math.floor(Math.random() * 2) + 1;
+      num = Math.floor(Math.random() * 20) + 3;
+      sinal = Math.floor(Math.random() * 2) + 1;
+      n = Math.floor(Math.random() * 3) + 2;
       if (dif==1){
         if(neg==1) num=-num;
         if ((num/denum)%1==0){
           var str = num/denum;
         }else if(denum!=1){
-          var str = create_frac(num,denum);
+          var str = f.create_frac(num,denum);
         }else{
           var str = num;
         }
-        final = str;
+        final += str;
         res=(num/denum);
       }else{
         for(var j = 0;j<n;j++){
           if (sinal==1) var op=(j==0)?(""):('<div id="cell2" class="divTableCelle">&nbsp; + &nbsp;</div>');
-          else var op='<div id="cell2" class="divTableCelle">&nbsp; - &nbsp;</div>';
+          else var op='<div id="cell2" class="divTableCelle">&nbsp; -</div>';
           var str = op;
           if(neg==1) num=-num;
           if ((num/denum)%1==0){
             str +=(neg==1)?('<div class="divTableCelle">&nbsp;('+num/denum+')&nbsp;</div>'):('<div class="divTableCelle">&nbsp;'+num/denum+'&nbsp;</div>') ;
           }else if(denum!=1){
-            str += create_frac(num,denum);
+            str += f.create_frac(num,denum);
           }else{
             str += (neg==1)?('<div class="divTableCelle">&nbsp;('+num+')&nbsp;</div>'):('<div class="divTableCelle">&nbsp;'+num/denum+'&nbsp;</div>');
           }
@@ -47,9 +46,9 @@ funcs[2][2] = function (i,data){
       var dec = Math.abs(Math.round((res%1)*10));
       if(dec==5 || dec==3 || dec==0 || dec==7) flag=3;
     }
-    final += end_frac();
-    console.log("pagina: ", i+1, "; Solucao: ",res)
-    enunciado.innerHTML += "Escolhe na reta númerica o valor:<br> " + final + "<br>" + canvas ;
-    create_reta_num(i,res,des);
+    final += f.end_frac();
+    q = 'Escolhe na reta númerica o valor: ' + final;
+    var cs = '<br><canvas id="canvas' + i + '"  width="400" height="400"></canvas>';
+    return {q:q, solution:res, cs:cs, exec:'create_reta_num('+i+','+res+','+des+')'}
   }
 }

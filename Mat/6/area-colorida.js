@@ -24,6 +24,6 @@ module.exports = {
     q = f.start_frac() + f.create_frac(num1,denum1) + op + f.create_frac(num2,denum2) + f.end_frac();
     sc=num1*num2;
     var cs = areaColTable(i,denum1,denum2);
-    return {q:q, s1:0, s2:0, s3:0, s4:0, solution:sc, cs:cs}
+    return {q:q, solution:sc, cs:cs}
   }
 };

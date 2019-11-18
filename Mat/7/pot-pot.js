@@ -41,6 +41,10 @@ module.exports = {
       s[i] = sol[rand];
       sol.splice(rand, 1);
     }
-    return {q:q, s1:s[0], s2:s[1], s3:s[2], s4:s[3], solution:sc}
+    var cs ='<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label id="label0'+i+'">'+s[0]+'</label><br>';
+    cs+='<input type="radio" id="r1'+i+'" name="solucao'+i+'" value="1"><label id="label1'+i+'">'+s[1]+'</label><br>';
+    cs+='<input type="radio" id="r2'+i+'" name="solucao'+i+'" value="2"><label id="label2'+i+'">'+s[2]+'</label><br>';
+    cs+='<input type="radio" id="r3'+i+'" name="solucao'+i+'" value="3"><label id="label3'+i+'">'+s[3]+'</label><br>';
+    return {q:q, cs:cs, solution:sc}
   }
 };

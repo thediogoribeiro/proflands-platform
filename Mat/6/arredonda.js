@@ -7,7 +7,7 @@ function create_decimal(num){
 }
 
 module.exports = {
-  f : function(){
+  f : function(i){
     var rand1, rand2, dif, q;
     rand1 = Math.round(((Math.random() * 20) + 1) * 100) / 100;
     rand2 = Math.round(((Math.random() * 20) + 1) * 100) / 100;
@@ -31,6 +31,10 @@ module.exports = {
     var b = top+" Arredondado por defeito";
     var c = bot+" Arredondado por excesso";
     var d = bot+" Arredondado por defeito";
-    return {q:q, s1:a, s2:b, s3:c, s4:d, solution:sc}
+    var cs ='<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label id="label0'+i+'">'+a+'</label><br>';
+    cs+='<input type="radio" id="r1'+i+'" name="solucao'+i+'" value="1"><label id="label1'+i+'">'+b+'</label><br>';
+    cs+='<input type="radio" id="r2'+i+'" name="solucao'+i+'" value="2"><label id="label2'+i+'">'+c+'</label><br>';
+    cs+='<input type="radio" id="r3'+i+'" name="solucao'+i+'" value="3"><label id="label3'+i+'">'+d+'</label><br>';
+    return {q:q, cs:cs, solution:sc}
   }
 };
