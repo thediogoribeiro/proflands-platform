@@ -49,6 +49,6 @@ module.exports = {
     final += f.end_frac();
     q = 'Escolhe na reta númerica o valor: ' + final;
     var cs = '<br><canvas id="canvas' + i + '"  width="400" height="400"></canvas>';
-    return {q:q, solution:res, cs:cs, exec:'create_reta_num('+i+','+res+','+des+')'}
+    return {q:q, solution:1, cs:cs, exec:'create_reta_num('+i+','+res+','+des+')'}
   }
 }

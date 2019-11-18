@@ -182,14 +182,15 @@ async function getPage(e,m){
   submete = data.sub;
   hide("materia");
   document.getElementById("quizzesMain").innerHTML=data.quizPage;
-  if(data.image!='none'){
+  if(data.image[0]!=null){
     for(var i = 0; i<10;i++){
       document.getElementById('img'+i).src = data.image[i];
     }
-  }
-  for(var i = 0;i<10;i++){
-    eval(data.exec[i]);
-    console.log(data.exec[i]);
+  }if (data.exec[0]!=null){
+    submete=2;
+    for(var i = 0;i<10;i++){
+      eval(data.exec[i]);
+    }
   }
   document.getElementById("banterior").disabled = true;
   hide("bverificar");
@@ -238,6 +239,8 @@ async function verificar(){
     for (var i = 0; i < 10; i++){
       sol[i] = conta_tabela(i);
     }
+  }else if (submete==2){
+      sol = ver_reta_num(i);
   }
   const options = {
     method: 'POST',

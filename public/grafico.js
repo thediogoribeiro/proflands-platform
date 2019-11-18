@@ -53,7 +53,7 @@ function getXYgraf(canvas, tV, event) {
 }
 
 function ver_reta_num(i){
-  if (sol[i]==1) return true;
+  return sol;
 }
 
 function ver_graf(i){
