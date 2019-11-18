@@ -23,8 +23,7 @@ function getXYretaNum(canvas,nums,decimals,des,comp, event) {
   var y = event.clientY - rect.top;
   ctx.beginPath();
   ctx.fillStyle = 'red';
-  if (nums[i]<0) ctx.arc((((Math.trunc(nums[i])*decimals[i])-des)*25)+x, y-canvas.height/2, 4, 0, 2 * Math.PI, false);
-  else ctx.arc((((Math.round(nums[i])*decimals[i])-des)*25)+x, y-canvas.height/2, 4, 0, 2 * Math.PI, false);
+  ctx.arc((((Math.round(nums[i])*decimals[i])-des)*25)+x, y-canvas.height/2, 4, 0, 2 * Math.PI, false);
   ctx.fill();
   if (decimals[i]==1 && x>=(190+((des-8)*25)) && x<=(210+((des-8)*25)))
   sol[i] = 1;

@@ -1,6 +1,48 @@
 //funcoes para criar fracoes
-
+const gcd = require('./gcd-lcm');
 module.exports = {
+
+
+  mult:function (a,b,x,y){
+    var topm = a * x;
+    var botm = b * y;
+    var divisor = gcd.gcd(topm, botm);
+    topm = topm / divisor;
+    botm = botm / divisor;
+    var res = [topm,botm];
+    return res
+  },
+
+  div:function (a,b,x,y){
+    var topm = a * y;
+    var botm = b * x;
+    var divisor = gcd.gcd(topm, botm);
+    topm = topm / divisor;
+    botm = botm / divisor;
+    var res = [topm,botm];
+    return res
+  },
+
+  add:function (a,b,x,y){
+    var topm = a * y + b * x;
+    var botm = b * y;
+    var divisor = gcd.gcd(topm, botm);
+    topm = topm / divisor;
+    botm = botm / divisor;
+    var res = [topm,botm];
+    return res
+  },
+
+  sub:function (a,b,x,y){
+    var topm = a * y - b * x;
+    var botm = b * y;
+    var divisor = gcd.gcd(topm, botm);
+    topm = topm / divisor;
+    botm = botm / divisor;
+    var res = [topm,botm];
+    return res
+  },
+
   start_frac : function (){
     var text = '<div class="divTable"><div class="divTableBody"><div class="divTableRow">';
     return text;

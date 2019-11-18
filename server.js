@@ -240,7 +240,11 @@ function pickFunc(i,materia){
 		break;
 		case 'Reta númerica':
 		const rn = require('./Mat/7/reta-num');
-		return {f:rn.f(i),type:4};
+		return {f:rn.f(i),type:1};
+		break;
+		case 'Frações com sinal':
+		const fs = require('./Mat/7/frac-sinal');
+		return {f:fs.f(i),type:1};
 		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);
