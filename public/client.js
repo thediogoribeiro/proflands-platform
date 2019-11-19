@@ -240,7 +240,7 @@ async function verificar(){
       sol[i] = conta_tabela(i);
     }
   }else if (submete==2){
-      sol = ver_reta_num(i);
+      sol = verificarRetaORGraf(i);
   }
   const options = {
     method: 'POST',

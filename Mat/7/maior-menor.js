@@ -1,5 +1,3 @@
-var calc1 = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
-var calc2 = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
 var esq, dir;
 const f = require('./../fracoes');
 
@@ -48,7 +46,7 @@ function create_enun_frac2(i,a,b,dif,pot){
 }
 
 function create_enun_frac3(i,a,b,dif,pot){
-  // com a neg dá erro a fazer -> sqrt(a)
+  // sqrt(-a) -> ERRO com 'a' NEG
   //console.log(" -   ",i,a,b,dif,pot);
   esq=(a/b)**pot;
   var text = f.start_frac() + f.create_frac_pot(a,b,pot);
@@ -66,14 +64,14 @@ function create_enun_frac3(i,a,b,dif,pot){
 
 module.exports = {
   f : function(i){
-  var sol = [-1,-1,-1,-1];
-  var neg, a, b, dif, q, s;
-      neg = Math.floor((Math.random() *2) + 1);
-      a = Math.floor((Math.random() *8) + 2);
-      b = Math.floor((Math.random() *8) + 2);
-      dif = Math.floor((Math.random() *4) + 1);
-      dif_enun = Math.floor((Math.random() *2) + 1);
-      pot_enun = Math.floor((Math.random() *3) + 1);
+    var sol = [-1,-1,-1,-1];
+    var neg, a, b, dif, q, s;
+    neg = Math.floor((Math.random() *2) + 1);
+    a = Math.floor((Math.random() *8) + 2);
+    b = Math.floor((Math.random() *8) + 2);
+    dif = Math.floor((Math.random() *4) + 1);
+    dif_enun = Math.floor((Math.random() *2) + 1);
+    pot_enun = Math.floor((Math.random() *3) + 1);
     if(a<b){
       var aux = a;
       a=b;

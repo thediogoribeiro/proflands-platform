@@ -13,6 +13,13 @@ for (var k = 0; k < sol3.length; k++) {
     sol3[k][m]=-99;
   }
 }
+var tableValues = new Array(10);
+for (var k = 0; k < sol2.length; k++) {
+  tableValues[k] = new Array(12);
+  for (var m = 0; m<6;m++){
+    tableValues[k][m]=0;
+  }
+}
 
 function getXYretaNum(canvas,nums,decimals,des,comp, event) {
   var i = Number(canvas.id.replace("canvas", ""));
@@ -31,8 +38,9 @@ function getXYretaNum(canvas,nums,decimals,des,comp, event) {
   sol[i] =1;
 }
 
-function getXYgraf(canvas, tV, event) {
+function getXYgraf(canvas, event) {
   var i = Number(canvas.id.replace("canvas", ""));
+  var tV = tableValues[i];
   var ctx = canvas.getContext("2d");
   var rect = canvas.getBoundingClientRect();
   var x = event.clientX - rect.left;
@@ -49,9 +57,16 @@ function getXYgraf(canvas, tV, event) {
   if(entre(x,tV[3]*25-5,tV[3]*25+5) && entre(y,-tV[9]*25-5, -tV[9]*25+5)) sol2[i][3]=true;
   if(entre(x,tV[4]*25-5,tV[4]*25+5) && entre(y,-tV[10]*25-5, -tV[10]*25+5)) sol2[i][4]=true;
   if(entre(x,tV[5]*25-5,tV[5]*25+5) && entre(y,-tV[11]*25-5, -tV[11]*25+5)) sol2[i][5]=true;
+  if(sol2[i][0] && sol2[i][1] && sol2[i][2] && sol2[i][3] && sol2[i][4] && sol2[i][5]) sol[i]=1;
 }
 
-function ver_reta_num(i){
+function entre(v, a, b) {
+  var min = Math.min.apply(Math, [a, b]);
+  var max = Math.max.apply(Math, [a, b]);
+  return v > min && v < max;
+};
+
+function verificarRetaORGraf(i){
   return sol;
 }
 
@@ -202,7 +217,8 @@ function create_reta_num(i,num,des){
   }
 }
 
-function create_graf(i,tV){
+function create_graf(i,a33,b33,c33,d33,e33,f33,g33,h33,i33,j33,k33,l33){
+  tableValues[i] = [a33,b33,c33,d33,e33,f33,g33,h33,i33,j33,k33,l33];
   var grid_size = 25;
   var x_axis_distance_grid_lines = 8;
   var y_axis_distance_grid_lines = 8;
@@ -218,7 +234,7 @@ function create_graf(i,tV){
   var num_lines_x = Math.floor(canvas_height/grid_size);
   var num_lines_y = Math.floor(canvas_width/grid_size);
   canvas.addEventListener('mousedown', function(e) {
-    getXYgraf(canvas,tV, e)
+    getXYgraf(canvas, e)
   });
 
   // Draw grid lines along X-axis
