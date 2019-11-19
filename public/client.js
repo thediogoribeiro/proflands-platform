@@ -253,7 +253,8 @@ async function verificar(){
 }
 
 function change_radio(item,i){
-  document.getElementById("cell2"+i).innerHTML=item.value;
+  var labelText = document.getElementById("label"+item.value+i).innerHTML
+  document.getElementById("cell2"+i).innerHTML=labelText;
 }
 
 function changeColor(td){

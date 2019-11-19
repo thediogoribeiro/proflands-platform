@@ -68,6 +68,7 @@ app.post('/verificar',(req, res) => {
 	var sol = req.body.solution;
 	var pontos = 0;
 	for(var i = 0; i<10; i++){
+		console.log(solutions[i]," ",sol[i]);
 		if(solutions[i]===sol[i]) pontos++;
 	}
 	res.send({score:pontos});
@@ -245,6 +246,10 @@ function pickFunc(i,materia){
 		case 'Frações com sinal':
 		const fs = require('./Mat/7/frac-sinal');
 		return {f:fs.f(i),type:1};
+		break;
+		case 'Maior ou Menor':
+		const mm = require('./Mat/7/maior-menor');
+		return {f:mm.f(i),type:1};
 		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);
