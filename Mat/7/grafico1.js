@@ -12,27 +12,24 @@ module.exports = {
   f : function(i){
     var neg1, neg2, xV, y, q;
     var tableV = new Array(10);
-    for (var k = 0; k < tableV.length; k++) {
-      tableV[k] = new Array(10);
-    }
     neg1 = Math.floor((Math.random() *2) + 1);
     xV = Math.floor((Math.random() *5) + 1);
     if(neg1==1) xV = -xV;
-    tableV[i][0] = xV-3;
-    tableV[i][1] = xV-2;
-    tableV[i][2] = xV-1;
-    tableV[i][3] = xV;
-    tableV[i][4] = xV+1;
-    tableV[i][5] = xV+2;
+    tableV[0] = xV-3;
+    tableV[1] = xV-2;
+    tableV[2] = xV-1;
+    tableV[3] = xV;
+    tableV[4] = xV+1;
+    tableV[5] = xV+2;
     for(var j = 6;j<12;j++){
       neg2 = Math.floor((Math.random() *2) + 1);
       y = Math.floor((Math.random() *6) + 1);
       if(neg2==1) y = -y;
-      tableV[i][j]=y;
+      tableV[j]=y;
     }
-    q = criaTabela(tableV[i]);
+    q = criaTabela(tableV);
     q += "Apresenta os valores de y no grafico:<br>";
     var cs = '<canvas id="canvas' + i + '"  width="400" height="400"></canvas>';
-    return {q:q, solution:1, cs:cs, exec:'create_graf('+i+','+tableV[i]+')'}
+    return {q:q, solution:1, cs:cs, exec:'create_graf('+i+','+tableV+')'}
   }
 };

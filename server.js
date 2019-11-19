@@ -254,6 +254,10 @@ function pickFunc(i,materia){
 		const g1 = require('./Mat/7/grafico1');
 		return {f:g1.f(i),type:1};
 		break;
+		case 'Grafico 2':
+		const g2 = require('./Mat/7/grafico2');
+		return {f:g2.f(i),type:1};
+		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);
 	}

@@ -67,22 +67,20 @@ function entre(v, a, b) {
 };
 
 function verificarRetaORGraf(i){
+  for(var i = 0;i<10;i++){
+    ver_graf2(i);
+  }
   return sol;
-}
-
-function ver_graf(i){
-  if (sol2[i][0] && sol2[i][1] && sol2[i][2] && sol2[i][3] && sol2[i][4] && sol2[i][5])
-  return true;
 }
 
 function ver_graf2(i){
   var s = new Array(6);
   for(var j =0;j<6;j++){
     var e = document.getElementById("sel"+j+i);
-    s[j] = e.options[e.selectedIndex].value;
+    try {s[j] = e.options[e.selectedIndex].value;}
+    catch (e) {console.log(e);}
   }
-  if (s[0]==sol3[i][0] && s[1]==sol3[i][1] && s[2]==sol3[i][2] && s[3]==sol3[i][3] && s[4]==sol3[i][4] && s[5]==sol3[i][5])
-  return true;
+  if(s[0]==sol3[i][0] && s[1]==sol3[i][1] && s[2]==sol3[i][2] && s[3]==sol3[i][3] && s[4]==sol3[i][4] && s[5]==sol3[i][5]) sol[i]=1;
 }
 
 function create_reta_num(i,num,des){
@@ -355,7 +353,8 @@ function create_graf(i,a33,b33,c33,d33,e33,f33,g33,h33,i33,j33,k33,l33){
   }
 }
 
-function create_graf2(i,tVs){
+function create_graf2(i,a33,b33,c33,d33,e33,f33,g33,h33,i33,j33,k33,l33){
+  var tVs = [a33,b33,c33,d33,e33,f33,g33,h33,i33,j33,k33,l33];
   var grid_size = 25;
   var x_axis_distance_grid_lines = 8;
   var y_axis_distance_grid_lines = 8;
