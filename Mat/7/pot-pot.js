@@ -1,7 +1,7 @@
 
 const f = require('./../fracoes');
 module.exports = {
-  f : function(){
+  f : function(i){
     var num1, num2, denum1, denum2, n1, n2, m1, m2, dif, sinal1, sinal2, forMax;
     var sol = [-1,-1,-1,-1];
     num1 = Math.floor(Math.random() * 9) + 1;
@@ -36,9 +36,9 @@ module.exports = {
     }
     var sc = sol[3];
     var s = [-1,-1,-1,-1];
-    for(var i = 0; i<4 ; i++){
-      var rand = Math.floor(Math.random() * (4-i));
-      s[i] = sol[rand];
+    for(var cont = 0; cont<4 ; cont++){
+      var rand = Math.floor(Math.random() * (4-cont));
+      s[cont] = sol[rand];
       sol.splice(rand, 1);
     }
     var cs ='<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label id="label0'+i+'">'+s[0]+'</label><br>';

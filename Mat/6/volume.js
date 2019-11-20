@@ -1,21 +1,16 @@
 const n_figuras_vol = 6;
-const larg_canvas = 400;
-const alt_canvas = 400;
-var scene;
-var camera;
-var renderer;
-
-const geometrias = require('./../geometrias');
-const three = require('./../three');
+const min = 20;
+const max = 100;
+const pi = Math.PI;
+const script = require('./../../script');
 
 function sol_errada_vol(sol){
-  sol = Math.round(variacao(sol) * 100) / 100;
-  return 'Volume: ' + sol + ' cm<sup>3</sup>.';
+  sol = Math.round(script.variacao(sol,50) * 100) / 100;
+  return sol;
 }
 
 function calc_vol_cubo(x,y,z){
-  var area_base = calc_area_rect(x,y);
-  var sol = area_base * z;
+  var sol = x*y*z;
   return Math.round(sol * 100) / 100;
 }
 
@@ -36,65 +31,60 @@ function calc_vol_piramide(x,z,tipo,lados){
   return Math.round(sol * 100) / 100;
 }
 
-function create_scene(i){
-  scene = new three.THREE.Scene();
-  camera = new three.THREE.PerspectiveCamera( 75, larg_canvas/alt_canvas, 0.1, 100 );
-  renderer = new three.THREE.WebGLRenderer();
-  scene.background = new three.THREE.Color('white');
-  renderer.setSize( larg_canvas, alt_canvas );
-}
+
 
 
 module.exports = {
   f : function(i){
-    var x, y, z, geom, ladosPir;
+    var x, y, z, geom, ladosPir, exec;
     x = Math.floor((Math.random() * max) + min);
     y = Math.floor((Math.random() * max) + min);
     z = Math.floor((Math.random() * max) + min);
     geom = Math.floor(Math.random() * n_figuras_vol) + 1;
     ladosPir = Math.floor((Math.random() *2) + 3);
     if (geom == 1) {
-      q = 'Raio: ' + x + 'cm.<br>Altura: ' + z + 'cm.';
-      create_scene(i);
-      draw_piramide(scene, camera, renderer, "cone", x, z, 400);
+      q = 'Raio: ' + x + 'cm.<br>Altura: ' + z + 'cm.<br>';
+      exec = 'draw_piramide('+i+',"cone", '+x+', '+z+', 400)';
       sol = calc_vol_piramide(x,z,"cone", 400);
     }else if(geom==2){
-      q = 'Aresta 1: ' + x + 'cm.<br>Aresta 2: ' + y + 'cm.<br>Altura: ' + z + 'cm.';
-      create_scene(i);
-      draw_cube(scene,camera,renderer,x,y,z);
+      q = 'Aresta 1: ' + x + 'cm.<br>Aresta 2: ' + y + 'cm.<br>Altura: ' + z + 'cm.<br>';
+      exec = 'draw_cube('+i+','+x+','+y+','+z+')';
       sol = calc_vol_cubo(x,y,z);
     }else if(geom==3){
-      q = 'Raio: ' + x + 'cm.<br>Altura: ' + z + 'cm.';
-      create_scene(i);
-      draw_prisma(scene,camera,renderer,"cilindro",x,z);
+      q = 'Raio: ' + x + 'cm.<br>Altura: ' + z + 'cm.<br>';
+      exec = 'draw_prisma('+i+',"cilindro",'+x+','+z+')';
       sol = calc_vol_prisma(x,z);
     }else if(geom==4){
-      q = 'Aresta: ' + x + 'cm.<br>Altura: ' + z + 'cm.';
-      create_scene(i);
-      draw_piramide(scene, camera, renderer, "piramide", x, z, ladosPir);
+      q = 'Aresta: ' + x + 'cm.<br>Altura: ' + z + 'cm.<br>';
+      exec = 'draw_piramide('+i+',"piramide", '+x+', '+z+', '+ladosPir+')';
       sol = calc_vol_piramide(x,z,"piramide",ladosPir);
     }else if(geom==5){
-      q = 'Aresta: ' + x + 'cm.<br>Altura: ' + z + 'cm.';
-      create_scene(i);
-      draw_prisma(scene,camera,renderer,"prisma",x,z);
+      q = 'Aresta: ' + x + 'cm.<br>Altura: ' + z + 'cm.<br>';
+      exec = 'draw_prisma('+i+',"prisma",'+x+','+z+')';
       sol = calc_vol_prisma(x,z);
     }else if(geom==6){
-      q = 'Aresta: ' + x + 'cm.';
-      create_scene(i);
-      draw_cube(scene,camera,renderer,x,x,x);
+      q = 'Aresta: ' + x + 'cm.<br>';
+      exec = 'draw_cube('+i+','+x+','+x+','+x+')';
       sol = calc_vol_cubo(x,x,x);
     }
-    write_solutions(i,sol_errada_vol(sol),sol_errada_vol(sol),sol_errada_vol(sol),'Volume: ' + sol + ' cm<sup>3</sup>.');
-    var s1 = 'Volume: ' + sol_errada_vol(sol) + ' cm<sup>3</sup>.';
-    var s2 = 'Volume: ' + sol_errada_vol(sol) + ' cm<sup>3</sup>.';
-    var s3 = 'Volume: ' + sol_errada_vol(sol) + ' cm<sup>3</sup>.';
-    var s4 = 'Volume: ' + sol_errada_vol(sol) + ' cm<sup>3</sup>.';
-    var s5 = 'Volume: ' + sol_errada_vol(sol) + ' cm<sup>3</sup>.';
-    var rand = Math.floor(Math.random() * 4) + 1;
-    if(rand==1){s1=s5}
-    else if(rand==2){s2=s5}
-    else if(rand==3){s3=s5}
-    else if(rand==4){s4=s5}
-    return {q:q, s1:s1, s2:s2, s3:s3, s4:s4, solution:s5, image:dataURL}
+    var s2 = [-1,-1,-1,-1];
+    var s = new Array(4);
+    while (s2[0]==s2[1] || s2[0]==s2[2] || s2[1]==s2[2]){
+      s2[0] = 'Volume: ' + sol_errada_vol(sol) + ' cm<sup>3</sup>.';
+      s2[1] = 'Volume: ' + sol_errada_vol(sol) + ' cm<sup>3</sup>.';
+      s2[2] = 'Volume: ' + sol_errada_vol(sol) + ' cm<sup>3</sup>.';
+    }
+    s2[3] = sol;
+    for(var cont = 0; cont<4 ; cont++){
+      var rand = Math.floor(Math.random() * (4-cont));
+      s[cont] = s2[rand];
+      s2.splice(rand, 1);
+    }
+    var cs ='<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label id="label0'+i+'">'+s[0]+'</label><br>';
+    cs+='<input type="radio" id="r1'+i+'" name="solucao'+i+'" value="1"><label id="label1'+i+'">'+s[1]+'</label><br>';
+    cs+='<input type="radio" id="r2'+i+'" name="solucao'+i+'" value="2"><label id="label2'+i+'">'+s[2]+'</label><br>';
+    cs+='<input type="radio" id="r3'+i+'" name="solucao'+i+'" value="3"><label id="label3'+i+'">'+s[3]+'</label><br>';
+    console.log(sol);
+    return {q:q, solution:sol, cs:cs, exec:exec}
   }
 };

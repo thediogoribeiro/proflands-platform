@@ -68,8 +68,10 @@ app.post('/verificar',(req, res) => {
 	var sol = req.body.solution;
 	var pontos = 0;
 	for(var i = 0; i<10; i++){
-		if(solutions[i]===sol[i]) pontos++;
+		//console.log(solutions[i]," . ",sol[i]);
+		if(solutions[i]==sol[i]) pontos++;
 	}
+	console.log(pontos);
 	res.send({score:pontos});
 });
 
@@ -80,12 +82,15 @@ app.post('/getPage',(req, res) => {
 	var image = new Array(10);
 	for(var i = 0; i<10; i++){
 		const data = pickFunc(i,req.body.materia);
+		if (data.type==2) submete = 2;
 		if (data.type==3) submete = 1;
 		solutions[i] = data.f.solution;
+		console.log(solutions[i]);
 		exec[i] = data.f.exec;
 		if (data.f.image!=undefined) image[i] = data.f.image;
 		quizPage+=script.buildPage(i, data.f.q, data.f.cs );
 	}
+	console.log(submete);
 	res.send({quizPage:quizPage, image:image, sub:submete, exec:exec});
 });
 
@@ -192,31 +197,31 @@ function pickFunc(i,materia){
 	switch(materia) {
 		case 'Frações':
 		const frac = require('./Mat/5/frac');
-		return {f:frac.f(i),type:1};
+		return {f:frac.f(i),type:0};
 		break;
 		case 'Areas':
 		const area = require('./Mat/5/area');
-		return {f:area.f(i),type:1};
+		return {f:area.f(i),type:0};
 		break;
 		case 'Perimetros':
 		const perim = require('./Mat/5/perim');
-		return {f:perim.f(i),type:1};
+		return {f:perim.f(i),type:0};
 		break;
 		case 'Divisores comuns':
 		const divCom = require('./Mat/5/div-com');
-		return {f:divCom.f(i),type:1};
+		return {f:divCom.f(i),type:0};
 		break;
 		case 'Volumes':
 		const vol = require('./Mat/6/volume');
-		//return vol.f(i); NOT WORKING
+		return {f:vol.f(i),type:0};
 		break;
 		case 'Potências':
 		const pot = require('./Mat/6/pot');
-		return {f:pot.f(i),type:1};
+		return {f:pot.f(i),type:0};
 		break;
 		case 'Fração VS Unidade':
 		const fVSu = require('./Mat/6/fracVSunidade');
-		return {f:fVSu.f(i),type:2};
+		return {f:fVSu.f(i),type:0};
 		break;
 		case 'Área colorida(Frações)':
 		const ac = require('./Mat/6/area-colorida');
@@ -224,39 +229,39 @@ function pickFunc(i,materia){
 		break;
 		case 'Potências(Frações)':
 		const pf = require('./Mat/6/pot-frac');
-		return {f:pf.f(i),type:1};
+		return {f:pf.f(i),type:0};
 		break;
 		case 'Arredondamentos':
 		const a = require('./Mat/6/arredonda');
-		return {f:a.f(i),type:1};
+		return {f:a.f(i),type:0};
 		break;
 		case 'Potência de Potência':
 		const pp = require('./Mat/7/pot-pot');
-		return {f:pp.f(i),type:1};
+		return {f:pp.f(i),type:0};
 		break;
 		case 'Raízes':
 		const r = require('./Mat/7/raizes');
-		return {f:r.f(i),type:1};
+		return {f:r.f(i),type:0};
 		break;
 		case 'Reta númerica':
 		const rn = require('./Mat/7/reta-num');
-		return {f:rn.f(i),type:1};
+		return {f:rn.f(i),type:2};
 		break;
 		case 'Frações com sinal':
 		const fs = require('./Mat/7/frac-sinal');
-		return {f:fs.f(i),type:1};
+		return {f:fs.f(i),type:0};
 		break;
 		case 'Maior ou Menor':
 		const mm = require('./Mat/7/maior-menor');
-		return {f:mm.f(i),type:1};
+		return {f:mm.f(i),type:0};
 		break;
 		case 'Grafico 1':
 		const g1 = require('./Mat/7/grafico1');
-		return {f:g1.f(i),type:1};
+		return {f:g1.f(i),type:2};
 		break;
 		case 'Grafico 2':
 		const g2 = require('./Mat/7/grafico2');
-		return {f:g2.f(i),type:1};
+		return {f:g2.f(i),type:2};
 		break;
 		default:
 		console.log('Nenhuma funcao executada', materia, i);

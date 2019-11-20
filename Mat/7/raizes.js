@@ -11,7 +11,7 @@ function randomAnswer(n){
 }
 
 module.exports = {
-  f : function(){
+  f : function(i){
     var sol = new Array(4);
     var num, dif;
     num = Math.floor(Math.random() * 20) + 3;
@@ -20,9 +20,9 @@ module.exports = {
     sol =randomAnswer(num);
     var sc = sol[3];
     var s = new Array(4);
-    for(var i = 0; i<4 ; i++){
-      var rand = Math.floor(Math.random() * (4-i));
-      s[i] = sol[rand];
+    for(var cont = 0; cont<4 ; cont++){
+      var rand = Math.floor(Math.random() * (4-cont));
+      s[cont] = sol[rand];
       sol.splice(rand, 1);
     }
     var cs ='<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label id="label0'+i+'">'+s[0]+'</label><br>';

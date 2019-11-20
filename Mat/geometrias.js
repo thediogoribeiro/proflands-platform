@@ -12,7 +12,12 @@ const Image = Canvas.Image;
 const canvas = new Canvas.Canvas(alt_canvas, larg_canvas);
 const context = canvas.getContext('2d');
 
-function create_3d(geometry, scene, camera, renderer, xrot, yxot, cam_pos, cor){
+function create_3d(geometry, xrot, yxot, cam_pos, cor){
+  var scene = new three.THREE.Scene();
+  var camera = new three.THREE.PerspectiveCamera( 75, larg_canvas/alt_canvas, 0.1, 100 );
+  var renderer = new three.THREE.WebGLRenderer();
+  scene.background = new three.THREE.Color('white');
+  renderer.setSize( larg_canvas, alt_canvas );
   var edges = new THREE.EdgesGeometry(geometry);
   var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 'black' }));
   scene.add(line);
@@ -35,23 +40,23 @@ function create_3d(geometry, scene, camera, renderer, xrot, yxot, cam_pos, cor){
 }
 
 module.exports = {
-  draw_cube:function(scene, camera, renderer,x,y,z){
+  draw_cube:function(x,y,z){
     var geometry = new THREE.BoxGeometry( x/100, y/100, z/100 );
-    create_3d(geometry,scene, camera, renderer, 0.5, 1,2, cor);
+    create_3d(geometry, 0.5, 1,2, cor);
   },
 
-  draw_prisma:function(scene, camera, renderer,tipo,x,z){
+  draw_prisma:function(tipo,x,z){
     if (tipo=="cilindro") var lados = 400;
     else if (tipo=="prisma") var lados = 3;
     var geometry = new THREE.CylinderGeometry(x/100, x/100, z/100, lados);
-    create_3d(geometry,scene, camera, renderer, 0.5, 1,2, cor);
+    create_3d(geometry, 0.5, 1,2, cor);
   },
 
-  draw_piramide:function(scene, camera, renderer, tipo, x, z, lados){
+  draw_piramide:function(tipo, x, z, lados){
     var xrot=0.2;
     if (tipo=="piramide") xrot=0.5;
     var geometry = new THREE.ConeGeometry(x/100, z/100, lados);
-    create_3d(geometry,scene, camera, renderer, xrot, 1.7,2, cor,tipo);
+    create_3d(geometry, xrot, 1.7,2, cor,tipo);
   },
 
   draw_pent:function(i,h,nl) {

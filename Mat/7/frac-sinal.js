@@ -45,9 +45,9 @@ module.exports = {
     sol[3] = f.start_frac()+f.create_frac(resok[0],resok[1])+f.end_frac();
     var sc = sol[3];
     var s = [-1,-1,-1,-1];
-    for(var i = 0; i<4 ; i++){
-      var rand = Math.floor(Math.random() * (4-i));
-      s[i] = sol[rand];
+    for(var cont = 0; cont<4 ; cont++){
+      var rand = Math.floor(Math.random() * (4-cont));
+      s[cont] = sol[rand];
       sol.splice(rand, 1);
     }
     var cs ='<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label id="label0'+i+'">'+s[0]+'</label><br>';

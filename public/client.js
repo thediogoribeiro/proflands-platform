@@ -187,7 +187,6 @@ async function getPage(e,m){
       document.getElementById('img'+i).src = data.image[i];
     }
   }if (data.exec[0]!=null){
-    submete=2;
     for(var i = 0;i<10;i++){
       eval(data.exec[i]);
     }
@@ -225,6 +224,7 @@ function pag_seg(){
 
 async function verificar(){
   var sol = new Array(10);
+  console.log(submete);
   if (submete==0){
     for (var i = 0; i < 10; i++){
       var radios = document.getElementsByName('solucao'+i);
