@@ -8,7 +8,7 @@ class lobby {
 		this._maxJogadores = maxJogadores;
 		this._data = data;
 		this._exec = exec;
-		this.solutions = sol;
+		this._solutions = sol;
 	}
 	set waiting(w){
 		this._waiting=w;
@@ -94,7 +94,6 @@ app.post('/getLocalPage',(req, res) => {
 		exec[i] = data.f.exec;
 		quizPage+=script.buildPage(i, data.f.q, data.f.cs );
 	}
-	console.log(solutions);
 	res.send({quizPage:quizPage, sub:submete, exec:exec});
 });
 
@@ -122,14 +121,10 @@ app.post('/getLobbyPage',(req, res) => {
 		lobbys[cont].exec = exec;
 		lobbys[cont].data = quizPage;
 	}
-	console.log(lobbys[cont].solutions);
-	console.log(lobbys[cont].data);
-	console.log(lobbys[cont].exec);
 	res.send({quizPage:lobbys[cont].data, sub:submete, exec:lobbys[cont].exec});
 });
 
 app.post('/waiting',(req, res) => {
-	console.log(req.body.user.num, " WAITING");
 	var cont=0;
 	var prontos=0;
 	while(lobbys[cont].id!=req.body.user.lobbyID){
@@ -140,10 +135,14 @@ app.post('/waiting',(req, res) => {
 	if(req.body.type=="ENTER"){
 		if(nUsers==lobbys[cont].maxJogadores){
 			res.send({status:"YES"});
+			if(req.body.user.num==1){
+				console.log(lobbys[cont].id," Lobby completo, a entregar questionarios aos jogadores... ... ...");
+				console.log("Solucoes: ", cleanSolutions(lobbys[cont].solutions));
+			}
 		}else {
 			res.send({status:"NO"});
 		}
-	}else{
+	}else if(req.body.type=="LEAVE"){
 		for(var i = 0; i<nUsers; i++){
 			if(user[i].pronto == 1) prontos++;
 		}
@@ -161,25 +160,20 @@ app.post('/lobbyScore',(req, res) => {
 	while(lobbys[cont].id!=req.body.jogador.lobbyID){
 		cont++;
 	}
-	//console.log("lobby: ",lobbys[cont]);
 	const nUsers =lobbys[cont].jogadores.length;
 	const user = lobbys[cont].jogadores;
 	var sol = req.body.solution;
 	var pontos = 0;
 	for(var i = 0; i<nUsers; i++){
 		if(user[i].num==req.body.jogador.num){
-			console.log("user: ", req.body.jogador.num);
+			console.log("user nº ", req.body.jogador.num, " finished");
 			for(var j = 0; j<10; j++){
-				//console.log(lobbys[cont].solutions[j]," . ",sol[j]);
 				if(lobbys[cont].solutions[j]==sol[j]) pontos++;
 			}
-			console.log("pontos: ", pontos);
 			lobbys[cont].jogadores[i].pontos = pontos;
 			lobbys[cont].jogadores[i].pronto = 1;
 		}
-		if(lobbys[cont].jogadores[i].pronto == 1){
-			prontos++;
-		}
+		if(lobbys[cont].jogadores[i].pronto == 1) prontos++;
 	}
 	if (prontos==MAX_LOBBY_PLAYERS) res.send({status:"score saved", last:"TRUE"});
 	else res.send({status:"score saved", last:"FALSE"});
@@ -187,7 +181,9 @@ app.post('/lobbyScore',(req, res) => {
 });
 
 app.post('/checkScore',(req, res) => {
+	console.log("All user finished");
 	var cont=0;
+	var flag = 0;
 	while(lobbys[cont].id!=req.body.user.lobbyID){
 		cont++;
 	}
@@ -197,7 +193,6 @@ app.post('/checkScore',(req, res) => {
 app.post('/lobby',(req, res) => {
 	var cont=0;
 	while(lobbys[cont]!=null){
-		console.log("numero jogadores: ", lobbys[cont].jogadores.length," MAX: ",lobbys[cont].maxJogadores);
 		if(lobbys[cont].jogadores.length < lobbys[cont].maxJogadores){
 			if(lobbys[cont].ano===req.body.jogador.ano){
 				var novo_jogador = req.body.jogador;
@@ -205,8 +200,7 @@ app.post('/lobby',(req, res) => {
 				novo_jogador.num=lobbys[cont].jogadores.length+1;
 				lobbys[cont].jogadores.push(novo_jogador);
 				res.send({ lobbyID:lobbys[cont].id, player: novo_jogador.num, maxPlayers:MAX_LOBBY_PLAYERS });
-				console.log("Jogador registado no lobby: ",lobbys[cont].id);
-				//console.log("lobby: ",lobbys[cont]);
+				console.log("--Jogador ",novo_jogador.num," entrou no lobby: ",lobbys[cont].id);
 				return;
 			}
 		}
@@ -219,8 +213,7 @@ app.post('/lobby',(req, res) => {
 	novo_jogador.lobbyID=ID;
 	novo_jogador.num=1;
 	lobbys[cont] = new lobby(ID,0, req.body.jogador.ano, novo_jogador, MAX_LOBBY_PLAYERS, null, null, null);
-	console.log("Jogador entrou no lobby: ",ID);
-	//console.log("lobby: ",lobbys[cont]);
+	console.log("--Jogador ",novo_jogador.num," entrou no lobby: ",ID);
 });
 
 app.post('/after_lobby',(req, res) => {
@@ -235,6 +228,23 @@ app.post('/after_lobby',(req, res) => {
 		res.send(lobbys[cont].data);
 	}
 });
+
+function cleanSolutions(s){
+	var sol = new Array(10);
+	for(var km = 0; km<10;km++){
+		if((typeof s[km])=="string"){
+			sol[km] = s[km].replace('<div class="divTable"><div class="divTableBody"><div class="divTableRow"><div class="divTableCellp">','')
+			sol[km] = sol[km].replace('(</div><div id="cell2" class="divTableCell"><span class="frac"><div class="num" id="num1">','');
+			sol[km] = sol[km].replace('(</div><div id="cell2" class="divTableCell"><span class="frac"><div class="num" id="num1">','');
+			sol[km] = sol[km].replace('</div></span></div><div class="divTableCellp">)</div></div></div></div>','');
+			sol[km] = sol[km].replace('</div><div class="denum" id="denum1">','/');
+			sol[km] = sol[km].replace('(</div><div id="cell2" class="divTableCelle"> -&nbsp;</div><div id="cell2" class="divTableCell"><span class="frac"><div class="num" id="num1">','-');
+		}else{
+			sol[km] = s[km];
+		}
+	}
+	return sol;
+}
 
 function pickFunc(i,materia){
 	switch(materia) {

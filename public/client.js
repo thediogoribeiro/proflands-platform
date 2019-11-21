@@ -114,6 +114,7 @@ function solo() {
   str+="<button onclick='cien()' class='dropbtn' id='bcien'>Ciências</button>";
   str+="<button onclick='geo()' class='dropbtn' id='bgeo'>Geografia</button>";
   document.getElementById("disciplina").innerHTML = str;
+  show("disciplina");
 }
 
 
@@ -182,7 +183,10 @@ async function getPage(e,m){
     body: JSON.stringify({materia:m, jg:jogador})
   };
   if (modo=="Lobby") res = await fetch('/getLobbyPage', options);
-  else if (modo=="solo") res = await fetch('/getLocalPage', options);
+  else if (modo=="solo") {
+    show("quizzes");
+    res = await fetch('/getLocalPage', options);
+  }
   const data = await res.json();
   submete = data.sub;
   hide("materia");
@@ -193,6 +197,7 @@ async function getPage(e,m){
   }
   document.getElementById("banterior").disabled = true;
   hide("bverificar");
+
 }
 
 function pag_ant(){
@@ -375,8 +380,24 @@ async function after_lobby(ano){
 }
 
 function sairQuiz(){
-  buildQuiz();
+  var str='<div class="user_input" id="user_input"></div>';
+  str='<div class="local_global" id="local_global"></div>';
+  str='<div class="solo_lobby" id="solo_lobby"></div>';
+  str='<div class="casual_rank" id="casual_rank"></div>';
+  str='<div class="disciplina" id="disciplina"></div>';
+  str='<div class="materia" id="materia"></div>';
+  str='<div class="lobby_room" id="lobby_room" style="display: none;">';
+  str='A espera que todos os jogadores entrem ... ... ...</div>';
+  str='<div class="chat_room" id="chat_room" style="display: none;">';
+  str='A espera que todos os jogadores entrem ... ... ...</div>';
+  str='<div class="quizzes" id="quizzes"></div>';
   hide("quizzes");
   show("solo_lobby");
   pagina = 0;
+  jogador.lobbyID = 0;
+  jogador.num = 0;
+  jogador.pontos = 0;
+  jogador.pronto = 0;
+  submete = 0;
+  modo = "erro";
 }

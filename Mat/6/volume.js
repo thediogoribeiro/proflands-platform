@@ -74,7 +74,7 @@ module.exports = {
       s2[1] = 'Volume: ' + sol_errada_vol(sol) + ' cm<sup>3</sup>.';
       s2[2] = 'Volume: ' + sol_errada_vol(sol) + ' cm<sup>3</sup>.';
     }
-    s2[3] = sol;
+    s2[3] = 'Volume: ' + sol + ' cm<sup>3</sup>.';
     for(var cont = 0; cont<4 ; cont++){
       var rand = Math.floor(Math.random() * (4-cont));
       s[cont] = s2[rand];
@@ -85,6 +85,6 @@ module.exports = {
     cs+='<input type="radio" id="r2'+i+'" name="solucao'+i+'" value="2"><label id="label2'+i+'">'+s[2]+'</label><br>';
     cs+='<input type="radio" id="r3'+i+'" name="solucao'+i+'" value="3"><label id="label3'+i+'">'+s[3]+'</label><br>';
     console.log(sol);
-    return {q:q, solution:sol, cs:cs, exec:exec}
+    return {q:q, solution:'Volume: ' + sol + ' cm<sup>3</sup>.', cs:cs, exec:exec}
   }
 };
