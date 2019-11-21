@@ -24,6 +24,7 @@ window.onload = function() {
 };
 
 //const frac = require('./frac');
+var maxLobbyPlayers;
 const materias = [
   ["Frações", "Areas", "Perimetros", "Divisores comuns"],
   ["Volumes","Potências","Fração VS Unidade","Área colorida(Frações)","Potências(Frações)","Arredondamentos"],
@@ -36,6 +37,16 @@ var pagina = 0;
 var modo = "erro";
 var cor_certo = "#88ff91";
 var cor_errado = "#ff8888";
+
+function buildLobbyRoom(){
+  var str='A esprea que todos os jogadores entrem... ... ...';
+  document.getElementById("lobby_room").innerHTML = str;
+}
+
+function buildChatRoom(){
+  var str='A esprea que todos os jogadores terminem... ... ...';
+  document.getElementById("chat_room").innerHTML = str;
+}
 
 function buildUserInput(){
   var str="<input type='text' id='userName' name='userName' value=''><br>";
@@ -84,7 +95,7 @@ function show(eid){
 function local() {
   hide("local_global");
   var str="<button onclick='solo()' class='dropbtn' id='bsolo'>Solo</button>";
-  str+="<button onclick='mm1v1()' class='dropbtn' id='blobby'>Lobby</button>";
+  str+="<button onclick='mmLobby()' class='dropbtn' id='blobby'>Lobby</button>";
   document.getElementById("solo_lobby").innerHTML = str;
 }
 
@@ -96,6 +107,7 @@ function global() {
 }
 
 function solo() {
+  jogador.num=1;
   modo = "solo";
   hide("solo_lobby");
   var str="<button onclick='mat()' class='dropbtn' id='bmat'>Matemática</button>";
@@ -105,13 +117,12 @@ function solo() {
 }
 
 
-function mm1v1() {
-  modo = "1v1";
+function mmLobby() {
+  modo = "Lobby";
   hide("solo_lobby");
   pagina = 0;
   hide("materia");
   enter_lobby();
-  titulo(jogador.ano,0);
   return false;
 }
 
@@ -139,14 +150,6 @@ function getUserInput(){
   buildLocalGlobal();
 }
 
-function titulo(ano,i){
-  if (modo=="solo"){
-    document.getElementById("tituloMateria").innerHTML =(ano+5) + "º ano - Materia: " + materias[ano][i];
-  }else if (modo=="1v1"){
-    document.getElementById("tituloMateria").innerHTML =(ano) + "º ano - Multiplayer: 1 V 1";
-  }
-}
-
 function criaHTML(element,className,id,inner,click){
   var html = document.createElement(element);
   if(className!=null)html.className=className;
@@ -171,25 +174,22 @@ function materia(ano,materia){
 }
 
 async function getPage(e,m){
+  var res;
   buildQuiz();
   const options = {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({materia:m})
+    body: JSON.stringify({materia:m, jg:jogador})
   };
-  const res = await fetch('/getPage', options);
+  if (modo=="Lobby") res = await fetch('/getLobbyPage', options);
+  else if (modo=="solo") res = await fetch('/getLocalPage', options);
   const data = await res.json();
   submete = data.sub;
   hide("materia");
   document.getElementById("quizzesMain").innerHTML=data.quizPage;
-  if(data.image[0]!=null){
-    for(var i = 0; i<10;i++){
-      document.getElementById('img'+i).src = data.image[i];
-    }
-  }if (data.exec[0]!=null){
-    for(var i = 0;i<10;i++){
-      eval(data.exec[i]);
-    }
+  console.log("Exec data: ",data.exec);
+  for(var i = 0; i<10;i++){
+    if(data.exec[i]!=null) eval(data.exec[i]);
   }
   document.getElementById("banterior").disabled = true;
   hide("bverificar");
@@ -222,9 +222,8 @@ function pag_seg(){
   }
 }
 
-async function verificar(){
+function verificar(){
   var sol = new Array(10);
-  console.log(submete);
   if (submete==0){
     for (var i = 0; i < 10; i++){
       var radios = document.getElementsByName('solucao'+i);
@@ -240,17 +239,13 @@ async function verificar(){
       sol[i] = conta_tabela(i);
     }
   }else if (submete==2){
-      sol = verificarRetaORGraf(i);
+    sol = verificarRetaORGraf(i);
   }
-  const options = {
-    method: 'POST',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({solution:sol})
-  };
-  const res = await fetch('/verificar', options);
-  const data = await res.json();
-  alert(data.score);
+  if (modo=="Lobby") sendLobbyScore(sol);
+  else if (modo=="solo") sendSoloScore(sol);
 }
+
+
 
 function change_radio(item,i){
   var labelText = document.getElementById("label"+item.value+i).innerHTML
@@ -267,10 +262,116 @@ function conta_tabela(i){
   var selct_cells = 0;
   for (j = 0; j< table.rows.length; j++){
     for (var i = 0; i < table.rows[j].cells.length; i++){
-     if(table.rows[j].cells[i].style.backgroundColor=='blue')selct_cells++;
+      if(table.rows[j].cells[i].style.backgroundColor=='blue')selct_cells++;
     }
   }
   return selct_cells;
+}
+
+async function enter_lobby(){
+  buildLobbyRoom();
+  const options = {
+    method: 'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({jogador:jogador})
+  };
+  const res = await fetch('/lobby', options);
+  const data = await res.json();
+  jogador.lobbyID = data.lobbyID;
+  jogador.num = data.player;
+  console.log("Jogador: ",jogador.num ,"Entrou no lobby: ", jogador.lobbyID);
+  maxLobbyPlayers=data.maxPlayers;
+  console.log(data.player," ",data.maxPlayers);
+  if (data.player<data.maxPlayers){
+    hide("quizzes");
+    show("lobby_room");
+    console.log(jogador.num," espera");
+    espera("lobby_room","quizzes",0);
+  }
+  after_lobby(jogador.ano-5);
+}
+
+function espera(str1,str2,flag){
+  var options;
+  if (flag==1){
+    options = {
+      method: 'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ user:jogador, type:"LEAVE" })
+    };
+  }else{
+    options = {
+      method: 'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ user:jogador, type:"ENTER" })
+    };
+  }
+  async function go() {
+    const res = await fetch('/waiting', options);
+    const data = await res.json();
+    console.log(data.status);
+    if (data.status=="YES") {
+      if (flag===1) check_score();
+      hide(str1);
+      show(str2);
+      return "YES";
+    }else{
+      setTimeout(go, 1000);
+    }
+  }
+  go();
+}
+
+async function sendLobbyScore(sol){
+  const options = {
+    method: 'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ jogador:jogador,solution:sol })
+  };
+  const res = await fetch('/lobbyScore', options);
+  const data = await res.json();
+  if (data.last=="FALSE"){
+    hide("quizzes");
+    show("chat_room");
+    espera("chat_room","quizzes",1);
+  }else check_score();
+  console.log(data);
+}
+
+async function sendSoloScore(sol){
+  const options = {
+    method: 'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({solution:sol})
+  };
+  const res = await fetch('/soloScore', options);
+  const data = await res.json();
+  alert(data.score);
+}
+
+async function check_score(){
+  const options = {
+    method: 'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ user: jogador})
+  };
+  const res = await fetch('/checkScore', options);
+  const data = await res.json();
+  console.log(data.list);
+}
+
+async function after_lobby(ano){
+  pagina = 0;
+  hide("materia");
+  show("quizzes");
+  getPage('',"Lobby");
+  if (jogador.num<maxLobbyPlayers){
+    hide("quizzes");
+    show("lobby_room");
+  }else{
+    hide("lobby_room");
+    show("quizzes");
+  }
 }
 
 function sairQuiz(){

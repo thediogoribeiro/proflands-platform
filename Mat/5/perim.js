@@ -1,5 +1,4 @@
 const n_figuras_perim = 5;
-const geometrias = require('./../geometrias');
 const script = require('./../../script');
 const min = 20;
 const max = 100;
@@ -53,7 +52,7 @@ function calc_perim_pent(h,nl){
 
 module.exports = {
   f : function(i){
-    var h, w, des, geom, nl;
+    var h, w, des, geom, nl, exec, q;
     h = Math.floor((Math.random() * max) + min);
     w = Math.floor((Math.random() * max) + min);
     nl = Math.floor((Math.random() * 6) + 5);
@@ -65,23 +64,23 @@ module.exports = {
     var hip2 = calc_hip(w,h);
     if (geom == 1){
       q = 'Base menor: ' + w + 'cm.<br>Base maior: ' + (w+des+des) + 'cm.<br>Lado 1: ' + hip1 + 'cm.<br>Lado 2: ' + hip1 + 'cm.';
-      dataURL = geometrias.draw_trapezoid(i,h,w,des,posx,posy);
+      exec = 'draw_trapezoid('+i+','+h+','+w+','+des+','+posx+','+posy+')';
       sol = calc_perim_trapezoid(hip1,w,des);
     }else if(geom == 2){
       q = 'Lado 1: ' + hip1 + 'cm.<br>lado 2: ' + hip2 + 'cm.<br>Base: ' + (w+des) + 'cm.';
-      dataURL = geometrias.draw_triangle(i,h,w,des,posx,posy);
+      exec = 'draw_triangle('+i+','+h+','+w+','+des+','+posx+','+posy+')';
       sol = calc_perim_triangle(hip1,hip2,w,des);
     }else if(geom == 3){
       q = 'Base: ' + w + 'cm.<br>Altura: ' + h + 'cm.';
-      dataURL = geometrias.draw_rect(i,h,w);
+      exec = 'draw_rect('+i+','+h+','+w+')';
       sol = calc_perim_rect(h,w);
     }else if(geom == 4){
       q = 'Raio: ' + h + 'cm.';
-      dataURL = geometrias.draw_circle(i,h);
+      exec = 'draw_circle('+i+','+h+')';
       sol = calc_perim_circle(h);
     }else if(geom == 5){
       q = 'Lado: ' + h + 'cm.';
-      dataURL = geometrias.draw_pent(i,h,nl);
+      exec = 'draw_pent('+i+','+h+','+nl+')';
       sol = calc_perim_pent(h,nl);
     }
     var s1 = 'Perimetro: : ' +sol_errada_perim(sol)+ ' cm.'
@@ -94,10 +93,11 @@ module.exports = {
     else if(rand==2){s2=s5}
     else if(rand==3){s3=s5}
     else if(rand==4){s4=s5}
+    q+= '<br><canvas id="canvas' + i + '"  width="400" height="400"></canvas>';
     var cs ='<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label id="label0'+i+'">'+s1+'</label><br>';
     cs+='<input type="radio" id="r1'+i+'" name="solucao'+i+'" value="1"><label id="label1'+i+'">'+s2+'</label><br>';
     cs+='<input type="radio" id="r2'+i+'" name="solucao'+i+'" value="2"><label id="label2'+i+'">'+s3+'</label><br>';
     cs+='<input type="radio" id="r3'+i+'" name="solucao'+i+'" value="3"><label id="label3'+i+'">'+s4+'</label><br>';
-    return {q:q, solution:s5, cs:cs, image:dataURL}
+    return {q:q, solution:s5, cs:cs, exec:exec}
   }
 };
