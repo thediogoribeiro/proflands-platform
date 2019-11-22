@@ -1,6 +1,6 @@
-
+const OFF = 298723423;
 function criaTabela2(i,tableXY){
-  let set = new Set([tableXY[6],tableXY[7],tableXY[8],tableXY[9],tableXY[10],tableXY[11]]);
+  let set = new Set([tableXY[6]-OFF,tableXY[7]-OFF,tableXY[8]-OFF,tableXY[9]-OFF,tableXY[10]-OFF,tableXY[11]-OFF]);
   var v = Array.from(set);
   v.sort(function(a,b){return b-a;});
   var select = new Array(6);
@@ -11,7 +11,6 @@ function criaTabela2(i,tableXY){
     }
     select[k] += '</select>';
   }
-
   var table = '<table style="width:400px"><tr>';
   table += '<th>x</th><td>'+tableXY[0]+'</td><td>'+tableXY[1]+'</td><td>'+tableXY[2]+'</td>';
   table += '<td>'+tableXY[3]+'</td><td>'+tableXY[4]+'</td><td>'+tableXY[5]+'</td></tr><tr>';
@@ -22,7 +21,8 @@ function criaTabela2(i,tableXY){
 
 module.exports = {
   f : function(i){
-    var tableV = new Array(10);
+    var tableV = new Array(12);
+    var sol = new Array(6);
     var neg = Math.floor((Math.random() *2) + 1);
     var xV = Math.floor((Math.random() *4) + 1);
     if(neg==1) xV = -xV;
@@ -36,11 +36,12 @@ module.exports = {
       var randomY = Math.floor((Math.random() *7) + 0);
       var negY = Math.floor(Math.random() * 2) + 1;
       if (negY==1) randomY = -randomY;
-      tableV[j]=randomY;
+      tableV[j]=randomY+OFF;
+      sol[j-6]=randomY;
     }
     var cs = '<canvas id="canvas' + i + '"  width="400" height="400"></canvas>';
     q = "Completa a tabela consoante os pontos no gráfico:<p></p>";
     q += criaTabela2(i,tableV);
-    return {q:q, solution:1, cs:cs, exec:'create_graf2('+i+','+tableV+')'}
+    return {q:q, solution:sol.toString(), cs:cs, exec:'create_graf2('+i+','+tableV+')'}
   }
 };

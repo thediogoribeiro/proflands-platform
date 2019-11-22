@@ -75,10 +75,10 @@ app.post('/soloScore',(req, res) => {
 	var sol = req.body.solution;
 	var pontos = 0;
 	for(var i = 0; i<10; i++){
-		console.log(solutions[i]," . ",sol[i]);
+		//console.log(solutions[i]," <=> ",sol[i]);
 		if(solutions[i]==sol[i]) pontos++;
 	}
-	console.log(pontos);
+	//console.log(pontos);
 	res.send({score:pontos});
 });
 

@@ -191,7 +191,6 @@ async function getPage(e,m){
   submete = data.sub;
   hide("materia");
   document.getElementById("quizzesMain").innerHTML=data.quizPage;
-  console.log("Exec data: ",data.exec);
   for(var i = 0; i<10;i++){
     if(data.exec[i]!=null) eval(data.exec[i]);
   }
