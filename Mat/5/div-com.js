@@ -58,7 +58,7 @@ module.exports = {
     var s2 = (sol_nova[1]==1) ? ('Impossivel') : (sol_nova[1])
     var s3 = (sol_nova[2]==1) ? ('Impossivel') : (sol_nova[2])
     var s4 = (sol_nova[3]==1) ? ('Impossivel') : (sol_nova[3])
-    var s5 = sol;
+    var s5 = (sol==1)?('Impossivel'):(sol);
     var rand = Math.floor(Math.random() * 4) + 1;
     if(rand==1){s1=s5}
     else if(rand==2){s2=s5}

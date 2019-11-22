@@ -78,7 +78,6 @@ module.exports = {
       a+=2;
     }
     if (neg==1) a=-a;
-    console.log(a);
     if(dif==1) q = create_enun_fracVSuni(i,a,b,pot_enun);
     else if(dif==2) q = create_enun_frac2(i,a,b,pot_enun);
     else if(dif==3) q = create_enun_frac3(i,a,b,pot_enun);

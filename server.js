@@ -47,7 +47,7 @@ const materias = [
 	["Potência de Potência","Raízes","Reta númerica","Frações com sinal","Maior ou Menor","Grafico 1","Grafico 2"]
 ];
 const MAX_LOBBYS = 100;
-const MAX_LOBBY_PLAYERS = 3;
+const MAX_LOBBY_PLAYERS = 2;
 const path = require('path');
 const host = '0.0.0.0';
 const port = 3000;
@@ -167,12 +167,12 @@ app.post('/lobbyScore',(req, res) => {
 	var pontos = 0;
 	for(var i = 0; i<nUsers; i++){
 		if(user[i].num==req.body.jogador.num){
-			console.log("user nº ", req.body.jogador.num, " finished");
 			for(var j = 0; j<10; j++){
 				if(lobbys[cont].solutions[j]==sol[j]) pontos++;
 			}
 			lobbys[cont].jogadores[i].pontos = pontos;
 			lobbys[cont].jogadores[i].pronto = 1;
+			console.log("user nº ", req.body.jogador.num, " finished with ",pontos," points");
 		}
 		if(lobbys[cont].jogadores[i].pronto == 1) prontos++;
 	}
@@ -182,7 +182,7 @@ app.post('/lobbyScore',(req, res) => {
 });
 
 app.post('/checkScore',(req, res) => {
-	console.log("All user finished");
+	if(req.body.user.num==1) console.log("All users finished");
 	var cont=0;
 	var flag = 0;
 	while(lobbys[cont].id!=req.body.user.lobbyID){
