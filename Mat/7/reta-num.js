@@ -1,4 +1,5 @@
 const f = require('./../fracoes');
+const OFF = 298723423;
 
 module.exports = {
   f : function(i){
@@ -14,22 +15,21 @@ module.exports = {
       num = Math.floor(Math.random() * 20) + 3;
       sinal = Math.floor(Math.random() * 2) + 1;
       n = Math.floor(Math.random() * 3) + 2;
+      // num=13;
+      // denum=3;
+      // des=8;
       if (dif==1){
         if(neg==1) num=-num;
-        if ((num/denum)%1==0){
-          var str = num/denum;
-        }else if(denum!=1){
-          var str = f.create_frac(num,denum);
-        }else{
-          var str = num;
-        }
+        if ((num/denum)%1==0){  var str = num/denum;
+        }else if(denum!=1){     var str = f.create_frac(num,denum);
+        }else{                  var str = num;}
         final += str;
         res=(num/denum);
       }else{
         for(var j = 0;j<n;j++){
-          if (sinal==1) var op=(j==0)?(""):('<div id="cell2" class="divTableCelle">&nbsp; + &nbsp;</div>');
-          else var op='<div id="cell2" class="divTableCelle">&nbsp; -</div>';
-          var str = op;
+          var str;
+          if (sinal==1) str=(j==0)?(""):('<div class="divTableCelle">+</div>');
+          else str='<div class="divTableCelle">-</div>';
           if(neg==1) num=-num;
           if ((num/denum)%1==0){
             str +=(neg==1)?('<div class="divTableCelle">&nbsp;('+num/denum+')&nbsp;</div>'):('<div class="divTableCelle">&nbsp;'+num/denum+'&nbsp;</div>') ;
@@ -49,6 +49,6 @@ module.exports = {
     final += f.end_frac();
     q = 'Escolhe na reta númerica o valor: ' + final;
     var cs = '<br><canvas id="canvas' + i + '"  width="400" height="400"></canvas>';
-    return {q:q, solution:1, cs:cs, exec:'create_reta_num('+i+','+res+','+des+')'}
+    return {q:q, solution:res, cs:cs, exec:'create_reta_num('+i+','+res+','+des+')'}
   }
 }

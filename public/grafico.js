@@ -1,5 +1,5 @@
 const OFF = 298723423;
-var sol = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
+var sol = [-99,-99,-99,-99,-99,-99,-99,-99,-99,-99];
 var sol2 = new Array(10);
 for (var k = 0; k < sol2.length; k++) {
   sol2[k] = new Array(6);
@@ -33,10 +33,8 @@ function getXYretaNum(canvas,nums,decimals,des,comp, event) {
   ctx.fillStyle = 'red';
   ctx.arc((((Math.round(nums[i])*decimals[i])-des)*25)+x, y-canvas.height/2, 4, 0, 2 * Math.PI, false);
   ctx.fill();
-  if (decimals[i]==1 && x>=(190+((des-8)*25)) && x<=(210+((des-8)*25)))
-  sol[i] = 1;
-  else if ((decimals[i]==2 || decimals[i]==3) && x>=(165+(((comp[i]+des)-8)*25)) && x<=(185+(((comp[i]+des)-8)*25)))
-  sol[i] =1;
+  if (decimals[i]==1 && x>=(190+((des-8)*25)) && x<=(210+((des-8)*25))) sol[i] = nums[i];
+  else if ((decimals[i]==2 || decimals[i]==3) && x>=(165+(((comp[i]+des)-8)*25)) && x<=(185+(((comp[i]+des)-8)*25))) sol[i] =nums[i];
 }
 
 function getXYgraf(canvas, event) {
@@ -87,10 +85,11 @@ function ver_graf2(i){
 }
 
 function create_reta_num(i,num,des){
+  //console.log(i," <> ",num," <> ",des);
+  var flag=0;
   var decimals =  [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
   var nums =  [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
   var comp =  [0,0,0,0,0,0,0,0,0,0];
-  sol[i]=-1;
   var n = num;
   nums[i] = num;
   var canvas = document.getElementById("canvas" + i);
@@ -101,7 +100,7 @@ function create_reta_num(i,num,des){
   else if (decimal==3 && num>0) comp[i]+=2;
   if (decimal==0) decimal=1;
   else if (decimal==5) decimal=2;
-  else if (decimal==7) decimal=3;
+  else if (decimal==7) {decimal=3;flag=1}
   decimals[i] = decimal;
   var canvas_width = canvas.width;
   var canvas_height = canvas.height;
@@ -149,9 +148,10 @@ function create_reta_num(i,num,des){
   // Translate to the new origin. Now Y-axis of the canvas is opposite to the Y-axis of the graph. So the y-coordinate of each element will be negative of the actual
   ctx.translate(y_axis_distance_grid_lines*grid_size, x_axis_distance_grid_lines*grid_size);
   // Ticks marks along the positive X-axis (and 0)
-  var v = 0;//qnt maior V mais para a esquerda os valores ficam
-  if (decimal==2) v = 2;
-  else if(decimal==3) v = 2;
+  var v = 2;
+  if(flag==1 && num<0) v = 3;
+  else if(flag==1 && num>0) v = 2;
+  else if(decimal==3 && num>0) v = 0;
   else if (decimal==1) v = 1;
   for(i=1; i<(num_lines_y - y_axis_distance_grid_lines)*decimal; i++) {
     ctx.beginPath();
