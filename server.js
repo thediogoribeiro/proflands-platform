@@ -72,14 +72,18 @@ var lobbys = new Array(MAX_LOBBYS);
 var solutions = new Array(10);
 
 app.post('/soloScore',(req, res) => {
+	var page = new Array(10);
 	var sol = req.body.solution;
 	var pontos = 0;
 	for(var i = 0; i<10; i++){
 		//console.log(solutions[i]," <=> ",sol[i]);
-		if(solutions[i]==sol[i]) pontos++;
+		if(solutions[i]==sol[i]){
+			pontos++;
+			page[i]="ok";
+		}
 	}
 	//console.log(pontos);
-	res.send({score:pontos});
+	res.send({score:pontos,page:page});
 });
 
 app.post('/getLocalPage',(req, res) => {
@@ -104,10 +108,10 @@ app.post('/getLobbyPage',(req, res) => {
 	var quizPage ="";
 	var submete = 0;
 	var cont=0;
+	while(lobbys[cont].id!=req.body.jg.lobbyID){
+		cont++;
+	}
 	if(req.body.jg.num==1) {
-		while(lobbys[cont].id!=req.body.jg.lobbyID){
-			cont++;
-		}
 		var ano=req.body.jg.ano-5;
 		for(var i = 0; i<10; i++){
 			var r = Math.floor(Math.random() * materias[ano].length);
@@ -156,6 +160,7 @@ app.post('/waiting',(req, res) => {
 });
 
 app.post('/lobbyScore',(req, res) => {
+	var page = new Array(10);
 	var cont = 0;
 	var prontos = 0;
 	while(lobbys[cont].id!=req.body.jogador.lobbyID){
@@ -168,7 +173,10 @@ app.post('/lobbyScore',(req, res) => {
 	for(var i = 0; i<nUsers; i++){
 		if(user[i].num==req.body.jogador.num){
 			for(var j = 0; j<10; j++){
-				if(lobbys[cont].solutions[j]==sol[j]) pontos++;
+				if(lobbys[cont].solutions[j]==sol[j]){
+					page[j]="ok";
+					pontos++;
+				}
 			}
 			lobbys[cont].jogadores[i].pontos = pontos;
 			lobbys[cont].jogadores[i].pronto = 1;
@@ -176,8 +184,9 @@ app.post('/lobbyScore',(req, res) => {
 		}
 		if(lobbys[cont].jogadores[i].pronto == 1) prontos++;
 	}
-	if (prontos==MAX_LOBBY_PLAYERS) res.send({status:"score saved", last:"TRUE"});
-	else res.send({status:"score saved", last:"FALSE"});
+	if (prontos==MAX_LOBBY_PLAYERS) res.send({status:"score saved", last:"TRUE",page:page});
+	else res.send({status:"score saved", last:"FALSE",page:page});
+	page=null;
 	return;
 });
 

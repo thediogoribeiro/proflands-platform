@@ -285,11 +285,9 @@ async function enter_lobby(){
   jogador.num = data.player;
   console.log("Jogador: ",jogador.num ,"Entrou no lobby: ", jogador.lobbyID);
   maxLobbyPlayers=data.maxPlayers;
-  console.log(data.player," ",data.maxPlayers);
   if (data.player<data.maxPlayers){
     hide("quizzes");
     show("lobby_room");
-    console.log(jogador.num," espera");
     espera("lobby_room","quizzes",0);
   }
   after_lobby(jogador.ano-5);
@@ -313,7 +311,6 @@ function espera(str1,str2,flag){
   async function go() {
     const res = await fetch('/waiting', options);
     const data = await res.json();
-    console.log(data.status);
     if (data.status=="YES") {
       if (flag===1) check_score();
       hide(str1);
@@ -339,7 +336,15 @@ async function sendLobbyScore(sol){
     show("chat_room");
     espera("chat_room","quizzes",1);
   }else check_score();
-  console.log(data);
+  certoErrado(data.page);
+}
+
+function certoErrado(page){
+  for(var i = 0;i<10;i++){
+    var div = document.getElementById("pag" + i);
+    if(page[i]=="ok") div.style.backgroundColor = '#ccffcc';
+    else div.style.backgroundColor = '#ff9999';
+  }
 }
 
 async function sendSoloScore(sol){
@@ -351,6 +356,7 @@ async function sendSoloScore(sol){
   const res = await fetch('/soloScore', options);
   const data = await res.json();
   alert(data.score);
+  certoErrado(data.page);
 }
 
 async function check_score(){
