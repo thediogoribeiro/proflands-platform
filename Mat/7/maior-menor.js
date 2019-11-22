@@ -22,19 +22,20 @@ function create_enun_fracVSuni(i,a,b,pot){
   return  text;
 }
 
-function create_enun_frac2(i,a,b,dif,pot){
-  if (a<0) var sinal = 1;
-  a = Math.abs(a);
-  if (dif==1) {
+function create_enun_frac2(i,a,b,pot){
+  var sinal
+  if (a>0) {
+    sinal=0;
     esq=(Math.sqrt(a)**pot)/b;
-    var str = '(&#8730;' +a+')<sup>'+pot+'</sup>';
+    var str ='(&#8730;' +a+')<sup>'+pot+'</sup>';
   }else{
+    sinal=1;
     esq=(Math.cbrt(a)**pot)/b;
     var str = '(&#8731;' +a+')<sup>'+pot+'</sup>';
   }
   var text = f.start_frac() + f.create_custom_frac(str,b,sinal);
   text += '<div id="cell2' + i + '" class="divTableCell">&nbsp;?&nbsp;</div>';
-  if (dif==1){
+  if (a>0){
     dir=(Math.sqrt(a)/b)**pot;
     text += f.create_custom_frac_pot('&#8730;'+a,b,pot,sinal);
   }else{
@@ -45,18 +46,16 @@ function create_enun_frac2(i,a,b,dif,pot){
   return text;
 }
 
-function create_enun_frac3(i,a,b,dif,pot){
-  // sqrt(-a) -> ERRO com 'a' NEG
-  //console.log(" -   ",i,a,b,dif,pot);
+function create_enun_frac3(i,a,b,pot){
   esq=(a/b)**pot;
   var text = f.start_frac() + f.create_frac_pot(a,b,pot);
   text += '<div id="cell2' + i + '" class="divTableCell">&nbsp;?&nbsp;</div>';
-  if (dif==1) {
+  if (a<0) {
     dir=(Math.cbrt(a**pot)/b)**3;
     text += f.create_custom_frac_pot('&#8731;'+a**pot,b,3,0);
   }else {
-    dir=(Math.sqrt(a**pot)/b)**2;
-    text += f.create_custom_frac_pot('&#8730;'+a**pot,b,2,0);
+      dir=(Math.sqrt(a**pot)/b)**2;
+      text += f.create_custom_frac_pot('&#8730;'+a**pot,b,2,0);
   }
   text += f.end_frac();
   return text;
@@ -70,7 +69,6 @@ module.exports = {
     a = Math.floor((Math.random() *8) + 2);
     b = Math.floor((Math.random() *8) + 2);
     dif = Math.floor((Math.random() *4) + 1);
-    dif_enun = Math.floor((Math.random() *2) + 1);
     pot_enun = Math.floor((Math.random() *3) + 1);
     if(a<b){
       var aux = a;
@@ -80,9 +78,10 @@ module.exports = {
       a+=2;
     }
     if (neg==1) a=-a;
+    console.log(a);
     if(dif==1) q = create_enun_fracVSuni(i,a,b,pot_enun);
-    else if(dif==2) q = create_enun_frac2(i,a,b,dif_enun,pot_enun);
-    else if(dif==3) q = create_enun_frac3(i,a,b,dif_enun,pot_enun);
+    else if(dif==2) q = create_enun_frac2(i,a,b,pot_enun);
+    else if(dif==3) q = create_enun_frac3(i,a,b,pot_enun);
     else if(dif==4) q = create_enun_frac1(i,a,b,pot_enun);
     if (esq>dir) s="&gt;";
     else if (esq<dir) s="&lt;";
