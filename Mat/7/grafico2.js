@@ -24,7 +24,7 @@ module.exports = {
     var tableV = new Array(12);
     var sol = new Array(6);
     var neg = Math.floor((Math.random() *2) + 1);
-    var xV = Math.floor((Math.random() *4) + 1);
+    var xV = Math.floor(Math.random() *4);
     if(neg==1) xV = -xV;
     tableV[0] = xV-3;
     tableV[1] = xV-2;

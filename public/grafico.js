@@ -1,3 +1,4 @@
+const OFF = 298723423;
 var sol = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
 var sol2 = new Array(10);
 for (var k = 0; k < sol2.length; k++) {
@@ -51,13 +52,15 @@ function getXYgraf(canvas, event) {
   ctx.fillStyle = 'red';
   ctx.arc(x, y,4, 0, 2 * Math.PI, false);
   ctx.fill();
-  if(entre(x,tV[0]*25-5,tV[0]*25+5) && entre(y,-tV[6]*25-5, -tV[6]*25+5)) sol2[i][0]=true;
-  if(entre(x,tV[1]*25-5,tV[1]*25+5) && entre(y,-tV[7]*25-5, -tV[7]*25+5)) sol2[i][1]=true;
-  if(entre(x,tV[2]*25-5,tV[2]*25+5) && entre(y,-tV[8]*25-5, -tV[8]*25+5)) sol2[i][2]=true;
-  if(entre(x,tV[3]*25-5,tV[3]*25+5) && entre(y,-tV[9]*25-5, -tV[9]*25+5)) sol2[i][3]=true;
-  if(entre(x,tV[4]*25-5,tV[4]*25+5) && entre(y,-tV[10]*25-5, -tV[10]*25+5)) sol2[i][4]=true;
-  if(entre(x,tV[5]*25-5,tV[5]*25+5) && entre(y,-tV[11]*25-5, -tV[11]*25+5)) sol2[i][5]=true;
-  if(sol2[i][0] && sol2[i][1] && sol2[i][2] && sol2[i][3] && sol2[i][4] && sol2[i][5]) sol[i]=sol;
+  //console.log(Math.round(x/10)," <> ",Math.round(y/10));
+  //console.log(Math.round(tV[0]*25/10),Math.round(-tV[6]*25/10));
+  if(entre(x,tV[0]*25-5,tV[0]*25+5) && entre(y,-tV[6]*25-5, -tV[6]*25+5)) sol2[i][0]=tV[0].toString()+tV[6].toString();
+  if(entre(x,tV[1]*25-5,tV[1]*25+5) && entre(y,-tV[7]*25-5, -tV[7]*25+5)) sol2[i][1]=tV[1].toString()+tV[7].toString();
+  if(entre(x,tV[2]*25-5,tV[2]*25+5) && entre(y,-tV[8]*25-5, -tV[8]*25+5)) sol2[i][2]=tV[2].toString()+tV[8].toString();
+  if(entre(x,tV[3]*25-5,tV[3]*25+5) && entre(y,-tV[9]*25-5, -tV[9]*25+5)) sol2[i][3]=tV[3].toString()+tV[9].toString();
+  if(entre(x,tV[4]*25-5,tV[4]*25+5) && entre(y,-tV[10]*25-5, -tV[10]*25+5)) sol2[i][4]=tV[4].toString()+tV[10].toString();
+  if(entre(x,tV[5]*25-5,tV[5]*25+5) && entre(y,-tV[11]*25-5, -tV[11]*25+5)) sol2[i][5]=tV[5].toString()+tV[11].toString();
+  sol[i]=sol2[i].toString();
 }
 
 function entre(v, a, b) {
@@ -78,7 +81,7 @@ function ver_graf2(i){
   for(var j =0;j<6;j++){
     var e = document.getElementById("sel"+j+i);
     try {s[j] = e.options[e.selectedIndex].value;}
-    catch (e) {console.log(e);}
+    catch (e) {return;}
   }
   sol[i]=s.toString();
 }
@@ -204,7 +207,7 @@ function create_reta_num(i,num,des){
 }
 
 function create_graf(i,a33,b33,c33,d33,e33,f33,g33,h33,i33,j33,k33,l33){
-  tableValues[i] = [a33,b33,c33,d33,e33,f33,g33,h33,i33,j33,k33,l33];
+  tableValues[i] = [a33-OFF,b33-OFF,c33-OFF,d33-OFF,e33-OFF,f33-OFF,g33-OFF,h33-OFF,i33-OFF,j33-OFF,k33-OFF,l33-OFF];
   var grid_size = 25;
   var x_axis_distance_grid_lines = 8;
   var y_axis_distance_grid_lines = 8;
@@ -315,7 +318,6 @@ function create_graf(i,a33,b33,c33,d33,e33,f33,g33,h33,i33,j33,k33,l33){
 }
 
 function create_graf2(i,a33,b33,c33,d33,e33,f33,g33,h33,i33,j33,k33,l33){
-  const OFF = 298723423;
   var tVs = [a33,b33,c33,d33,e33,f33,g33-OFF,h33-OFF,i33-OFF,j33-OFF,k33-OFF,l33-OFF];
   var grid_size = 25;
   var x_axis_distance_grid_lines = 8;

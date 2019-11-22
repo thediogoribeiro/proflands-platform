@@ -94,6 +94,7 @@ app.post('/getLocalPage',(req, res) => {
 		exec[i] = data.f.exec;
 		quizPage+=script.buildPage(i, data.f.q, data.f.cs );
 	}
+	console.log(solutions);
 	res.send({quizPage:quizPage, sub:submete, exec:exec});
 });
 
