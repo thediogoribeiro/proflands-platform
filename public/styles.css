@@ -25,7 +25,7 @@ td.selected {
       max-height: 640px; } }
   @media screen and (min-width: 375px) and (max-width: 413px) {
     .index__container {
-      max-height: 812px; } }
+      height: 812px; } }
   @media screen and (min-width: 414px) and (max-width: 639px) {
     .index__container {
       max-height: 823px; } }
@@ -70,16 +70,18 @@ td.selected {
   letter-spacing: 1px;
   text-decoration: underline; }
 
+/****************************** BUTTONS ***************************** */
 @media screen and (min-width: 640px) {
   .dropbtn {
     font-weight: bold;
     font-size: 100px; } }
 
 /* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus, .is-primary:focus .is-inverted:focus .is-outlined:focus {
-  background-color: #FFFFFF;
-  color: #be9ed8; }
+.dropbtn:hover, .button:hover {
+  background-color: #be9ed8;
+  border-color: #FFFFFF; }
 
+/****************************** DROPDOWN ***************************** */
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
   margin: auto;
