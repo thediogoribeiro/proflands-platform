@@ -1,53 +1,24 @@
-//importa os outros ficheiros js
-// var scripts = ["/static/three.js","/static/Mat/frac.js","/static/Mat/geom.js","/static/Mat/area.js","/static/Mat/perim.js","/static/Mat/maior_menor.js",
-// "/static/Mat/div_com.js","/static/Mat/vol.js","/static/Mat/pot.js","/static/Mat/frac_aprox_unidade.js","/static/Mat/mult_n_racio.js","/static/Mat/pot_frac.js",
-// "/static/Mat/arredonda.js","/static/Mat/pot_pot.js","/static/Mat/raizes.js","/static/Mat/graf.js","/static/Mat/reta_num.js","/static/Mat/frac_sinal.js",
-// "/static/Mat/func_graf.js","/static/Mat/func_graf2.js"];
-
-// for (var i = 0; i < scripts.length; i++) {
-//   var imported = document.createElement("script");
-//   imported.src = scripts[i];
-//   document.getElementsByTagName("head")[0].appendChild(imported);
-// }
-
-//variaveis
-var funcs = new Array(10);
-for (var i = 0; i < funcs.length; i++) {
-  funcs[i] = new Array(10);
-  // for (var j = 0; j < funcs[i].length; j++) {
-  //   funcs[i][j] = new Array(10);
-  // }
-}
 
 window.onload = function() {
   buildUserInput();
 };
 
-//const frac = require('./frac');
-var maxLobbyPlayers;
-const materias = [
-  ["Frações", "Areas", "Perimetros", "Divisores comuns"],
-  ["Volumes","Potências","Fração VS Unidade","Área colorida(Frações)","Potências(Frações)","Arredondamentos"],
-  ["Potência de Potência","Raízes","Reta númerica","Frações com sinal","Maior ou Menor","Grafico 1","Grafico 2"]
-];
+//variaveis
 
+var maxLobbyPlayers;
 var jogador = {lobbyID: 0, nome : "", num: 0, ano: 0, pontos: 0, pronto: 0};
 var submete = 0;
 var pagina = 0;
 var modo = "erro";
 var cor_certo = "#88ff91";
 var cor_errado = "#ff8888";
+const materias = [
+  ["Frações", "Areas", "Perimetros", "Divisores comuns"],
+  ["Volumes","Potências","Fração VS Unidade","Área colorida(Frações)","Potências(Frações)","Arredondamentos"],
+  ["Potência de Potência","Raízes","Reta númerica","Frações com sinal","Maior ou Menor","Grafico 1","Grafico 2"]
+];
 
-function buildLobbyRoom(){
-  var str='A esprea que todos os jogadores entrem... ... ...';
-  document.getElementById("lobby_room").innerHTML = str;
-}
-
-function buildChatRoom(){
-  var str='A esprea que todos os jogadores terminem... ... ...';
-  document.getElementById("chat_room").innerHTML = str;
-}
-
+//funcoes
 function buildUserInput(){
   var str="<input type='text' id='userName' name='userName' value=''><br>";
   str+="<select id='userYear'>";
@@ -70,13 +41,6 @@ function buildQuiz(){
   document.getElementById("quizzes").innerHTML=str;
 }
 
-function buildChatRoom(){
-  document.getElementById("quizzes").innerHTML="A espera que todos os jogadores terminem... ... ...";
-}
-
-function buildLobbyRoom(){
-  document.getElementById("quizzes").innerHTML="A espera que todos os jogadores entrem... ... ...";
-}
 
 function buildLocalGlobal(){
   str = '<button onclick="local()" class="dropbtn" id="blocal">Local</button>';
@@ -116,7 +80,6 @@ function solo() {
   document.getElementById("disciplina").innerHTML = str;
   show("disciplina");
 }
-
 
 function mmLobby() {
   modo = "Lobby";
@@ -249,8 +212,6 @@ function verificar(){
   else if (modo=="solo") sendSoloScore(sol);
 }
 
-
-
 function change_radio(item,i){
   var labelText = document.getElementById("label"+item.value+i).innerHTML
   document.getElementById("cell2"+i).innerHTML=labelText;
@@ -273,7 +234,7 @@ function conta_tabela(i){
 }
 
 async function enter_lobby(){
-  buildLobbyRoom();
+  buildChatRoom();
   const options = {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
@@ -287,8 +248,8 @@ async function enter_lobby(){
   maxLobbyPlayers=data.maxPlayers;
   if (data.player<data.maxPlayers){
     hide("quizzes");
-    show("lobby_room");
-    espera("lobby_room","quizzes",0);
+    show("chat_room");
+    espera("chat_room","quizzes",0);
   }
   after_lobby(jogador.ano-5);
 }
@@ -377,9 +338,9 @@ async function after_lobby(ano){
   getPage('',"Lobby");
   if (jogador.num<maxLobbyPlayers){
     hide("quizzes");
-    show("lobby_room");
+    show("chat_room");
   }else{
-    hide("lobby_room");
+    hide("chat_room");
     show("quizzes");
   }
 }
@@ -391,10 +352,7 @@ function sairQuiz(){
   str='<div class="casual_rank" id="casual_rank"></div>';
   str='<div class="disciplina" id="disciplina"></div>';
   str='<div class="materia" id="materia"></div>';
-  str='<div class="lobby_room" id="lobby_room" style="display: none;">';
-  str='A espera que todos os jogadores entrem ... ... ...</div>';
-  str='<div class="chat_room" id="chat_room" style="display: none;">';
-  str='A espera que todos os jogadores entrem ... ... ...</div>';
+  str='<div class="chat_room" id="chat_room" style="display: none;"></div>';
   str='<div class="quizzes" id="quizzes"></div>';
   hide("quizzes");
   show("solo_lobby");
@@ -405,4 +363,41 @@ function sairQuiz(){
   jogador.pronto = 0;
   submete = 0;
   modo = "erro";
+}
+
+function buildChatRoom(){
+  const socket = io('http://localhost:3000');
+  const messageContainer = document.getElementById('message-container');
+  const messageForm = document.getElementById('send-container');
+  const messageInput = document.getElementById('message-input');
+
+  const name= jogador.nome;
+  appendMessage('You joined')
+  socket.emit('new-user', name)
+
+  socket.on('chat-message', data => {
+    appendMessage(`${data.name}: ${data.message}`)
+  })
+
+  socket.on('user-connected', name => {
+    appendMessage(`${name} connected`)
+  })
+
+  socket.on('user-disconnected', name => {
+    appendMessage(`${name} disconnected`)
+  })
+
+  messageForm.addEventListener('submit', e => {
+    e.preventDefault()
+    const message = messageInput.value
+    appendMessage(`You: ${message}`)
+    socket.emit('send-chat-message', message)
+    messageInput.value = ''
+  })
+
+  function appendMessage(message) {
+    const messageElement = document.createElement('div')
+    messageElement.innerText = message
+    messageContainer.append(messageElement)
+  }
 }

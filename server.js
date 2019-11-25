@@ -41,19 +41,22 @@ class lobby {
 		return this._id;
 	}
 }
+
 const materias = [
 	["Frações", "Areas", "Perimetros", "Divisores comuns"],
 	["Volumes","Potências","Fração VS Unidade","Área colorida(Frações)","Potências(Frações)","Arredondamentos"],
 	["Potência de Potência","Raízes","Reta númerica","Frações com sinal","Maior ou Menor","Grafico 1","Grafico 2"]
 ];
+
 const MAX_LOBBYS = 100;
-const MAX_LOBBY_PLAYERS = 2;
+const MAX_LOBBY_PLAYERS = 3;
 const path = require('path');
 const host = '0.0.0.0';
 const port = 3000;
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const io = require('socket.io')(3000);
 const bodyParser = require('body-parser');
 const script = require('./script');
 
@@ -67,6 +70,22 @@ app.listen(port, host, function() {//poe o sv a correr
 
 app.use(express.static('public'));
 app.use(express.json({limit:'1mb'}));
+
+const users = {}
+
+io.on('connection', socket => {
+  socket.on('new-user', name => {
+    users[socket.id] = name
+    socket.broadcast.emit('user-connected', name)
+  })
+  socket.on('send-chat-message', message => {
+    socket.broadcast.emit('chat-message', { message: message, name: users[socket.id] })
+  })
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('user-disconnected', users[socket.id])
+    delete users[socket.id]
+  })
+})
 
 var lobbys = new Array(MAX_LOBBYS);
 var solutions = new Array(10);

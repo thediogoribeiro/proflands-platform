@@ -7,28 +7,29 @@
 	<script type="text/javascript" src="grafico.js"></script>
 	<script type="text/javascript" src="three.js"></script>
 	<script type="text/javascript" src="geometrias.js"></script>
+	<script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
 </head>
 <body>
 	<div class="user_input" id="user_input"></div>
 
-  <div class="local_global" id="local_global"></div>
+	<div class="local_global" id="local_global"></div>
 
-  <div class="solo_lobby" id="solo_lobby"></div>
+	<div class="solo_lobby" id="solo_lobby"></div>
 
-  <div class="casual_rank" id="casual_rank"></div>
+	<div class="casual_rank" id="casual_rank"></div>
 
 	<div class="disciplina" id="disciplina"></div>
 
 	<div class="materia" id="materia"></div>
 
-	<div class="lobby_room" id="lobby_room" style="display: none;">
-		A espera que todos os jogadores entrem ... ... ...
-	</div>
-
 	<div class="chat_room" id="chat_room" style="display: none;">
-		A espera que todos os jogadores terminem ... ... ...
+		<div id="message-container"></div>
+		<form id="send-container">
+			<input type="text" id="message-input">
+			<button type="submit" id="send-button">Send</button>
+		</form>
 	</div>
 
-  <div class="quizzes" id="quizzes"></div>
+	<div class="quizzes" id="quizzes"></div>
 </body>
 </html>
