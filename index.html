@@ -27,7 +27,7 @@
 		</div>
 
 		<!-- UTILIZADOR -->
-		<div id="user_input" class="user__info">
+		<div class="user__info" id="user_input">
 			<div class="user__img">
 				<img class="user__photo">
 			</div>
@@ -82,22 +82,29 @@
 		</div>
 
 		<!-- 1ª layer local ou global -->
-		<div class="local_global" id="local_global">
-			<button onclick="local()" class="dropbtn button is-medium" id="blocal">Local</button>
-			<button onclick="global()" class="dropbtn button is-medium" id="bglobal">Global</button>
+		<div class="menu__playlist-1">
+			<div class="menu__local-global" id="local_global">
+				<div class="playlist__local">
+					<button onclick="local()" class="dropbtn button is-medium" id="blocal">Local</button>
+				</div>
+				<div class="playlist__global">
+					<button onclick="global()" class="dropbtn button is-medium" id="bglobal">Global</button>
+				</div>
+			</div>
 		</div>
 
-		<!-- 2ª layer Local : Solo ou Lobby -->
-	  <div class="solo_lobby" id="solo_lobby">
-	    <button onclick="solo()" class="dropbtn button is-medium" id="bsolo">Solo</button>
-	    <button onclick="mm1v1()" class="dropbtn button is-medium" id="blobby">Lobby</button>
-	  </div>
-
-	  <!-- 2ª layer Global : casual ou rank -->
-	  <div class="casual_rank" id="casual_rank">
-	    <button onclick="casual()" class="dropbtn button is-medium" id="bcasual">Casual</button>
-	    <button onclick="rank()" class="dropbtn button is-medium" id="brank">Rank</button>
-	  </div>
+		<div class="menu__playlist-2">
+			<!-- layer Local : Solo ou Lobby -->
+		  <div class="menu__local" id="solo_lobby">
+		    <button onclick="solo()" class="playlist__solo dropbtn button is-medium" id="bsolo">Solo</button>
+		    <button onclick="mm1v1()" class="playlist__lobby dropbtn button is-medium" id="blobby">Lobby</button>
+		  </div>
+			<!-- layer Global : casual ou rank -->
+		  <div class="menu__global" id="casual_rank">
+		    <button onclick="casual()" class="playlist__casual dropbtn button is-medium" id="bcasual">Casual</button>
+		    <button onclick="rank()" class="playlist__rank dropbtn button is-medium" id="brank">Rank</button>
+		  </div>
+		</div>
 
 	  <!-- Escolha da materia -->
 		<div class="disciplina" id="disciplina">
