@@ -49,14 +49,15 @@ const materias = [
 ];
 
 const MAX_LOBBYS = 100;
-const MAX_LOBBY_PLAYERS = 3;
+const MAX_LOBBY_PLAYERS = 2;
 const path = require('path');
 const host = '0.0.0.0';
 const port = 3000;
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const io = require('socket.io')(3000);
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 const bodyParser = require('body-parser');
 const script = require('./script');
 
@@ -64,7 +65,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.listen(port, host, function() {//poe o sv a correr
+http.listen(port, host, function() {//poe o sv a correr
 	console.log('Running at: ',host,port);
 });
 
