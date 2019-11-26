@@ -234,7 +234,6 @@ function conta_tabela(i){
 }
 
 async function enter_lobby(){
-  buildChatRoom();
   const options = {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
@@ -246,6 +245,7 @@ async function enter_lobby(){
   jogador.num = data.player;
   console.log("Jogador: ",jogador.num ,"Entrou no lobby: ", jogador.lobbyID);
   maxLobbyPlayers=data.maxPlayers;
+  buildChatRoom();
   if (data.player<data.maxPlayers){
     hide("quizzes");
     show("chat_room");
@@ -366,6 +366,7 @@ function sairQuiz(){
 }
 
 function buildChatRoom(){
+  console.log(jogador.nome, jogador.lobbyID);
   var socket = io.connect();
   const messageContainer = document.getElementById('message-container');
   const messageForm = document.getElementById('send-container');
@@ -373,7 +374,7 @@ function buildChatRoom(){
 
   const name= jogador.nome;
   appendMessage('You joined')
-  socket.emit('new-user', name)
+  socket.emit('new-user', jogador.lobbyID, name)
 
   socket.on('chat-message', data => {
     appendMessage(`${data.name}: ${data.message}`)
@@ -391,7 +392,7 @@ function buildChatRoom(){
     e.preventDefault()
     const message = messageInput.value
     appendMessage(`You: ${message}`)
-    socket.emit('send-chat-message', message)
+    socket.emit('send-chat-message', jogador.lobbyID, message)
     messageInput.value = ''
   })
 

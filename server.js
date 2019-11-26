@@ -49,44 +49,53 @@ const materias = [
 ];
 
 const MAX_LOBBYS = 100;
-const MAX_LOBBY_PLAYERS = 2;
+const MAX_LOBBY_PLAYERS = 3;
 const path = require('path');
 const host = '0.0.0.0';
 const port = 3000;
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const script = require('./script');
+const rooms = {};
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
-http.listen(port, host, function() {//poe o sv a correr
-	console.log('Running at: ',host,port);
-});
-
 app.use(express.static('public'));
 app.use(express.json({limit:'1mb'}));
 
-const users = {}
+server.listen(port, host, function() {//poe o sv a correr
+	console.log('Running at: ',host,port);
+});
+
 
 io.on('connection', socket => {
-  socket.on('new-user', name => {
-    users[socket.id] = name
-    socket.broadcast.emit('user-connected', name)
+  socket.on('new-user', (lobby, name) => {
+		socket.join(lobby)
+    rooms[lobby].users[socket.id] = name
+    socket.to(lobby).broadcast.emit('user-connected', name)
   })
-  socket.on('send-chat-message', message => {
-    socket.broadcast.emit('chat-message', { message: message, name: users[socket.id] })
+  socket.on('send-chat-message', (lobby, message) => {
+    socket.to(lobby).broadcast.emit('chat-message', { message: message, name: rooms[lobby].users[socket.id] })
   })
   socket.on('disconnect', () => {
-    socket.broadcast.emit('user-disconnected', users[socket.id])
-    delete users[socket.id]
+		getUserRooms(socket).forEach(lobby =>{
+			socket.broadcast.emit('user-disconnected', rooms[lobby].users[socket.id])
+			delete rooms[lobby].users[socket.id]
+		})
   })
 })
+
+function getUserRooms(socket){
+	return Object.entries(rooms).reduce((names, [name, lobby])=>{
+		if(lobby.users[socket.id]!=null) names.push(name)
+		return names
+	},[])
+}
 
 var lobbys = new Array(MAX_LOBBYS);
 var solutions = new Array(10);
@@ -243,6 +252,7 @@ app.post('/lobby',(req, res) => {
 	novo_jogador.lobbyID=ID;
 	novo_jogador.num=1;
 	lobbys[cont] = new lobby(ID,0, req.body.jogador.ano, novo_jogador, MAX_LOBBY_PLAYERS, null, null, null);
+	rooms[ID] = { users:{}}
 	console.log("--Jogador ",novo_jogador.num," entrou no lobby: ",ID);
 });
 
