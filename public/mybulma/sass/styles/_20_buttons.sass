@@ -8,36 +8,48 @@
 
 .menu__local-global
   vertical-align: center
-  button
-    margin-top: 50px
-    width: 50%
-    padding-top: 50px
-    padding-bottom: 70px
-    padding-left: 50% //60px
-    padding-right: 50% //60px
+  @media screen and (min-width: $xs) and  (max-width: $md - 1)
+    button
+      margin-top: 50px
+      width: 50%
+      padding-top: 50px
+      padding-bottom: 70px
+      padding-left: 50%
+      padding-right: 50%
 
+  @media screen and (min-width: $md)
+    button
+      margin-top: 50px
+      margin-bottom: 25px
+      width: 50%
+      padding-top: 80px
+      padding-bottom: 100px
+      padding-left: 50%
+      padding-right: 50%
 
-//.dropbtn
+.playlist__local
+  .button
+    background-color: $laser-blue
+    color: $white
+
+.playlist__global
+  .button
+    background-color: $purple
+    color: $white
+
+.btn
+  font-weight: bold
   //@media screen and (min-width: $xs) and  (max-width: $md - 1)
 
-  //@media screen and (min-width: $md)
-    //font-weight: bold
-    //font-size: 100px
+  @media screen and (min-width: $md)
+    font-size: 100px
 
 /* Dropdown button on hover & focus */
-.dropbtn:hover, .btn:hover, .btnW:hover, .btnX:hover, .btnY:hover, .btnZ:hover
+.dropbtn:hover, .btn:hover
   background-color: $light-purple
   border-color: $black
+  color: $black
 
-.btnW
-  background-color: $blue
-
-.btnX
-  background-color: $orange
-
-.btnY
-
-.btnZ
 
 
 /****************************** DROPDOWN ******************************/
