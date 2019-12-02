@@ -7,22 +7,37 @@
 //@extend %is-outlined
 
 .menu__local-global
+  vertical-align: center
   button
-    margin-top: 100px
+    margin-top: 50px
     width: 50%
-    padding-top: 100px
+    padding-top: 50px
+    padding-bottom: 70px
+    padding-left: 50% //60px
+    padding-right: 50% //60px
 
-.dropbtn
+
+//.dropbtn
   //@media screen and (min-width: $xs) and  (max-width: $md - 1)
 
-  @media screen and (min-width: $md)
-    font-weight: bold
-    font-size: 100px
+  //@media screen and (min-width: $md)
+    //font-weight: bold
+    //font-size: 100px
 
 /* Dropdown button on hover & focus */
-.dropbtn:hover, .button:hover                     /* NOT WORKING !!!!! */
+.dropbtn:hover, .btn:hover, .btnW:hover, .btnX:hover, .btnY:hover, .btnZ:hover
   background-color: $light-purple
-  border-color: $white
+  border-color: $black
+
+.btnW
+  background-color: $blue
+
+.btnX
+  background-color: $orange
+
+.btnY
+
+.btnZ
 
 
 /****************************** DROPDOWN ******************************/

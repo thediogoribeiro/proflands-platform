@@ -7174,15 +7174,15 @@ td.selected {
   text-decoration: underline; }
 
 /****************************** BUTTONS ******************************/
-.menu__local-global button {
-  margin-top: 100px;
-  width: 50%;
-  padding-top: 100px; }
-
-@media screen and (min-width: 640px) {
-  .dropbtn {
-    font-weight: bold;
-    font-size: 100px; } }
+.menu__local-global {
+  vertical-align: center; }
+  .menu__local-global button {
+    margin-top: 50px;
+    width: 50%;
+    padding-top: 50px;
+    padding-bottom: 70px;
+    padding-left: 50%;
+    padding-right: 50%; }
 
 /* Dropdown button on hover & focus */
 .dropbtn:hover, .button:hover {
