@@ -1,5 +1,5 @@
 //importa os outros ficheiros js
-var scripts =["/static/three.js","/static/Mat/frac.js","/static/Mat/geom.js","/static/Mat/area.js","/static/Mat/perim.js","/static/Mat/maior_menor.js",
+var scripts =["/static/javascripts/three.js","/static/Mat/frac.js","/static/Mat/geom.js","/static/Mat/area.js","/static/Mat/perim.js","/static/Mat/maior_menor.js",
 "/static/Mat/div_com.js","/static/Mat/vol.js","/static/Mat/pot.js","/static/Mat/frac_aprox_unidade.js","/static/Mat/mult_n_racio.js","/static/Mat/pot_frac.js",
 "/static/Mat/arredonda.js","/static/Mat/pot_pot.js","/static/Mat/raizes.js","/static/Mat/graf.js","/static/Mat/reta_num.js","/static/Mat/frac_sinal.js",
 "/static/Mat/func_graf.js","/static/Mat/func_graf2.js"]
@@ -37,7 +37,7 @@ window.onload = function() {
   hide("solo_lobby");
   hide("casual_rank");
   hide("materia");
-  hide("ano");
+  //hide("ano");
   hide("disciplina");
   hide("quizzes");
 };
@@ -228,10 +228,10 @@ function materia(ano,materia){
   document.getElementById("materia").innerHTML="";
   for (var i = 0; i < materia.length; i++) {
     if((typeof materia[i])=="string"){
-      var novo_botao = criaHTML("button","dropbtn","b"+materia[i],materia[i],funcs[ano][i]);
+      var novo_botao = criaHTML("button","btn button is-medium","b"+materia[i],materia[i],funcs[ano][i]);
       document.getElementById("materia").appendChild(novo_botao);
     }else{
-      var novo_botao = criaHTML("button","dropbtn","b"+materia[i][0],materia[i][0],dd2click);
+      var novo_botao = criaHTML("button","btn button is-medium","b"+materia[i][0],materia[i][0],dd2click);
       document.getElementById("materia").appendChild(novo_botao);
       var nova_div = criaHTML("div","dropdown-content","myDropdown2",null,null);
       document.getElementById("materia").appendChild(nova_div);
@@ -244,7 +244,7 @@ function materia(ano,materia){
 
   var nova_div = criaHTML("div",null,"div_muda_ano",null,null);
   document.getElementById("materia").appendChild(nova_div);
-  var novo_botao = criaHTML("button","dropbtn","bsairMateria","Mudar ano",sairMateria);
+  var novo_botao = criaHTML("button","btn button is-medium","bsairMateria","Mudar ano",sairMateria);
   document.getElementById("div_muda_ano").appendChild(novo_botao);
 }
 

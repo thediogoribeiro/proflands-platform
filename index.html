@@ -9,8 +9,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Our CSS file -->
   <link rel="stylesheet" type="text/css" href="/static/mybulma/css/mystyles.css">
-  <!-- BULMA CSS file -->
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"> -->
   <!-- Our JS file -->
 	<script type="text/javascript" src="/static/javascripts/script.js"></script>
 	<!-- Link to JQuery -->
@@ -96,13 +94,21 @@
 		<div class="menu__playlist-2">
 			<!-- layer Local : Solo ou Lobby -->
 		  <div class="menu__local" id="solo_lobby">
-		    <button onclick="solo()" class="playlist__solo btn button is-medium" id="bsolo">Solo</button>
-		    <button onclick="mm1v1()" class="playlist__lobby btn button is-medium" id="blobby">Lobby</button>
+		  	<div class="playlist__solo">
+		  		<button onclick="solo()" class="btn button is-medium" id="bsolo">Solo</button>
+		  	</div>
+		    <div class="playlist__lobby">
+		    	<button onclick="mm1v1()" class="btn button is-medium" id="blobby">Lobby</button>
+		    </div>
 		  </div>
 			<!-- layer Global : casual ou rank -->
 		  <div class="menu__global" id="casual_rank">
-		    <button onclick="casual()" class="playlist__casual btn button is-medium" id="bcasual">Casual</button>
-		    <button onclick="rank()" class="playlist__rank btn button is-medium" id="brank">Rank</button>
+		  	<div class="playlist__casual">
+		  		<button onclick="casual()" class="btn button is-medium" id="bcasual">Casual</button>
+		  	</div>
+		    <div class="playlist__rank">
+		    	<button onclick="rank()" class="btn button is-medium" id="brank">Rank</button>
+		    </div>
 		  </div>
 		</div>
 
@@ -113,11 +119,13 @@
 			<button onclick="geo()" class="btn button is-medium" id="bgeo">Geografia</button>
 	  </div>
 
+	  <!-- 
 		<div class="ano" id="ano">
 			<button onclick="ano(5)" class="dropbtn button is-medium" id="bano5">5º Ano</button>
 			<button onclick="ano(6)" class="dropbtn button is-medium" id="bano6">6º Ano</button>
 			<button onclick="ano(7)" class="dropbtn button is-medium" id="bano7">7º Ano</button>
 		</div>
+		-->
 
 		<!-- Materia em função do ano -->
 		<div class="materia" id="materia">
@@ -130,14 +138,16 @@
 				<h1 id="tituloMateria"></h1>
 				<p class="cabecalho_pag" id="cabecalho_pag">Pagina: 1</p>
 			</div>
-			<div class="quizzes" id="quizzesMain"></div>
+			<div class="quizzes" id="quizzesMain">
+				
+			</div>
 			<div>
 				<p></p>
-				<button onclick="pag_ant()" class="dropbtn button is-medium" id="banterior">Anterior</button>
-				<button onclick="pag_seg()" class="dropbtn button is-medium" id="bseguinte">Seguinte</button>
+				<button onclick="pag_ant()" class="btn dropbtn button is-medium" id="banterior">Anterior</button>
+				<button onclick="pag_seg()" class="btn dropbtn button is-medium" id="bseguinte">Seguinte</button>
 				<p></p>
-				<button onclick="sairQuiz()" class="dropbtn button is-medium" id="bsairQuiz">Sair</button>
-				<button onclick="verificar()" class="dropbtn button is-medium" id="bverificar">Submeter</button>
+				<button onclick="sairQuiz()" class="btn dropbtn button is-medium" id="bsairQuiz">Sair</button>
+				<button onclick="verificar()" class="btn dropbtn button is-medium" id="bverificar">Submeter</button>
 			</div>
 	  </div>
 

@@ -6,7 +6,7 @@
 //@extend %is-inverted 
 //@extend %is-outlined
 
-.menu__local-global
+.menu__local-global, .menu__local, .menu__global
   vertical-align: center
   @media screen and (min-width: $xs) and  (max-width: $md - 1)
     button
@@ -27,12 +27,12 @@
       padding-left: 50%
       padding-right: 50%
 
-.playlist__local
+.playlist__local, .playlist__solo, .playlist__casual
   .button
     background-color: $laser-blue
     color: $white
 
-.playlist__global
+.playlist__global, .playlist__lobby, .playlist__rank
   .button
     background-color: $purple
     color: $white

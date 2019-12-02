@@ -7174,10 +7174,10 @@ td.selected {
   text-decoration: underline; }
 
 /****************************** BUTTONS ******************************/
-.menu__local-global {
+.menu__local-global, .menu__local, .menu__global {
   vertical-align: center; }
   @media screen and (min-width: 320px) and (max-width: 639px) {
-    .menu__local-global button {
+    .menu__local-global button, .menu__local button, .menu__global button {
       margin-top: 50px;
       width: 50%;
       padding-top: 50px;
@@ -7185,7 +7185,7 @@ td.selected {
       padding-left: 50%;
       padding-right: 50%; } }
   @media screen and (min-width: 640px) {
-    .menu__local-global button {
+    .menu__local-global button, .menu__local button, .menu__global button {
       margin-top: 50px;
       margin-bottom: 25px;
       width: 50%;
@@ -7194,11 +7194,11 @@ td.selected {
       padding-left: 50%;
       padding-right: 50%; } }
 
-.playlist__local .button {
+.playlist__local .button, .playlist__solo .button, .playlist__casual .button {
   background-color: #6EEFF2;
   color: #FFFFFF; }
 
-.playlist__global .button {
+.playlist__global .button, .playlist__lobby .button, .playlist__rank .button {
   background-color: #9A50D9;
   color: #FFFFFF; }
 
@@ -7363,43 +7363,27 @@ td.selected {
 
 /* CONTAINER PLAYLIST 1 */
 @media screen and (min-width: 320px) and (max-width: 639px) {
-  .menu__playlist-1 {
+  .menu__playlist-1, .menu__playlist-2 {
     grid-column-start: 2;
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 6; } }
 
 @media screen and (min-width: 640px) {
-  .menu__playlist-1 {
+  .menu__playlist-1, .menu__playlist-2 {
     grid-column-start: 3;
     grid-column-end: 5;
     grid-row-start: 2;
     grid-row-end: 6; } }
 
-.menu__local-global {
+.menu__local-global, .menu__local, .menu__global {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 4; }
-  .menu__local-global .playlist__local {
-    text-align: center; }
-  .menu__local-global .playlist__global {
-    text-align: center; }
 
-/* CONTAINER PLAYLIST 2 */
-@media screen and (min-width: 320px) and (max-width: 639px) {
-  .menu__playlist-2 {
-    grid-column-start: 2;
-    grid-column-end: 4;
-    grid-row-start: 2;
-    grid-row-end: 6; } }
-
-@media screen and (min-width: 640px) {
-  .menu__playlist-2 {
-    grid-column-start: 3;
-    grid-column-end: 5;
-    grid-row-start: 2;
-    grid-row-end: 6; } }
+.playlist__local, .playlist__global, .playlist__solo, .playlist__lobby, .playlist__casual, .playlist__rank {
+  text-align: center; }
 
 .divTable {
   text-align: center;
