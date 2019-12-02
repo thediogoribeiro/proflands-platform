@@ -7139,11 +7139,11 @@ td.selected {
       max-height: 1366px;
       grid-row-gap: 32px; } }
 
-.user__info, .menu__playlist-1, .menu__playlist-2 {
+.user__info, .menu__playlist-1, .menu__playlist-2, .menu__subjects {
   display: grid;
   grid-template-columns: 1fr 1fr; }
   @media screen and (min-width: 640px) {
-    .user__info, .menu__playlist-1, .menu__playlist-2 {
+    .user__info, .menu__playlist-1, .menu__playlist-2, .menu__subjects {
       grid-template-rows: 200px 125px 125px 125px;
       grid-row-gap: 32px; } }
 
@@ -7174,6 +7174,7 @@ td.selected {
   text-decoration: underline; }
 
 /****************************** BUTTONS ******************************/
+/* Button position and dimension */
 .menu__local-global, .menu__local, .menu__global {
   vertical-align: center; }
   @media screen and (min-width: 320px) and (max-width: 639px) {
@@ -7194,12 +7195,43 @@ td.selected {
       padding-left: 50%;
       padding-right: 50%; } }
 
+.subject__list {
+  vertical-align: center; }
+  @media screen and (min-width: 320px) and (max-width: 639px) {
+    .subject__list button {
+      margin-top: 15px;
+      width: 50%;
+      padding-left: 50%;
+      padding-right: 50%; } }
+  @media screen and (min-width: 640px) {
+    .subject__list button {
+      margin-top: 15px;
+      margin-bottom: 5px;
+      width: 50%;
+      padding-top: 30px;
+      padding-bottom: 50px;
+      padding-left: 50%;
+      padding-right: 50%; } }
+
+/* Buttons color */
 .playlist__local .button, .playlist__solo .button, .playlist__casual .button {
   background-color: #6EEFF2;
   color: #FFFFFF; }
 
 .playlist__global .button, .playlist__lobby .button, .playlist__rank .button {
   background-color: #9A50D9;
+  color: #FFFFFF; }
+
+.subject__mat .button {
+  background-color: #0165C3;
+  color: #FFFFFF; }
+
+.subject__cn .button {
+  background-color: #1B8738;
+  color: #FFFFFF; }
+
+.subject__geo .button {
+  background-color: #F29023;
   color: #FFFFFF; }
 
 .btn {
@@ -7361,7 +7393,7 @@ td.selected {
     .user__options .user__options-1, .user__options .user__options-2 {
       margin-bottom: 20px; } }
 
-/* CONTAINER PLAYLIST 1 */
+/* CONTAINER PLAYLIST 1 & 2 */
 @media screen and (min-width: 320px) and (max-width: 639px) {
   .menu__playlist-1, .menu__playlist-2 {
     grid-column-start: 2;
@@ -7425,4 +7457,28 @@ td.selected {
   border-bottom: 1px solid black; }
 
 .denum {
+  text-align: center; }
+
+/* CONTAINER SUBJECTS */
+@media screen and (min-width: 320px) and (max-width: 639px) {
+  .menu__subjects {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 6; } }
+
+@media screen and (min-width: 640px) {
+  .menu__subjects {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 6; } }
+
+.subject__list {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 4; }
+
+.subject__mat, .subject__cn, .subject__geo {
   text-align: center; }

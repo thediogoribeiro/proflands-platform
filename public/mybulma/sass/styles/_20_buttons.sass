@@ -1,10 +1,8 @@
 
 /****************************** BUTTONS ******************************/
 
-//.button
-//@extend %is-primary
-//@extend %is-inverted 
-//@extend %is-outlined
+
+/* Button position and dimension */ 
 
 .menu__local-global, .menu__local, .menu__global
   vertical-align: center
@@ -27,6 +25,27 @@
       padding-left: 50%
       padding-right: 50%
 
+.subject__list
+  vertical-align: center
+  @media screen and (min-width: $xs) and  (max-width: $md - 1)
+    button
+      margin-top: 15px
+      width: 50%
+      padding-left: 50%
+      padding-right: 50%
+
+  @media screen and (min-width: $md)
+    button
+      margin-top: 15px
+      margin-bottom: 5px
+      width: 50%
+      padding-top: 30px
+      padding-bottom: 50px
+      padding-left: 50%
+      padding-right: 50%
+
+
+/* Buttons color */
 .playlist__local, .playlist__solo, .playlist__casual
   .button
     background-color: $laser-blue
@@ -35,6 +54,21 @@
 .playlist__global, .playlist__lobby, .playlist__rank
   .button
     background-color: $purple
+    color: $white
+
+.subject__mat
+  .button
+    background-color: $blue
+    color: $white
+
+.subject__cn
+  .button
+    background-color: $pine-green
+    color: $white
+
+.subject__geo
+  .button
+    background-color: $orange
     color: $white
 
 .btn
