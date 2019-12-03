@@ -1,7 +1,6 @@
-
-/* CONTAINER SUBJECTS */
-.menu__subjects
-	@media screen and (min-width: $xs) and (max-width: $md - 1)
+/* CONTAINER THEMES */
+.menu__themes
+	@media screen and (min-width: $xs) and  (max-width: $md - 1)
 		grid-column-start: 2
 		grid-column-end: 4
 		grid-row-start: 2
@@ -12,15 +11,21 @@
 		grid-row-start: 2
 		grid-row-end: 6
 
-.subject__list
+.themes__list
 	grid-column-start: 1
 	grid-column-end: 3
 	grid-row-start: 1
 	grid-row-end: 4
 	//display: flex
 	//flex-flow: column wrap
+	button
+		@media screen and (min-width: $xs) and (max-width: $md - 1)
+			margin-top: 20px
+		@media screen and (min-width: $md)
+			margin-top: 40px
 
-.subject__mat, .subject__cn, .subject__geo
+.themes__options
 	text-align: center
-
+	vertical-align: center
+	display: block
 

@@ -244,7 +244,7 @@ function materia(ano,materia){
 
   var nova_div = criaHTML("div",null,"div_muda_ano",null,null);
   document.getElementById("materia").appendChild(nova_div);
-  var novo_botao = criaHTML("button","btn button is-medium","bsairMateria","Mudar ano",sairMateria);
+  var novo_botao = criaHTML("button","btn button is-small","bsairMateria","Mudar Ano",sairMateria);
   document.getElementById("div_muda_ano").appendChild(novo_botao);
 }
 
@@ -288,10 +288,10 @@ function sairQuiz(){
   var str = '<div><h1 id="tituloMateria"></h1>';
   str += '<p class="cabecalho_pag" id="cabecalho_pag">Pagina: 1</p></div>';
   str += '<div class"quizzes" id="quizzesMain"></div>';
-  str += '<div><p></p><button onclick="pag_ant()" class="dropbtn" id="banterior">Anterior</button>&nbsp;';
-  str += '<button onclick="pag_seg()" class="dropbtn" id="bseguinte">Seguinte</button><p></p>';
-  str += '<button onclick="sairQuiz()" class="dropbtn" id="bsairQuiz">Sair</button>';
-  str += '<button onclick="verificar()" class="dropbtn" id="bverificar">Submeter</button></div>';
+  str += '<div><p></p><button onclick="pag_ant()" class="btn button is-small" id="banterior">Anterior</button>&nbsp;';
+  str += '<button onclick="pag_seg()" class="btn button is-small" id="bseguinte">Seguinte</button><p></p>';
+  str += '<button onclick="sairQuiz()" class="btn button is-small" id="bsairQuiz">Sair</button>';
+  str += '<button onclick="verificar()" class="btn button is-small" id="bverificar">Submeter</button></div>';
   document.getElementById("quizzes").innerHTML=str;
   hide("quizzes");
   show("materia");
