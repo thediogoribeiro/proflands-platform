@@ -7241,7 +7241,7 @@ td.selected {
       font-size: 100px; } }
 
 /* Dropdown button on hover & focus */
-.dropbtn:hover, .btn:hover {
+.dropbtn:hover, .btn:hover, .button:hover {
   background-color: #be9ed8;
   border-color: #000000;
   color: #000000; }
@@ -7500,6 +7500,8 @@ td.selected {
     grid-row-end: 6; } }
 
 .themes__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 1;
@@ -7513,5 +7515,13 @@ td.selected {
 
 .themes__options {
   text-align: center;
-  vertical-align: center;
-  display: block; }
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 4; }
+  @media screen and (min-width: 320px) and (max-width: 1023px) {
+    .themes__options .theme-0 button, .themes__options .theme-1 button, .themes__options .theme-2 button, .themes__options .theme-3 button, .themes__options .theme-4 button, .themes__options .theme-5 button {
+      width: 75%; } }
+  @media screen and (min-width: 1024px) {
+    .themes__options .theme-0 button, .themes__options .theme-1 button, .themes__options .theme-2 button, .themes__options .theme-3 button, .themes__options .theme-4 button, .themes__options .theme-5 button {
+      width: 50%; } }

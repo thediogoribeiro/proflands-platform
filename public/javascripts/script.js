@@ -228,10 +228,12 @@ function materia(ano,materia){
   document.getElementById("materia").innerHTML="";
   for (var i = 0; i < materia.length; i++) {
     if((typeof materia[i])=="string"){
-      var novo_botao = criaHTML("button","btn button is-medium","b"+materia[i],materia[i],funcs[ano][i]);
-      document.getElementById("materia").appendChild(novo_botao);
+      var nova_div = criaHTML("div","theme-"+i,"theme-"+i,null,null);
+      document.getElementById("materia").appendChild(nova_div);
+      var novo_botao = criaHTML("button","button is-medium","b"+materia[i],materia[i],funcs[ano][i]);
+      document.getElementById("theme-"+i).appendChild(novo_botao);
     }else{
-      var novo_botao = criaHTML("button","btn button is-medium","b"+materia[i][0],materia[i][0],dd2click);
+      var novo_botao = criaHTML("button","button is-medium","b"+materia[i][0],materia[i][0],dd2click);
       document.getElementById("materia").appendChild(novo_botao);
       var nova_div = criaHTML("div","dropdown-content","myDropdown2",null,null);
       document.getElementById("materia").appendChild(nova_div);
@@ -244,7 +246,7 @@ function materia(ano,materia){
 
   var nova_div = criaHTML("div",null,"div_muda_ano",null,null);
   document.getElementById("materia").appendChild(nova_div);
-  var novo_botao = criaHTML("button","btn button is-small","bsairMateria","Mudar Ano",sairMateria);
+  var novo_botao = criaHTML("button","button is-small","bsairMateria","Mudar Ano",sairMateria);
   document.getElementById("div_muda_ano").appendChild(novo_botao);
 }
 
