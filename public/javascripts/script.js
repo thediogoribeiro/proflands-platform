@@ -228,7 +228,7 @@ function materia(ano,materia){
   document.getElementById("materia").innerHTML="";
   for (var i = 0; i < materia.length; i++) {
     if((typeof materia[i])=="string"){
-      var nova_div = criaHTML("div","theme-"+i,"theme-"+i,null,null);
+      var nova_div = criaHTML("div","theme","theme-"+i,null,null);
       document.getElementById("materia").appendChild(nova_div);
       var novo_botao = criaHTML("button","button is-medium","b"+materia[i],materia[i],funcs[ano][i]);
       document.getElementById("theme-"+i).appendChild(novo_botao);
