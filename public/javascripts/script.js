@@ -262,9 +262,9 @@ function cria_pag(i){
   var nova_div = criaHTML("div","pag"+i,"pag"+i,null,null);
   if(i!=0) nova_div.style.display = 'none';
   document.getElementById("quizzesMain").appendChild(nova_div);
-  var nova_div = criaHTML("div","pag"+i,"enunciado"+i,null,null);
+  var nova_div = criaHTML("div","enunciado"+i,"enunciado"+i,null,null);
   document.getElementById("pag"+i).appendChild(nova_div);
-  var nova_div = criaHTML("div","pag"+i,"respostas"+i,null,null);
+  var nova_div = criaHTML("div","respostas"+i,"respostas"+i,null,null);
   document.getElementById("pag"+i).appendChild(nova_div);
   var str = '<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label class="ans'+i+'" id="label0'+i+'"></label><br>';
   str += '<input type="radio" id="r1'+i+'" name="solucao'+i+'" value="1"><label class="ans'+i+'" id="label1'+i+'"></label><br>';
