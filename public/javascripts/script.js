@@ -266,10 +266,10 @@ function cria_pag(i){
   document.getElementById("pag"+i).appendChild(nova_div);
   var nova_div = criaHTML("div","pag"+i,"respostas"+i,null,null);
   document.getElementById("pag"+i).appendChild(nova_div);
-  var str = '<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label id="label0'+i+'"></label><br>';
-  str += '<input type="radio" id="r1'+i+'" name="solucao'+i+'" value="1"><label id="label1'+i+'"></label><br>';
-  str += '<input type="radio" id="r2'+i+'" name="solucao'+i+'" value="2"><label id="label2'+i+'"></label><br>';
-  str += '<input type="radio" id="r3'+i+'" name="solucao'+i+'" value="3"><label id="label3'+i+'"></label><br>';
+  var str = '<input type="radio" id="r0'+i+'" name="solucao'+i+'" value="0"><label class="ans'+i+'" id="label0'+i+'"></label><br>';
+  str += '<input type="radio" id="r1'+i+'" name="solucao'+i+'" value="1"><label class="ans'+i+'" id="label1'+i+'"></label><br>';
+  str += '<input type="radio" id="r2'+i+'" name="solucao'+i+'" value="2"><label class="ans'+i+'" id="label2'+i+'"></label><br>';
+  str += '<input type="radio" id="r3'+i+'" name="solucao'+i+'" value="3"><label class="ans'+i+'" id="label3'+i+'"></label><br>';
   nova_div.innerHTML = str;
 }
 
