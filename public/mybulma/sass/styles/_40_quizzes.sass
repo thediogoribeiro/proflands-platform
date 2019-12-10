@@ -1,6 +1,9 @@
 /* CONTAINER QUIZZ */
+
+/***** LAYER 1 *****/
 .menu__quizz
-    @media screen and (min-width: $xs) and  (max-width: $md - 1)
+    // Grid-child
+    @media screen and (min-width: $xs) and (max-width: $md - 1)
         grid-column-start: 2
         grid-column-end: 4
         grid-row-start: 2
@@ -11,66 +14,41 @@
         grid-row-start: 2
         grid-row-end: 6
 
+/***** LAYER 2 *****/
 .quizz__top
+    // As Grid-child
+    grid-column-start: 1
+    grid-column-end: 3
+    grid-row-start: 1
+    grid-row-end: 2
     // As Grid-parent
     display: grid
     grid-template-columns: 1fr 1fr
-    // As Grid-child
-    grid-column-start: 1
-    grid-column-end: 3
-    grid-row-start: 1
-    grid-row-end: 2
 
 .quizz__list
-    display: grid
-    grid-template-columns: 1fr 1fr
     // As Grid-child
     grid-column-start: 1
     grid-column-end: 3
     grid-row-start: 2
     grid-row-end: 4
-
-.quizz__elements
-    display: grid
-    grid-template-columns: 1fr 1fr
-    // As Grid-child
-    grid-column-start: 1
-    grid-column-end: 3
-    grid-row-start: 4
-    grid-row-end: 5
-    
-
-.quizz__heading
-    text-align: center
-    grid-column-start: 1
-    grid-column-end: 3
-    grid-row-start: 1
-    grid-row-end: 2
-
-.quizz__questions
-    text-align: center
-    grid-column-start: 1
-    grid-column-end: 3
-    grid-row-start: 2
-    grid-row-end: 4
-
-.quizz__buttons
-    text-align: center
-    grid-column-start: 1
-    grid-column-end: 3
-    grid-row-start: 4
-    grid-row-end: 5
-
-//div[class^="pag"]
-.pag0, .pag1, .pag2, .pag3, .pag4, .pag5, .pag6, .pag7, .pag8, .pag9
+    height: 75%
     // Grid-parent
     display: grid
     grid-template-columns: 1fr 1fr
-    grid-template-rows: 2fr 1fr 1fr 1fr 1fr
-    width: 100%
+    grid-template-rows: 1fr 1fr 1fr
 
-//div[class^="enunciado"]
-.enunciado0, .enunciado1, .enunciado2, .enunciado3, .enunciado4, .enunciado5, .enunciado6, .enunciado7, .enunciado8, .enunciado9
+.quizz__elements
+    // As Grid-child
+    grid-column-start: 1
+    grid-column-end: 3
+    grid-row-start: 4
+    grid-row-end: 5
+    // Grid-parent
+    display: grid
+    grid-template-columns: 1fr 1fr
+ 
+/***** LAYER 3 *****/
+.quizz__heading
     // Grid-child
     text-align: center
     grid-column-start: 1
@@ -78,14 +56,52 @@
     grid-row-start: 1
     grid-row-end: 2
 
-//div[class^="respostas"]
-.respostas0, .respostas1, .respostas2, .respostas3, .respostas4, .respostas5, .respostas6, .respostas7, .respostas8, .respostas9
+.quizz__buttons
     // Grid-child
     text-align: center
     grid-column-start: 1
     grid-column-end: 3
-    grid-row-start: 2
+    grid-row-start: 4
     grid-row-end: 5
+
+.pag0, .pag1, .pag2, .pag3, .pag4, .pag5, .pag6, .pag7, .pag8, .pag9
+    // Grid-child
+    text-align: center
+    grid-column-start: 1
+    grid-column-end: 3
+    grid-row-start: 1
+    grid-row-end: 4
+    // Grid-parent
+    display: grid
+    grid-template-columns: 1fr 1fr
+    grid-template-rows: 1fr 1fr 1fr
+    width: 100%
+    height: 100%
+
+
+/***** LAYER 4 *****/
+
+.enunciado0, .enunciado1, .enunciado2, .enunciado3, .enunciado4, .enunciado5, .enunciado6, .enunciado7, .enunciado8, .enunciado9
+    // Grid-child
+    grid-column-start: 1
+    grid-column-end: 3
+    grid-row-start: 1
+    grid-row-end: 2
+    text-align: center
+    justify-self: center
+    align-self: center
+    height: 33%
+    
+
+
+.respostas0, .respostas1, .respostas2, .respostas3, .respostas4, .respostas5, .respostas6, .respostas7, .respostas8, .respostas9
+    // Grid-child
+    grid-column-start: 1
+    grid-column-end: 3
+    grid-row-start: 2
+    grid-row-end: 4
+    text-align: center
+    height: 67%
     // Grid-parent
     display: grid
     grid-template-columns: 1fr 1fr
@@ -117,9 +133,12 @@
 
 .selector00, .selector01, .selector02, .selector03, .selector04, .selector05, .selector06, .selector07, .selector08, .selector09, .selector10, .selector11, .selector12, .selector13, .selector14, .selector15, .selector16, .selector17, .selector18, .selector19, .selector20, .selector21, .selector22, .selector23, .selector24, .selector25, .selector26, .selector27, .selector28, .selector29, .selector30, .selector31, .selector32, .selector33, .selector34, .selector35, .selector36, .selector37, .selector38, .selector39,
     margin-top: 12px
+    margin-left: -40px
+    justify-self: center
 
 .ans00, .ans01, .ans02, .ans03, .ans04, .ans05, .ans06, .ans07, .ans08, .ans09, .ans10, .ans11, .ans12, .ans13, .ans14, .ans15, .ans16, .ans17, .ans18, .ans19, .ans20, .ans21, .ans22, .ans23, .ans24, .ans25, .ans26, .ans27, .ans28, .ans29, .ans30, .ans31, .ans32, .ans33, .ans34, .ans35, .ans36, .ans37, .ans38, .ans39
     margin-left: 15px
+    justify-self: center
 
 
 /* QUIZZ STYLING */
@@ -129,6 +148,7 @@
     height: 30px
     width: 40px
     display: table
+
 
 .divTableCell
     font-size: 13px
