@@ -21,7 +21,7 @@ app.use('/static', express.static('public'));
 //app.use(express.json({limit:'1mb'}));
 
 app.get('/', function(req, res){
-    res.sendFile(path.join(__dirname,'/index.html'));
+    res.sendFile(path.join(__dirname,'/public/views/index.html'));
 });
 
 var nJg=0;
