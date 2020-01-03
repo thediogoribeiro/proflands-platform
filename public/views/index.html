@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Proflands!</title>
+	<link rel="stylesheet" type="text/css" href="mybulma/css/mystyles.css">
+	<script type="text/javascript" src="javascripts/client.js"></script>
+	<script type="text/javascript" src="javascripts/grafico.js"></script>
+	<script type="text/javascript" src="javascripts/three.js"></script>
+	<script type="text/javascript" src="javascripts/geometrias.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+	<div class="user_input" id="user_input"></div>
+
+	<div class="local_global" id="local_global"></div>
+
+	<div class="solo_lobby" id="solo_lobby"></div>
+
+	<div class="casual_rank" id="casual_rank"></div>
+
+	<div class="disciplina" id="disciplina"></div>
+
+	<div class="materia" id="materia"></div>
+
+	<div class="chat_room" id="chat_room" style="display: none;">
+		<div id="message-container"></div>
+		<form id="send-container">
+			<input type="text" id="message-input">
+			<button type="submit" id="send-button">Send</button>
+		</form>
+	</div>
+
+	<div class="quizzes" id="quizzes"></div>
+</body>
+</html>
