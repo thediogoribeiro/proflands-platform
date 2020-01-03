@@ -1,0 +1,137 @@
+
+/****************************** BUTTONS ******************************/
+
+
+/* Button position and dimension */ 
+
+.menu__local-global, .menu__local, .menu__global
+  vertical-align: center
+  @media screen and (min-width: $xs) and  (max-width: $md - 1)
+    button
+      margin-top: 50px
+      width: 50%
+      padding-top: 50px
+      padding-bottom: 70px
+      padding-left: 50%
+      padding-right: 50%
+
+  @media screen and (min-width: $md)
+    button
+      margin-top: 50px
+      margin-bottom: 25px
+      width: 50%
+      padding-top: 80px
+      padding-bottom: 100px
+      padding-left: 50%
+      padding-right: 50%
+
+.subject__list
+  vertical-align: center
+  @media screen and (min-width: $xs) and  (max-width: $md - 1)
+    button
+      margin-top: 15px
+      width: 50%
+      padding-left: 50%
+      padding-right: 50%
+
+  @media screen and (min-width: $md)
+    button
+      margin-top: 15px
+      margin-bottom: 5px
+      width: 50%
+      padding-top: 30px
+      padding-bottom: 50px
+      padding-left: 50%
+      padding-right: 50%
+
+
+/* Buttons color */
+.playlist__local, .playlist__solo, .playlist__casual
+  .button
+    background-color: $laser-blue
+    color: $white
+
+.playlist__global, .playlist__lobby, .playlist__rank
+  .button
+    background-color: $purple
+    color: $white
+
+.subject__mat
+  .button
+    background-color: $blue
+    color: $white
+
+.subject__cn
+  .button
+    background-color: $pine-green
+    color: $white
+
+.subject__geo
+  .button
+    background-color: $orange
+    color: $white
+
+.btn
+  font-weight: bold
+  //@media screen and (min-width: $xs) and  (max-width: $md - 1)
+
+  @media screen and (min-width: $md)
+    font-size: 100px
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .btn:hover, .button:hover
+  background-color: $light-purple
+  border-color: $black
+  color: $black
+
+
+
+/****************************** DROPDOWN ******************************/
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown 
+  margin: auto
+  display: inline-block
+  text-align: center
+
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content 
+  display: none
+  position: absolute
+  background-color: #f9f9f9
+  min-width: 160px
+  box-shadow: 8px 16px rgba(0,0,0,0.2)
+
+
+/* Links inside the dropdown */
+.dropdown-content a 
+  color: black
+  padding: 12px 16px
+  text-decoration: none
+  display: block
+
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover 
+  background-color: #f1f1f1
+
+
+/* Dropdown Button */
+//.dropbtn
+  //background-color: $light-purple
+  //color: $light-purple
+  //font-weight: bold
+  //padding: 10px 20px
+  //font-size: 16px
+  //border: none
+  //cursor: pointer
+  //background-size: 50px
+  //background-repeat: no-repeat
+  //background-position: left  
+
+
+
+
+
+

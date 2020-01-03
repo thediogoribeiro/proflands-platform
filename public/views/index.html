@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profland!</title>
+	<!-- Default meta tags -->
+	<meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <!-- Responsive viewport meta tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Our CSS file -->
+  <link rel="stylesheet" type="text/css" href="/static/mybulma/css/mystyles.css">
+  <!-- Our JS file -->
+	<script type="text/javascript" src="/static/javascripts/script.js"></script>
+	<!-- Link to JQuery -->
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<!-- Link to fontawesome -->
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+	<div class="index__container">
+
+		<!-- LOGO PROFLANDS -->
+		<div class="index__logo">
+			<img src="/static/assets/logo-3D-newcolor.png">
+		</div>
+
+		<!-- UTILIZADOR -->
+		<div class="user__info" id="user_input">
+			<div class="user__img">
+				<img class="user__photo">
+			</div>
+			<div class="user__input">
+				<div class="field user__input-1">
+				  <p class="control has-icons-left has-icons-right">
+				    <input id="userName" class="user__name input is-small" type="email" placeholder="Email">
+				    <span class="icon is-small is-left">
+				      <i class="fas fa-envelope"></i>
+				    </span>
+				    <!--
+				    <span class="icon is-small is-right">
+				      <i class="fas fa-check"></i>
+				    </span>
+				  	-->
+				  </p>
+				</div>
+				<div class="field user__input-2">
+				  <p class="control has-icons-left">
+				    <input id="userPass" class="user__pass input is-small" type="password" placeholder="Password">
+				    <span class="icon is-small is-left">
+				      <i class="fas fa-lock"></i>
+				    </span>
+				  </p>
+				</div>
+				<!-- 
+				<input type="text" id="userName" class=" input " name="userName" value="" placeholder="Username">
+				<br>
+				<input type="password" id="userPass" class="user__pass input is-small" name="userPass" value="" placeholder="Password">
+				-->
+			</div>
+			<div class="user__dropbtn">
+				<div class="select is-small user__year">
+				  <select id="userYear" class="">
+				    <option onclick="ano(5)" value="5">5º ano</option>
+				    <option onclick="ano(6)" value="6">6º ano</option>
+				    <option onclick="ano(7)" value="7">7º ano</option>
+				  </select>
+				</div>
+				<div class="user__btn">
+					<button onclick="getUserInput()" class="dropbtn button is-medium" id="bgetUserInput">Login</button>
+				</div>
+			</div>
+			<div class="user__options">
+				<div class="user__options-1">
+					<p>Novo Utilizador</p>
+				</div>
+				<div class="user__options-2">
+					<p>Recuperar Password</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- 1ª layer local ou global -->
+		<div class="menu__playlist-1">
+			<div class="menu__local-global" id="local_global">
+				<div class="playlist__local">
+					<button onclick="local()" class="btn button is-medium" id="blocal">Local</button>
+				</div>
+				<div class="playlist__global">
+					<button onclick="global()" class="btn button is-medium" id="bglobal">Global</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="menu__playlist-2">
+			<!-- layer Local : Solo ou Lobby -->
+		  <div class="menu__local" id="solo_lobby">
+		  	<div class="playlist__solo">
+		  		<button onclick="solo()" class="btn button is-medium" id="bsolo">Solo</button>
+		  	</div>
+		    <div class="playlist__lobby">
+		    	<button onclick="mm1v1()" class="btn button is-medium" id="blobby">Lobby</button>
+		    </div>
+		  </div>
+			<!-- layer Global : casual ou rank -->
+		  <div class="menu__global" id="casual_rank">
+		  	<div class="playlist__casual">
+		  		<button onclick="casual()" class="btn button is-medium" id="bcasual">Casual</button>
+		  	</div>
+		    <div class="playlist__rank">
+		    	<button onclick="rank()" class="btn button is-medium" id="brank">Rank</button>
+		    </div>
+		  </div>
+		</div>
+
+	  <!-- Escolha da materia -->
+	  <div class="menu__subjects">
+		  <div class="subject__list" id="disciplina">
+				<div class="subject__mat">
+					<button onclick="mat()" class="btn button is-medium" id="bmat">Matemática</button>
+				</div>
+		    <div class="subject__cn">
+		    	<button onclick="cien()" class="btn button is-medium" id="bcien">Ciências</button>
+		    </div>
+		    <div class="subject__geo">
+		    	<button onclick="geo()" class="btn button is-medium" id="bgeo">Geografia</button>
+		    </div>
+		  </div>
+	  </div>
+
+		<!-- Materia em função do ano -->
+		<div class="menu__themes">
+			<div class="themes__list">
+				<div class="themes__options" id="materia">
+			
+				</div>
+			</div>
+		</div>
+		
+		<!-- Quizzes - JS -->
+	  <div class="menu__quizz" id="quizzes">
+
+			<div class="quizz__top">
+				<div class="quizz__heading">
+					<h1 id="tituloMateria"></h1>
+					<p class="cabecalho_pag" id="cabecalho_pag">Pagina: 1</p>
+				</div>
+			</div>
+
+			<div class="quizz__list" id="quizzesMain">
+				<!-- <div class="quizz__questions" > </div> -->
+			</div>
+
+			<div class="quizz__elements">
+				<div class="quizz__buttons">
+					<p></p>
+					<button onclick="pag_ant()" class="btn dropbtn button is-small" id="banterior">Anterior</button>
+					<button onclick="pag_seg()" class="btn dropbtn button is-small" id="bseguinte">Seguinte</button>
+					<p></p>
+					<button onclick="sairQuiz()" class="btn dropbtn button is-small" id="bsairQuiz">Sair</button>
+					<button onclick="verificar()" class="btn dropbtn button is-small" id="bverificar">Submeter</button>
+				</div>
+			</div>
+			
+	  </div>
+
+	</div>
+
+</body>
+</html>

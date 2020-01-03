@@ -63,16 +63,8 @@ app.listen(port, host, function() {//poe o sv a correr
 app.use(express.static('public'));
 app.use(express.json({limit:'1mb'}));
 
-var lobbys = new Array(MAX_LOBBYS);
-var solutions = new Array(10);
-
-app.post('/verificar',(req, res) => {
-	var sol = req.body.solution;
-	var pontos = 0;
-	for(var i = 0; i<10; i++){
-		if(solutions[i]===sol[i]) pontos++;
-	}
-	res.send({score:pontos});
+app.get('/', function(req, res){
+    res.sendFile(path.join(__dirname,'/public/views/index.html'));
 });
 
 app.post('/getPage',(req, res) => {

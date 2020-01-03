@@ -1,0 +1,129 @@
+
+// First big container
+
+// Container Proflands logo
+.index__logo
+	@media screen and (min-width: $xs) and  (max-width: $md - 1)
+		grid-column-start: 1
+		grid-column-end: 5
+		grid-row-start: 1
+		grid-row-end: 2
+		img
+			height: auto
+			width: 100%
+	@media screen and (min-width: $md) and  (max-width: $lg - 1)
+		grid-column-start: 2
+		grid-column-end: 6
+		grid-row-start: 1
+		grid-row-end: 2
+		img
+			height: auto
+			width: 100%
+	@media screen and (min-width: $lg)
+		grid-column-start: 2
+		grid-column-end: 6
+		grid-row-start: 1
+		grid-row-end: 2
+		text-align: center
+		img
+			height: auto
+			width: 100%
+			max-width: 700px
+
+// Container information login
+.user__info
+	//grid-template-columns: subgrid ---> So disponivel no Firefox - Utilizar outra solução 
+	@media screen and (min-width: $xs) and  (max-width: $md - 1)
+		grid-column-start: 2
+		grid-column-end: 4
+		grid-row-start: 2
+		grid-row-end: 6
+	@media screen and (min-width: $md)
+		grid-column-start: 3
+		grid-column-end: 5
+		grid-row-start: 2
+		grid-row-end: 6
+
+
+// Container user photo
+.user__img
+	@media screen and (min-width: $xs)
+		grid-column-start: 1
+		grid-column-end: 3
+		grid-row: 1
+		text-align: center
+
+.user__photo
+	@media screen and (min-width: $xs) and  (max-width: $md - 1)
+		content: url("https://via.placeholder.com/100")
+	@media screen and (min-width: $md) and  (max-width: $lg - 1)
+		content: url("https://via.placeholder.com/150")
+	@media screen and (min-width: $lg)
+		content: url("https://via.placeholder.com/200")
+
+
+// Container username and password
+.user__input
+	text-align: center
+	@media screen and (min-width: $xs)
+		grid-column-start: 1
+		grid-column-end: 3
+		grid-row: 2
+	@media screen and (min-width: $lg)
+		padding-top: 15px
+	.user__input-1, .user__input-2
+		@media screen and (min-width: $xs) and (max-width: $md - 1)
+			width: 200px
+		@media screen and (min-width: $md)
+			width: 250px
+
+.user__name
+	align-self: start
+
+.user__pass
+	@media screen and (min-width: $xs) and  (max-width: $md - 1)
+		//margin-top: 15px
+	@media screen and (min-width: $md)
+		//margin-top: 25px
+
+
+// Container dropdown & Button
+.user__dropbtn
+	text-align: center
+	@media screen and (min-width: $xs)
+		grid-column-start: 1
+		grid-column-end: 3
+		grid-row: 3
+
+// Container login button
+.user__btn
+	text-align: center
+	@media screen and (min-width: $xs) and (max-width: $md - 1)
+		margin-top: 20px
+		button
+			width: 200px
+	@media screen and (min-width: $md)
+		margin-top: 40px
+		button
+			width: 250px
+
+// Container new-user & forgot-password
+.user__options
+	text-align: center
+	@media screen and (min-width: $xs)
+		grid-column-start: 1
+		grid-column-end: 3
+		grid-row: 4
+	.user__options-1, .user__options-2
+		@media screen and (min-width: $xs) and  (max-width: $md - 1)
+			margin-bottom: 15px
+		@media screen and (min-width: $md)
+			margin-bottom: 20px
+
+
+
+
+
+
+
+

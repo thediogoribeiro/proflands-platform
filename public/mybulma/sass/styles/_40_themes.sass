@@ -1,0 +1,47 @@
+/* CONTAINER THEMES */
+.menu__themes
+	@media screen and (min-width: $xs) and  (max-width: $md - 1)
+		grid-column-start: 2
+		grid-column-end: 4
+		grid-row-start: 2
+		grid-row-end: 6
+	@media screen and (min-width: $md)
+		grid-column-start: 3
+		grid-column-end: 5
+		grid-row-start: 2
+		grid-row-end: 6
+
+.themes__list
+	// Grid parent
+	display: grid
+	grid-template-columns: 1fr 1fr
+	// Grid-child
+	grid-column-start: 1
+	grid-column-end: 3
+	grid-row-start: 1
+	grid-row-end: 4
+	button
+		@media screen and (min-width: $xs) and (max-width: $md - 1)
+			margin-top: 20px
+		@media screen and (min-width: $md)
+			margin-top: 40px
+
+.themes__options
+	text-align: center
+	grid-column-start: 1
+	grid-column-end: 3
+	grid-row-start: 1
+	grid-row-end: 4
+	.theme
+		button
+			@media screen and (min-width: $xs) and (max-width: $lg - 1)
+				width: 75%
+			@media screen and (min-width: $lg)
+				width: 50%
+				
+
+
+
+
+
+

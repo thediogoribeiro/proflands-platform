@@ -1,0 +1,72 @@
+// Breakpoints
+$xl: 1280px
+$lg: 1024px
+$md: 640px
+$smp: 414px
+$sm: 375px
+$xs: 320px
+
+// responsive gaps
+$sm-gap: 16px
+$md-gap: 32px
+$lg-gap: 48px
+
+// Estrutura do 1º Container 
+.index__container
+	display: grid
+	height: 100%
+	// SMARTPHONES
+	@media screen and (min-width: $xs) and  (max-width: $md - 1)
+		grid-template-rows: 1fr 1fr 1fr 1fr 1fr
+		grid-template-columns: 1fr 1fr 1fr 1fr
+		grid-row-gap: $sm-gap
+	@media screen and (min-width: $xs) and  (max-width: $sm - 1)
+		max-height: 640px
+	@media screen and (min-width: $sm) and  (max-width: $smp - 1)
+		max-height: 812px
+	@media screen and (min-width: $smp) and  (max-width: $md - 1)
+		max-height: 823px
+	// IPAD 
+	@media screen and (min-width: $md)
+		grid-template-rows: 1fr 1fr 1fr 1fr 1fr
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
+		max-height: 1366px
+		grid-row-gap: $md-gap
+
+
+
+// Estrutura do 2º Container (dentro do 1º)
+.user__info, .menu__playlist-1, .menu__playlist-2, .menu__subjects, .menu__themes, .menu__quizz
+	// Grid-parent
+	display: grid
+	grid-template-columns: 1fr 1fr
+	@media screen and (min-width: $md)
+		grid-template-rows: 200px 125px 125px 125px
+		grid-row-gap: $md-gap
+
+.user__input
+	display: flex
+	flex-direction: column	
+	flex-wrap: wrap
+	align-content: center
+
+.user__btn
+	display: flex
+	flex-direction: column	
+	flex-wrap: wrap
+	align-content: center
+
+.user__options
+	display: flex
+	flex-direction: column	
+	flex-wrap: wrap
+	align-content: center
+
+
+
+
+	
+
+
+
+

@@ -1,0 +1,25 @@
+/* CONTAINER PLAYLIST 1 & 2 */
+.menu__playlist-1, .menu__playlist-2
+	@media screen and (min-width: $xs) and (max-width: $md - 1)
+		grid-column-start: 2
+		grid-column-end: 4
+		grid-row-start: 2
+		grid-row-end: 6
+	@media screen and (min-width: $md)
+		grid-column-start: 3
+		grid-column-end: 5
+		grid-row-start: 2
+		grid-row-end: 6
+
+.menu__local-global, .menu__local, .menu__global
+	grid-column-start: 1
+	grid-column-end: 3
+	grid-row-start: 1
+	grid-row-end: 4
+	//display: flex
+	//flex-flow: column wrap
+
+.playlist__local, .playlist__global, .playlist__solo, .playlist__lobby, .playlist__casual, .playlist__rank
+	text-align: center
+
+
