@@ -50,7 +50,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const frac = require('./Mat/5/frac');
 const area = require('./Mat/5/area');
-const script = require('./script');
+const script = require('./static/javascripts/script');
 
 app.use(cors());
 app.use(bodyParser.json());

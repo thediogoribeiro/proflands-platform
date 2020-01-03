@@ -3,7 +3,7 @@
 //variaveis
 const intervalo_frac = 99;// 1 ate X
 const intervalo_variacao = 50; //-25 ate 25
-const script = require('./../../script');
+const script = require('./../../static/javascripts/script');
 const gcd = require('./../gcd');
 const aux = require('./../frac_aux');
 
