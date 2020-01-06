@@ -8,9 +8,9 @@
   <!-- Responsive viewport meta tags -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Our CSS file -->
-  <link rel="stylesheet" type="text/css" href="/static/mybulma/css/mystyles.css">
+  <link rel="stylesheet" type="text/css" href="/mybulma/css/mystyles.css">
   <!-- Our JS file -->
-	<script type="text/javascript" src="/static/javascripts/client.js"></script>
+	<script type="text/javascript" src="/javascripts/client.js"></script>
 	<!-- Link to JQuery -->
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<!-- Link to fontawesome -->
@@ -19,76 +19,17 @@
 <body>
 	<div class="index__container">
 
-		<!-- LOGO PROFLANDS -->
 		<div class="index__logo">
-			<img src="/static/assets/logo-3D-newcolor.png">
-		</div>
+    	<img src="/assets/logo-3D-newcolor.png">
+    </div>
 
-		<!-- UTILIZADOR -->
-		<div class="user__info" id="user_input">
-			<div class="user__img">
-				<img class="user__photo">
-			</div>
-			<div class="user__input">
-				<div class="field user__input-1">
-				  <p class="control has-icons-left has-icons-right">
-				    <input id="userName" class="user__name input is-small" type="email" placeholder="Email">
-				    <span class="icon is-small is-left">
-				      <i class="fas fa-envelope"></i>
-				    </span>
-				    <!--
-				    <span class="icon is-small is-right">
-				      <i class="fas fa-check"></i>
-				    </span>
-				  	-->
-				  </p>
-				</div>
-				<div class="field user__input-2">
-				  <p class="control has-icons-left">
-				    <input id="userPass" class="user__pass input is-small" type="password" placeholder="Password">
-				    <span class="icon is-small is-left">
-				      <i class="fas fa-lock"></i>
-				    </span>
-				  </p>
-				</div>
-				<!-- 
-				<input type="text" id="userName" class=" input " name="userName" value="" placeholder="Username">
-				<br>
-				<input type="password" id="userPass" class="user__pass input is-small" name="userPass" value="" placeholder="Password">
-				-->
-			</div>
-			<div class="user__dropbtn">
-				<div class="select is-small user__year">
-				  <select id="userYear" class="">
-				    <option onclick="ano(5)" value="5">5º ano</option>
-				    <option onclick="ano(6)" value="6">6º ano</option>
-				    <option onclick="ano(7)" value="7">7º ano</option>
-				  </select>
-				</div>
-				<div class="user__btn">
-					<button onclick="getUserInput()" class="dropbtn button is-medium" id="bgetUserInput">Login</button>
-				</div>
-			</div>
-			<div class="user__options">
-				<div class="user__options-1">
-					<p>Novo Utilizador</p>
-				</div>
-				<div class="user__options-2">
-					<p>Recuperar Password</p>
-				</div>
-			</div>
-		</div>
+    <div class="user__info" id="user_input">
+
+    </div>
 
 		<!-- 1ª layer local ou global -->
-		<div class="menu__playlist-1">
-			<div class="menu__local-global" id="local_global">
-				<div class="playlist__local">
-					<button onclick="local()" class="btn button is-medium" id="blocal">Local</button>
-				</div>
-				<div class="playlist__global">
-					<button onclick="global()" class="btn button is-medium" id="bglobal">Global</button>
-				</div>
-			</div>
+		<div class="menu__playlist-1" id="local_global">
+			
 		</div>
 
 		<div class="menu__playlist-2">
@@ -98,7 +39,7 @@
 		  		<button onclick="solo()" class="btn button is-medium" id="bsolo">Solo</button>
 		  	</div>
 		    <div class="playlist__lobby">
-		    	<button onclick="mm1v1()" class="btn button is-medium" id="blobby">Lobby</button>
+		    	<button onclick="mmlobby()" class="btn button is-medium" id="blobby">Lobby</button>
 		    </div>
 		  </div>
 			<!-- layer Global : casual ou rank -->
