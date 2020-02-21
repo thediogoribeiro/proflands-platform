@@ -66,13 +66,16 @@ function buildUserInput(){
 
 
 function buildQuiz(){
-  var str = '<div><h1 id="tituloMateria"></h1>';
-  str += '<p class="cabecalho_pag" id="cabecalho_pag">Pagina: 1</p></div>';
-  str += '<p></p><button onclick="pag_ant()" class="dropbtn" id="banterior">Anterior</button>&nbsp;';
-  str += '<button onclick="pag_seg()" class="dropbtn" id="bseguinte">Seguinte</button><p></p>';
-  str += '<div class"quizzes" id="quizzesMain"></div>';
-  str += '<div><p></p><button onclick="sairQuiz()" class="dropbtn" id="bsairQuiz">Sair</button>';
-  str += '<button onclick="verificar()" class="dropbtn" id="bverificar">Submeter</button></div>';
+  var str = '<div class="quizz__top"><div class="quizz__heading"><h1 id="tituloMateria"></h1>';
+  str += '<p class="cabecalho_pag" id="cabecalho_pag">Pagina: 1</p></div></div>';
+  str += '<div class="quizz__list" id="quizzesMain"></div>';
+  str += '<div class="quizz__elements" style="display: none;"><div class="quizz__buttons"><p></p>';
+  str += '<button onclick="pag_ant()" class="btn dropbtn button is-small" id="banterior">Anterior</button>';
+  str += '<button onclick="pag_seg()" class="btn dropbtn button is-small" id="bseguinte">Seguinte</button>';
+  str += '<p></p>';
+  str += '<button onclick="sairQuiz()" class="btn dropbtn button is-small" id="bsairQuiz">Sair</button>';
+  str += '<button onclick="verificar()" class="btn dropbtn button is-small" id="bverificar">Submeter</button>';
+  str += '</div></div>';
   document.getElementById("quizzes").innerHTML=str;
 }
 
@@ -168,7 +171,7 @@ function materia(ano,materia){
   document.getElementById("materia").innerHTML="";
   for (var i = 0; i < materia.length; i++) {
     var novo_botao = document.createElement('button');
-    novo_botao.className="dropbtn";
+    novo_botao.className="btn button is-medium";
     novo_botao.id="b"+materia[i];
     novo_botao.innerHTML = materia[i];
     novo_botao.addEventListener("click", getPage.bind(null, event, materia[i]));
@@ -264,7 +267,6 @@ function changeColor(td){
 
 function conta_tabela(i){
   var table = document.getElementById("tabela_cores" + i);
-  var n_cells = table.rows[0].cells;
   var selct_cells = 0;
   for (j = 0; j< table.rows.length; j++){
     for (var i = 0; i < table.rows[j].cells.length; i++){

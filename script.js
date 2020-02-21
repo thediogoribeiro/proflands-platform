@@ -6,8 +6,8 @@ module.exports = {
     if(i>0) str = '<div class="pag'+i+'" id="pag'+i+'" style="display: none;">';
     else str = '<div class="pag'+i+'" id="pag'+i+'">';
     str+='<img src="" id="img'+i+'" width="500" />';
-    str+='<div class="pag'+i+'" id="enunciado'+i+'">'+q+'</div>';
-    str+='<div class="pag'+i+'" id="respostas'+i+'">'+cs+'</div>';
+    str+='<div class="pag'+i+'" id="enunciado'+i+'">'+q+'</div><p></p>';
+    str+='<div class="pag'+i+'" id="respostas'+i+'">'+cs+'</div><p></p>';
     str+='</div></div>';
     return str;
   },
