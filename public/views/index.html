@@ -32,39 +32,21 @@
 			
 		</div>
 
-		<div class="menu__playlist-2">
+		<div class="menu__playlist-2" id="menu_playlist-2">
 			<!-- layer Local : Solo ou Lobby -->
 		  <div class="menu__local" id="solo_lobby">
-		  	<div class="playlist__solo">
-		  		<button onclick="solo()" class="btn button is-medium" id="bsolo">Solo</button>
-		  	</div>
-		    <div class="playlist__lobby">
-		    	<button onclick="mmlobby()" class="btn button is-medium" id="blobby">Lobby</button>
-		    </div>
+
 		  </div>
 			<!-- layer Global : casual ou rank -->
 		  <div class="menu__global" id="casual_rank">
-		  	<div class="playlist__casual">
-		  		<button onclick="casual()" class="btn button is-medium" id="bcasual">Casual</button>
-		  	</div>
-		    <div class="playlist__rank">
-		    	<button onclick="rank()" class="btn button is-medium" id="brank">Rank</button>
-		    </div>
+
 		  </div>
 		</div>
 
 	  <!-- Escolha da materia -->
 	  <div class="menu__subjects">
 		  <div class="subject__list" id="disciplina">
-				<div class="subject__mat">
-					<button onclick="mat()" class="btn button is-medium" id="bmat">Matemática</button>
-				</div>
-		    <div class="subject__cn">
-		    	<button onclick="cien()" class="btn button is-medium" id="bcien">Ciências</button>
-		    </div>
-		    <div class="subject__geo">
-		    	<button onclick="geo()" class="btn button is-medium" id="bgeo">Geografia</button>
-		    </div>
+
 		  </div>
 	  </div>
 
@@ -78,7 +60,7 @@
 		</div>
 		
 		<!-- Quizzes - JS -->
-	  <div class="menu__quizz" id="quizzes">
+	  <div class="menu__quizz" id="quizzes" style="display:none;">
 
 			<div class="quizz__top">
 				<div class="quizz__heading">
@@ -91,7 +73,7 @@
 				<!-- <div class="quizz__questions" > </div> -->
 			</div>
 
-			<div class="quizz__elements">
+			<div class="quizz__elements" style="display: none;">
 				<div class="quizz__buttons">
 					<p></p>
 					<button onclick="pag_ant()" class="btn dropbtn button is-small" id="banterior">Anterior</button>

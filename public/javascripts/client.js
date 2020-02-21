@@ -80,12 +80,8 @@ function buildQuiz(){
 function buildLocalGlobal(){
   hide("user_input")
   var str = '<div class="menu__local-global">';
-    str += '<div class="playlist__local">';
-      str += '<button onclick="local()" class="btn button is-medium" id="blocal">Local</button>';
-      str += '</div>';
-    str += '<div class="playlist__global">';
-      str += '<button onclick="global()" class="btn button is-medium" id="bglobal">Global</button>';
-    str += '</div>';
+  str += '<div class="playlist__local"><button onclick="local()" class="btn button is-medium" id="blocal">Local</button></div>';
+  str += '<div class="playlist__global"><button onclick="global()" class="btn button is-medium" id="bglobal">Global</button></div>';
   str += '</div>';
   document.getElementById("local_global").innerHTML=str;
 }
@@ -100,15 +96,15 @@ function show(eid){
 
 function local() {
   hide("local_global");
-  var str="<button onclick='solo()' class='dropbtn' id='bsolo'>Solo</button>";
-  str+="<button onclick='mmLobby()' class='dropbtn' id='blobby'>Lobby</button>";
+  var str = '<div class="playlist__solo"><button onclick="solo()" class="btn button is-medium" id="bsolo">Solo</button></div>';
+  str += '<div class="playlist__lobby"><button onclick="mmLobby()" class="btn button is-medium" id="blobby">Lobby</button></div>';
   document.getElementById("solo_lobby").innerHTML = str;
 }
 
 function global() {
   hide("local_global");
-  var str="<button onclick='casual()' class='dropbtn' id='bcasual'>Casual</button>";
-  str+="<button onclick='rank()' class='dropbtn' id='brank'>Rank</button>";
+  var str = '<div class="playlist__casual"><button onclick="casual()" class="btn button is-medium" id="bcasual">Casual</button></div>';
+  str += '<div class="playlist__rank"><button onclick="rank()" class="btn button is-medium" id="brank">Rank</button></div>';
   document.getElementById("casual_rank").innerHTML = str;
 }
 
@@ -116,9 +112,12 @@ function solo() {
   jogador.num=1;
   modo = "solo";
   hide("solo_lobby");
-  var str="<button onclick='mat()' class='dropbtn' id='bmat'>Matemática</button>";
-  str+="<button onclick='cien()' class='dropbtn' id='bcien'>Ciências</button>";
-  str+="<button onclick='geo()' class='dropbtn' id='bgeo'>Geografia</button>";
+  var str = '<div class="subject__mat">';
+  str += '<button onclick="mat()" class="btn button is-medium" id="bmat">Matemática</button>';
+  str += '</div><div class="subject__cn">';
+  str += '<button onclick="cien()" class="btn button is-medium" id="bcien">Ciências</button>';
+  str += '</div><div class="subject__geo">';
+  str += '<button onclick="geo()" class="btn button is-medium" id="bgeo">Geografia</button></div>';
   document.getElementById("disciplina").innerHTML = str;
   show("disciplina");
 }
