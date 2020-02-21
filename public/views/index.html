@@ -4,13 +4,17 @@
 	<title>Profland!</title>
 	<!-- Default meta tags -->
 	<meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <!-- Responsive viewport meta tags -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Our CSS file -->
-  <link rel="stylesheet" type="text/css" href="/mybulma/css/mystyles.css">
-  <!-- Our JS file -->
-	<script type="text/javascript" src="/javascripts/client.js"></script>
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<!-- Responsive viewport meta tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Our CSS file -->
+	<link rel="stylesheet" type="text/css" href="/mybulma/css/mystyles.css">
+	<!-- Our JS file -->
+	<script type="text/javascript" src="javascripts/client.js"></script>
+	<script type="text/javascript" src="javascripts/grafico.js"></script>
+	<script type="text/javascript" src="javascripts/three.js"></script>
+	<script type="text/javascript" src="javascripts/geometrias.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
 	<!-- Link to JQuery -->
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<!-- Link to fontawesome -->
@@ -23,45 +27,43 @@
     	<img src="/assets/logo-3D-newcolor.png">
     </div>
 
-    <div class="user__info" id="user_input">
-
-    </div>
+	<!-- Onde o user insere os dados e faz login -->
+    <div class="user__info" id="user_input"></div>
 
 		<!-- 1ª layer local ou global -->
-		<div class="menu__playlist-1" id="local_global">
-			
-		</div>
+		<div class="menu__playlist-1" id="local_global"></div>
+
 
 		<div class="menu__playlist-2" id="menu_playlist-2">
 			<!-- layer Local : Solo ou Lobby -->
-		  <div class="menu__local" id="solo_lobby">
-
-		  </div>
+		  <div class="menu__local" id="solo_lobby"> </div>
 			<!-- layer Global : casual ou rank -->
-		  <div class="menu__global" id="casual_rank">
-
-		  </div>
+		  <div class="menu__global" id="casual_rank"> </div>
 		</div>
 
 	  <!-- Escolha da materia -->
 	  <div class="menu__subjects">
-		  <div class="subject__list" id="disciplina">
-
-		  </div>
+		  <div class="subject__list" id="disciplina"></div>
 	  </div>
 
 		<!-- Materia em função do ano -->
 		<div class="menu__themes">
 			<div class="themes__list">
-				<div class="themes__options" id="materia">
-			
-				</div>
+				<div class="themes__options" id="materia"></div>
 			</div>
+		</div>
+
+		<!-- Chat room-->
+		<div class="chat_room" id="chat_room" style="display: none;">
+			<div id="message-container"></div>
+			<form id="send-container">
+				<input type="text" id="message-input">
+				<button type="submit" id="send-button">Send</button>
+			</form>
 		</div>
 		
 		<!-- Quizzes - JS -->
 	  <div class="menu__quizz" id="quizzes" style="display:none;">
-
 			<div class="quizz__top">
 				<div class="quizz__heading">
 					<h1 id="tituloMateria"></h1>

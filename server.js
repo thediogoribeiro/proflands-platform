@@ -69,7 +69,7 @@ const materias = [
 ];
 
 const MAX_LOBBYS = 100;
-const MAX_LOBBY_PLAYERS = 3;
+const MAX_LOBBY_PLAYERS = 2;
 const path = require('path');
 const host = '0.0.0.0';
 const port = 3000;
