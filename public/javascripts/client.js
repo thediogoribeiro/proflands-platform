@@ -69,7 +69,7 @@ function buildQuiz(){
   var str = '<div class="quizz__top"><div class="quizz__heading"><h1 id="tituloMateria"></h1>';
   str += '<p class="cabecalho_pag" id="cabecalho_pag">Pagina: 1</p></div></div>';
   str += '<div class="quizz__list" id="quizzesMain"></div>';
-  str += '<div class="quizz__elements" style="display: none;"><div class="quizz__buttons"><p></p>';
+  str += '<div class="quizz__elements"><div class="quizz__buttons"><p></p>';
   str += '<button onclick="pag_ant()" class="btn dropbtn button is-small" id="banterior">Anterior</button>';
   str += '<button onclick="pag_seg()" class="btn dropbtn button is-small" id="bseguinte">Seguinte</button>';
   str += '<p></p>';
@@ -284,12 +284,11 @@ async function enter_lobby(){
   };
   const res = await fetch('/lobby', options);
   const data = await res.json();
-  jogador.lobbyID = data.lobbyID;
-  jogador.num = data.player;
+  jogador = data.player;
   console.log("Jogador: ",jogador.num ,"Entrou no lobby: ", jogador.lobbyID);
   maxLobbyPlayers=data.maxPlayers;
   buildChatRoom();
-  if (data.player<data.maxPlayers){
+  if (data.player.num<data.maxPlayers){
     hide("quizzes");
     show("chat_room");
     espera("chat_room","quizzes",0);

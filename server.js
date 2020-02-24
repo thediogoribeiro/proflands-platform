@@ -1,74 +1,11 @@
-
-class lobby {
-
-	constructor(id, waiting, ano, jogadores, maxJogadores) {
-
-		this._id = id;
-		this._waiting = waiting;
-		this._ano = ano;
-		this._jogadores =[jogadores];
-		this._maxJogadores = maxJogadores;
-		this._data = "";
-		this._exec = [];
-		this._solutions = [];
-	}
-	set data(d){
-		this._data=d;
-	}
-	get data(){
-		return this._data;
-	}
-	set waiting(w){
-		this._waiting=w;
-	}
-	get waiting(){
-		return this._waiting;
-	}
-	set ano(a){
-		this._ano=a;
-	}
-	get ano(){
-		return this._ano;
-	}
-	set maxJogadores(m){
-		this._maxJogadores = m;
-	}
-	get maxJogadores(){
-		return this._maxJogadores;
-	}
-	set jogadores(j){
-		this._jogadores.push(j);
-	}
-	get jogadores(){
-		return this._jogadores;
-	}
-	set id(i){
-		this._id = i;
-	}
-	get id(){
-		return this._id;
-	}
-	set solutions(s){
-		this._solutions.push(s);
-	}
-	get solutions(){
-		return this._solutions;
-	}
-	set exec(e){
-		this._exec.push(e);
-	}
-	get exec(){
-		return this._exec;
-	}
-}
-
 const materias = [
 	["Frações", "Areas", "Perimetros", "Divisores comuns"],
 	["Volumes","Potências","Fração VS Unidade","Área colorida(Frações)","Potências(Frações)","Arredondamentos"],
 	["Potência de Potência","Raízes","Reta númerica","Frações com sinal","Maior ou Menor","Grafico 1","Grafico 2"]
 ];
 
-const MAX_LOBBYS = 100;
+//const MAX_LOBBYS = 100;
+//var lobbys = new Array(MAX_LOBBYS);
 const MAX_LOBBY_PLAYERS = 2;
 const path = require('path');
 const host = '0.0.0.0';
@@ -81,7 +18,9 @@ const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const script = require('./script');
 const rooms = {};
-var lobbys = new Array(MAX_LOBBYS);
+const lobbys = {};
+
+var solutions = new Array(10);
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -121,7 +60,6 @@ function getUserRooms(socket){
 	},[])
 }
 
-var solutions = new Array(10);
 app.post('/lobby',(req, res) => {
 	var cont=0;
 	while(lobbys[cont]!=null){
@@ -131,20 +69,24 @@ app.post('/lobby',(req, res) => {
 				novo_jogador.lobbyID=lobbys[cont].id;
 				novo_jogador.num=lobbys[cont].jogadores.length+1;
 				lobbys[cont].jogadores.push(novo_jogador);
-				res.send({ lobbyID:lobbys[cont].id, player: novo_jogador.num, maxPlayers:MAX_LOBBY_PLAYERS });
+				res.send({ player: novo_jogador, maxPlayers:MAX_LOBBY_PLAYERS });
 				console.log("--Jogador ",novo_jogador.num," entrou no lobby: ",lobbys[cont].id);
+				console.log(lobbys[cont]);
 				return;
 			}
 		}
 		cont++;
 	}
-	var ID = Math.floor(Math.random() * 99999)
+	var ID = cont;
+	//var ID = Math.floor(Math.random() * 99999)
 	console.log("Novo lobby com o ID: ",ID);
-	res.send({ lobbyID:ID, player: 1 , maxPlayers:MAX_LOBBY_PLAYERS});
 	var novo_jogador = req.body.jogador;
 	novo_jogador.lobbyID=ID;
 	novo_jogador.num=1;
-	lobbys[cont] = new lobby(ID,0, req.body.jogador.ano, novo_jogador, MAX_LOBBY_PLAYERS);
+	res.send({ player: novo_jogador, maxPlayers:MAX_LOBBY_PLAYERS });
+	var lobby = {id:ID, ano:req.body.jogador.ano, jogadores: [novo_jogador], maxJogadores:MAX_LOBBY_PLAYERS, waiting:0, data:[] , solutions :[], exec:[]}
+	lobbys[cont] = lobby;
+	//lobbys[cont] = new lobby(ID,0, req.body.jogador.ano, novo_jogador, MAX_LOBBY_PLAYERS);
 	rooms[ID] = { users:{}}
 	console.log("--Jogador ",novo_jogador.num," entrou no lobby: ",ID);
 });
@@ -168,52 +110,52 @@ app.post('/getLocalPage',(req, res) => {
 	var quizPage ="";
 	var exec = new Array(10);
 	var submete = 0;
+	var data; 
 	for(var i = 0; i<10; i++){
-		const data = pickFunc(i,req.body.materia);
-		if (data.type==2) submete = 2;
-		if (data.type==3) submete = 1;
+		data = pickFunc(i,req.body.materia);
 		solutions[i] = data.f.solution;
 		exec[i] = data.f.exec;
 		quizPage+=script.buildPage(i, data.f.q, data.f.cs );
 	}
+	if (data.type==2) submete = 2;
+	if (data.type==3) submete = 1;
 	console.log(solutions);
 	res.send({quizPage:quizPage, sub:submete, exec:exec});
 });
 
 app.post('/getLobbyPage',(req, res) => {
 	var submete = 0;
-	var cont=0;
+	var cont=req.body.jg.lobbyID;/*
 	while(lobbys[cont].id!=req.body.jg.lobbyID){
 		cont++;
-	}
+	}*/
 	if(req.body.jg.num==1) {
 		var ano=req.body.jg.ano-5;
+		var data;
 		for(var i = 0; i<10; i++){
 			var r = Math.floor(Math.random() * materias[ano].length);
-			const data = pickFunc(i,materias[ano][r]);
-			if (data.type==2) submete = 2;
-			if (data.type==3) submete = 1;
+			data = pickFunc(i,materias[ano][r]);
 			lobbys[cont].solutions.push(data.f.solution);
 			lobbys[cont].exec.push(data.f.exec);
 			lobbys[cont].data+=script.buildPage(i, data.f.q, data.f.cs );
 		}
+		if (data.type==2) submete = 2;
+		if (data.type==3) submete = 1;
 	}
 	res.send({quizPage:lobbys[cont].data, sub:submete, exec:lobbys[cont].exec});
 });
 
 app.post('/waiting',(req, res) => {
-	var cont=0;
+	var cont=req.body.user.lobbyID;
 	var prontos=0;
-	while(lobbys[cont].id!=req.body.user.lobbyID){
-		cont++;
-	}
 	const nUsers =lobbys[cont].jogadores.length;
 	const user = lobbys[cont].jogadores;
 	if(req.body.type=="ENTER"){
+		console.log(nUsers, lobbys[cont].maxJogadores, req.body.user.num);
 		if(nUsers==lobbys[cont].maxJogadores){
 			res.send({status:"YES"});
 			if(req.body.user.num==1){
-				console.log(lobbys[cont].id," Lobby completo, a entregar questionarios aos jogadores... ... ...");
+				console.log("Lobby ",lobbys[cont].id, "completo, a entregar questionarios aos jogadores... ... ...");
 				console.log("Solucoes: ", cleanSolutions(lobbys[cont].solutions));
 			}
 		}else {
@@ -233,11 +175,8 @@ app.post('/waiting',(req, res) => {
 
 app.post('/lobbyScore',(req, res) => {
 	var page = new Array(10);
-	var cont = 0;
+	var cont = req.body.jogador.lobbyID;
 	var prontos = 0;
-	while(lobbys[cont].id!=req.body.jogador.lobbyID){
-		cont++;
-	}
 	const nUsers =lobbys[cont].jogadores.length;
 	const user = lobbys[cont].jogadores;
 	var sol = req.body.solution;
@@ -263,19 +202,11 @@ app.post('/lobbyScore',(req, res) => {
 
 app.post('/checkScore',(req, res) => {
 	if(req.body.user.num==1) console.log("All users finished");
-	var cont=0;
-	var flag = 0;
-	while(lobbys[cont].id!=req.body.user.lobbyID){
-		cont++;
-	}
-	res.send({ list:lobbys[cont].jogadores });
+	res.send({ list:lobbys[req.body.user.lobbyID].jogadores });
 });
 
 app.post('/after_lobby',(req, res) => {
-	var cont=0;
-	while(lobbys[cont].id!=req.body.lobbyID){
-		cont++;
-	}
+	var cont=req.body.lobbyID;
 	if(req.body.num==1){
 		lobbys[cont].data = {f:req.body.f, data:req.body.data};
 		res.send({ status: 'SUCCESS' });
