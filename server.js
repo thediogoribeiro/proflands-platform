@@ -17,6 +17,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const script = require('./script');
+const mysql = require('mysql');
 const rooms = {};
 const lobbys = {};
 
@@ -27,6 +28,61 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use(express.json({limit:'1mb'}));
+
+var BD;
+function handleDisconnect() {
+    BD = mysql.createConnection({
+        host : 'localhost', 
+        user : 'root',
+        password : '', 
+        database : 'proflands'
+    });  // Recreate the connection, since the old one cannot be reused.
+    BD.connect( function onConnect(err) {   // The server is either down
+        if (err) {                                  // or restarting (takes a while sometimes).
+            console.log('error when connecting to db:', err);
+            setTimeout(handleDisconnect, 10000);    
+        }else console.log('Connected to database without errors');                                          
+    });                                            
+    BD.on('error', function onError(err) {
+        console.log('db error', err);
+        if (err.code == 'PROTOCOL_CONNECTION_LOST') {   
+            handleDisconnect();                         
+        } else {                                        
+            throw err;                                  
+        }
+    });
+}
+handleDisconnect();
+
+
+app.post('/checkUserLogin',(req, res) => {
+	var sqlStr = "SELECT * FROM users WHERE user=? AND pw=? AND ano=?";
+	BD.query(sqlStr, [req.body.user, req.body.pw, req.body.year], function(err,sqlRes) {
+		if (err) console.log(err);
+		if (sqlRes[0]!=undefined) {
+			var id = sqlRes[0].ID;
+			var user = sqlRes[0].user;
+			var pw = sqlRes[0].pw;
+			var ano = sqlRes[0].ano;
+			if(pw==req.body.pw && user==req.body.user && ano==req.body.year) res.send({ res: "ok" });
+			else res.send({ res: "Wrong user" });
+		}else res.send({ res: "Wrong user" });
+	});
+});
+
+app.post('/registerUser',(req, res) => {
+	var sqlStr = "SELECT * FROM users WHERE user=?";
+	BD.query(sqlStr, [req.body.user, req.body.pw, req.body.year], function(err,sqlRes) {
+		if (err) console.log(err);
+		if (sqlRes[0]==undefined) {
+			var sqlStr2 = "INSERT INTO `users` (`ID`, `user`, `pw`, `ano`) VALUES (NULL, ?, ?, ?);";
+			BD.query(sqlStr2, [req.body.user, req.body.pw, req.body.year], function(err,sqlRes2) {
+				if (err) console.log(err);
+				else res.send({ res: "ok" });
+			});
+		}else res.send({ res: "User exists" });
+	});
+});
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/public/views/index.html'));

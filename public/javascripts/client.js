@@ -55,15 +55,74 @@ function buildUserInput(){
   str+='</div>';
   str+='<div class="user__options">';
     str+='<div class="user__options-1">';
-      str+='<p>Novo Utilizador</p>';
+      str+='<p class="pointing" onclick="register_info()"> Registar </p>';
     str+='</div>';
     str+='<div class="user__options-2">';
-      str+='<p>Recuperar Password</p>';
+      str+='<p class="pointing">Recuperar Password</p>';
     str+='</div>';
   str+='</div>';
   document.getElementById("user_input").innerHTML = str;
 }
 
+function register_info() {
+  hide("user_input");
+  var str='<div class="user__input">';
+  str+='<div class="field user__input-1">';
+  str+='<p class="control has-icons-left has-icons-right">';
+  str+='<input id="userNameReg" class="user__name input is-small" type="email" placeholder="Email">';
+  str+='<span class="icon is-small is-left">';
+  str+='<i class="fas fa-envelope"></i></span></p></div>';
+  str+='<div class="field user__input-2">';
+  str+='<p class="control has-icons-left">';
+  str+='<input id="userPassReg" class="user__pass input is-small" type="password" placeholder="Password">';
+  str+='<span class="icon is-small is-left">';
+  str+='<i class="fas fa-lock"></i></span></p></div>';
+  str+='<div class="field user__input-2">';
+  str+='<p class="control has-icons-left">';
+  str+='<input id="userPassConfirmReg" class="user__pass input is-small" type="password" placeholder="Confirm password">';
+  str+='<span class="icon is-small is-left">';
+  str+='<i class="fas fa-lock"></i></span></p></div>';
+  str+='</div>';
+  str+='<div class="user__dropbtn">';
+  str+='<div class="select is-small user__year">';
+  str+='<select id="userYearReg" class="">';
+  str+='<option onclick="ano(5)" value="5">5º ano</option>';
+  str+='<option onclick="ano(6)" value="6">6º ano</option>';
+  str+='<option onclick="ano(7)" value="7">7º ano</option>';
+  str+='</select>';
+  str+='</div>';
+  str+='<div class="user__btn">';
+  str+='<button onclick="registerUser()" class="dropbtn button is-medium" id="bgetUserRegister">Registar</button></div>';
+  str+='</div></div>';
+  document.getElementById("user_register").innerHTML = str;
+}
+
+function registerUser(){
+  var user = document.getElementById("userNameReg").value;
+  var pw = document.getElementById("userPassReg").value;
+  var pwConfirm = document.getElementById("userPassConfirmReg").value;
+  var year = document.getElementById("userYearReg").value;
+  if (pw!=pwConfirm) alert('Confirme a sua password');
+  else{
+    const options = {
+      method: 'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({user:user,pw:pw,year:year})
+    };
+    fetch('/registerUser', options).then(function(res) {
+      return res.json()
+    }).then(function(data) {
+      if(data.res=="ok"){
+        hide("user_register");
+        buildLocalGlobal();
+      }else{
+        alert("Utilizador já existe");
+      }
+    }).catch(function(error) {
+      console.error(error)
+    })
+  }
+}
 
 function buildQuiz(){
   var str = '<div class="quizz__top"><div class="quizz__heading"><h1 id="tituloMateria"></h1>';
@@ -154,8 +213,28 @@ function getUserInput(){
   var e = document.getElementById("userYear");
   jogador.nome = document.getElementById("userName").value
   jogador.ano = e.options[e.selectedIndex].value;
-  hide("user_input");
-  buildLocalGlobal();
+  var user = jogador.nome
+  var year = jogador.ano
+  var pw = jogador.nome = document.getElementById("userPass").value
+  const options = {
+    method: 'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({user:user,pw:pw,year:year})
+  };
+  fetch('/checkUserLogin', options).then(function(res) {
+    return res.json()
+  }).then(function(data) {
+    if(data.res=="ok"){
+      hide("user_input");
+      buildLocalGlobal();
+    }else{
+      alert("login errado");
+    }
+  }).catch(function(error) {
+    console.error(error)
+  })
+
+
 }
 
 function criaHTML(element,className,id,inner,click){

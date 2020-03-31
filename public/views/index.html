@@ -24,48 +24,51 @@
 	<div class="index__container">
 
 		<div class="index__logo">
-    	<img src="/assets/logo-3D-newcolor.png">
-    </div>
+		<img src="/assets/logo-3D-newcolor.png">
+	</div>
 
 	<!-- Onde o user insere os dados e faz login -->
-    <div class="user__info" id="user_input"></div>
+	<div class="user__info" id="user_input"></div>
 
-		<!-- 1ª layer local ou global -->
-		<div class="menu__playlist-1" id="local_global"></div>
+	<!-- Onde o user se regista na base de dado -->
+	<div class="user__info" id="user_register"></div>
+
+	<!-- 1ª layer local ou global -->
+	<div class="menu__playlist-1" id="local_global"></div>
 
 
-		<div class="menu__playlist-2" id="menu_playlist-2">
-			<!-- layer Local : Solo ou Lobby -->
-		  <div class="menu__local" id="solo_lobby"> </div>
-			<!-- layer Global : casual ou rank -->
-		  <div class="menu__global" id="casual_rank"> </div>
-		</div>
-
-	  <!-- Escolha da materia -->
-	  <div class="menu__subjects">
-		  <div class="subject__list" id="disciplina"></div>
-	  </div>
-
-		<!-- Materia em função do ano -->
-		<div class="menu__themes">
-			<div class="themes__list">
-				<div class="themes__options" id="materia"></div>
-			</div>
-		</div>
-
-		<!-- Chat room-->
-		<div class="chat_room" id="chat_room" style="display: none;">
-			<div id="message-container"></div>
-			<form id="send-container">
-				<input type="text" id="message-input">
-				<button type="submit" id="send-button">Send</button>
-			</form>
-		</div>
-		
-		<!-- Quizzes - JS -->
-	  <div class="menu__quizz" id="quizzes" style="display:none;"></div>
-
+	<div class="menu__playlist-2" id="menu_playlist-2">
+		<!-- layer Local : Solo ou Lobby -->
+		<div class="menu__local" id="solo_lobby"> </div>
+		<!-- layer Global : casual ou rank -->
+		<div class="menu__global" id="casual_rank"> </div>
 	</div>
+
+	<!-- Escolha da materia -->
+	<div class="menu__subjects">
+		<div class="subject__list" id="disciplina"></div>
+	</div>
+
+	<!-- Materia em função do ano -->
+	<div class="menu__themes">
+		<div class="themes__list">
+			<div class="themes__options" id="materia"></div>
+		</div>
+	</div>
+
+	<!-- Chat room-->
+	<div class="chat_room" id="chat_room" style="display: none;">
+		<div id="message-container"></div>
+		<form id="send-container">
+			<input type="text" id="message-input">
+			<button type="submit" id="send-button">Send</button>
+		</form>
+	</div>
+	
+	<!-- Quizzes - JS -->
+	<div class="menu__quizz" id="quizzes" style="display:none;"></div>
+
+
 
 </body>
 </html>
