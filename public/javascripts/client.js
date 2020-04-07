@@ -215,7 +215,7 @@ function getUserInput(){
   jogador.ano = e.options[e.selectedIndex].value;
   var user = jogador.nome
   var year = jogador.ano
-  var pw = jogador.nome = document.getElementById("userPass").value
+  var pw = document.getElementById("userPass").value
   const options = {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
@@ -442,6 +442,7 @@ async function sendSoloScore(sol){
 }
 
 async function check_score(){
+  console.log(jogador.lobbyID)
   const options = {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
