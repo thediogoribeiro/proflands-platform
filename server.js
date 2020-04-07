@@ -125,7 +125,6 @@ app.post('/lobby',(req, res) => {
 				lobbys[cont].jogadores.push(novo_jogador);
 				res.send({ player: novo_jogador, maxPlayers:MAX_LOBBY_PLAYERS });
 				console.log("--Jogador ",novo_jogador.num," entrou no lobby: ",lobbys[cont].id);
-				console.log(lobbys[cont]);
 				return;
 			}
 		}
@@ -195,24 +194,21 @@ app.post('/getLobbyPage',(req, res) => {
 });
 
 app.post('/waiting',(req, res) => {
+	console.log(req.body.user.lobbyID, req.body.type, req.body.user.num);
 	var cont=req.body.user.lobbyID;
-	lobbys[cont].left=0;
 	const nUsers =lobbys[cont].jogadores.length;
-	const user = lobbys[cont].jogadores;
 	if(req.body.type=="ENTER"){
-		console.log(nUsers, lobbys[cont].maxJogadores, req.body.user.num);
 		if(nUsers==lobbys[cont].maxJogadores){
 			res.send({status:"YES"});
-			if(req.body.user.num==1){
-				console.log("Lobby ",lobbys[cont].id, "completo, a entregar questionarios aos jogadores... ... ...");
-				console.log("Solucoes: ", cleanSolutions(lobbys[cont].solutions));
-			}
+			console.log("Lobby ",lobbys[cont].id, "completo, a entregar questionarios aos jogadores... ... ...");
+			console.log("Solucoes: ", cleanSolutions(lobbys[cont].solutions));
 		}else {
 			res.send({status:"NO"});
 		}
 	}else if(req.body.type=="LEAVE"){
+		lobbys[cont].left=0;
 		for(var i = 0; i<nUsers; i++){
-			if(user[i].pronto == 1) lobbys[cont].left++;
+			if(lobbys[cont].jogadores[i].pronto == 1) lobbys[cont].left++;
 		}
 		if(lobbys[cont].left==lobbys[cont].maxJogadores){
 			res.send({status:"YES"});
@@ -225,25 +221,17 @@ app.post('/waiting',(req, res) => {
 app.post('/lobbyScore',(req, res) => {
 	var page = new Array(10);
 	var cont = req.body.jogador.lobbyID;
-	lobbys[cont].waiting = 0;
-	const nUsers =lobbys[cont].jogadores.length;
-	const user = lobbys[cont].jogadores;
 	var sol = req.body.solution;
-	var pontos = 0;
-	for(var i = 0; i<nUsers; i++){
-		if(user[i].num==req.body.jogador.num){
-			for(var j = 0; j<10; j++){
-				if(lobbys[cont].solutions[j]==sol[j]){
-					page[j]="ok";
-					pontos++;
-				}
-			}
-			lobbys[cont].jogadores[i].pontos = pontos;
-			lobbys[cont].jogadores[i].pronto = 1;
-			console.log("user nº ", req.body.jogador.num, " finished with ",pontos," points");
+	var i = req.body.jogador.num -1;
+	for(var j = 0; j<10; j++){
+		if(lobbys[cont].solutions[j]==sol[j]){
+			page[j]="ok";
+			lobbys[cont].jogadores[i].pontos++;
 		}
-		if(lobbys[cont].jogadores[i].pronto == 1) lobbys[cont].waiting++;
 	}
+	lobbys[cont].jogadores[i].pronto = 1;
+	lobbys[cont].waiting++;
+	console.log("user nº ", req.body.jogador.num, " finished with ",lobbys[cont].jogadores[i].pontos," points");
 	if (lobbys[cont].waiting==MAX_LOBBY_PLAYERS) res.send({status:"score saved", last:"TRUE", page:page});
 	else res.send({status:"score saved", last:"FALSE", page:page});
 	return;
@@ -251,23 +239,13 @@ app.post('/lobbyScore',(req, res) => {
 
 app.post('/checkScore',(req, res) => {
 	var cont = req.body.user.lobbyID;
-	if(req.body.user.num==1) console.log("All users finished");
 	res.send({ list:lobbys[cont].jogadores });
 	if(lobbys[cont].left==lobbys[cont].maxJogadores){
 		lobbys[cont]=null;
-		console.log("lobby reseted");
+		console.log("All users finished, lobby reseted");
 	}
 });
 
-app.post('/after_lobby',(req, res) => {
-	var cont=req.body.lobbyID;
-	if(req.body.num==1){
-		lobbys[cont].data = {f:req.body.f, data:req.body.data};
-		res.send({ status: 'SUCCESS' });
-	}else{
-		res.send(lobbys[cont].data);
-	}
-});
 
 function cleanSolutions(s){
 	var sol = new Array(10);

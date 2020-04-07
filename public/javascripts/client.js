@@ -413,6 +413,7 @@ async function sendLobbyScore(sol){
   };
   const res = await fetch('/lobbyScore', options);
   const data = await res.json();
+  console.log(data);
   if (data.last=="FALSE"){
     hide("quizzes");
     show("chat_room");
@@ -442,7 +443,6 @@ async function sendSoloScore(sol){
 }
 
 async function check_score(){
-  console.log(jogador.lobbyID)
   const options = {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
