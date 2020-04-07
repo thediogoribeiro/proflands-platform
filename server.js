@@ -4,7 +4,7 @@ const materias = [
 	["Potência de Potência","Raízes","Reta númerica","Frações com sinal","Maior ou Menor","Grafico 1","Grafico 2"]
 ];
 
-const MAX_LOBBY_PLAYERS = 2;
+const MAX_LOBBY_PLAYERS = 4;
 const path = require('path');
 const host = '0.0.0.0';
 const port = 3000;
@@ -136,7 +136,7 @@ app.post('/lobby',(req, res) => {
 	novo_jogador.lobbyID=ID;
 	novo_jogador.num=1;
 	res.send({ player: novo_jogador, maxPlayers:MAX_LOBBY_PLAYERS });
-	var lobby = {id:ID, ano:req.body.jogador.ano, jogadores: [novo_jogador], maxJogadores:MAX_LOBBY_PLAYERS, waiting:0, left:0, data:[] , solutions :[], exec:[]}
+	var lobby = {id:ID, ano:req.body.jogador.ano, jogadores: [novo_jogador], maxJogadores:MAX_LOBBY_PLAYERS, waiting:0, left:0, delete:0, data:[] , solutions :[], exec:[]}
 	lobbys[cont] = lobby;
 	rooms[ID] = { users:{}}
 	console.log("--Jogador ",novo_jogador.num," entrou no lobby: ",ID);
@@ -238,10 +238,11 @@ app.post('/lobbyScore',(req, res) => {
 });
 
 app.post('/checkScore',(req, res) => {
-	var cont = req.body.user.lobbyID;
-	res.send({ list:lobbys[cont].jogadores });
-	if(lobbys[cont].left==lobbys[cont].maxJogadores){
-		lobbys[cont]=null;
+	lobbys[req.body.user.lobbyID].delete++;
+	console.log(lobbys[req.body.user.lobbyID].delete);
+	res.send({ list:lobbys[req.body.user.lobbyID].jogadores });
+	if (lobbys[req.body.user.lobbyID].delete==MAX_LOBBY_PLAYERS){
+		lobbys[req.body.user.lobbyID]=null;
 		console.log("All users finished, lobby reseted");
 	}
 });
